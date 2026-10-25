@@ -1,0 +1,191 @@
+# vizmo Design System Reference
+
+Source of truth: `docs/vizmo-markenhandbuch.pdf` (Markenhandbuch, 6 pages, German).
+Read the section you need, not the whole file.
+
+Every rule carries one of these tags:
+
+- **[PDF]** stated in the Markenhandbuch. Do not change it.
+- **[PDF-observed]** visible in the PDF layout but not written down as a rule. Use it as a strong default.
+- **[Computed]** worked out from PDF values (for example WCAG contrast).
+- **[Assumption]** not in the PDF. A working default for the demo, open to revision. Do not present it as brand.
+
+Contents: 1 Brand · 2 Color · 3 Typography · 4 Logo & mark · 5 Spacing, radius, elevation · 6 Components · 7 Interaction states · 8 Voice & copy · 9 Open questions
+
+---
+
+## 1. Brand essence
+
+- **[PDF]** Product: vizmo is a platform that lets private landlords (private Vermieter) organize apartment viewings without arranging every appointment themselves.
+- **[PDF]** Trust runs both ways: landlords let strangers into their home, and applicants (Interessenten) reveal their identity. The brand therefore feels **calm, precise and reliable, not playful**.
+- **[PDF]** Mark: two chevrons pointing forward and down, "two guided steps that arrive". They stand for the step-by-step flow from application to viewing.
+- **[PDF]** Claim: „Besichtigungen, die sich selbst organisieren."
+- **[PDF]** Supergraphic: the double chevron, cropped large, in slightly lightened Nachtblau. It is the recognition device on all social-media surfaces. **[Assumption]** In the app, use it only sparingly (empty states, onboarding or login hero), never as wallpaper.
+
+## 2. Color
+
+### 2.1 Tokens [PDF]
+
+| Token | Brand name | Hex | Role per PDF |
+|---|---|---|---|
+| `blue` | Vizmo Blau | `#3C5BDA` | Primary: buttons, links, active steps, upper chevron |
+| `night` | Nachtblau | `#151C39` | Body text, wordmark, dark surfaces, header |
+| `lavender` | Lavendel | `#A9B8EF` | Accent, lower chevron, progress on dark backgrounds. **Surface/graphic only, never text on light** |
+| `mist` | Nebel | `#E6EBFE` | Background areas, cards, badges, light app icon |
+| `deep-blue` | Tiefblau | `#2B45B5` | Hover and pressed states, links on Nebel |
+| `slate` | Schiefer | `#545B78` | Secondary text, labels |
+| `gray` | Grau | `#8C93AD` | Placeholders, disabled elements. **Non-text only** |
+| `line` | Linie | `#DCE1F0` | Dividers, input field borders |
+| `surface` | Fläche | `#F6F7FC` | App page background |
+| `white` | Weiß | `#FFFFFF` | Cards, content areas |
+| `success` | Bestätigt | `#187A4C` | Identity verified, acceptance, slot booked |
+| `warning` | Hinweis | `#E5A00D` | Deposit hold active (Betragssperre), action pending |
+| `error` | Fehler | `#C23A3A` | Rejection, failed verification |
+
+Implemented in `src/app/tokens.css` as Tailwind theme colors (`bg-blue`, `text-night`, `border-line`, …; CSS var `--color-<token>`). Tailwind's default palette is removed. Token names are **[Assumption]**. Brand names and hex values are **[PDF]**. Never put raw colors outside `tokens.css`.
+
+### 2.2 Usage rules [PDF]
+
+- Distribution: **60 % white/surface · 25 % Nachtblau · 10 % Vizmo Blau · 5 % Lavendel.**
+- Blue is reserved for **actions and brand**. Use it sparingly so it stays strong.
+- Use Nachtblau instead of black.
+- Functional colors (Bestätigt / Hinweis / Fehler) appear **only in status indicators**, so they keep their meaning. Never use them for decoration, charts or category coding.
+- Hinweis takes **Nachtblau text only**. Bestätigt and Fehler take white text.
+- Lavendel is never a text color on a light background.
+
+### 2.3 Contrast pairs
+
+| Foreground on background | Ratio | Source | Use |
+|---|---|---|---|
+| White on Vizmo Blau | 5.7:1 | [PDF] | Primary button label |
+| Nachtblau on White | 16.7:1 | [PDF] | Body text |
+| Nachtblau on Nebel | 14.1:1 | [PDF] | Text on cards and badges |
+| White on Tiefblau | 8.0:1 | [PDF] | Hovered or pressed primary button |
+| Schiefer on White | 6.7:1 | [PDF] | Secondary text |
+| White on Bestätigt | 5.4:1 | [PDF] | Success badge |
+| Nachtblau on Hinweis | 7.5:1 | [Computed] | Warning badge (white fails at 2.2:1) |
+| White on Fehler | 5.2–5.3:1 | [PDF]/[Computed] | Error badge |
+| Vizmo Blau on White / Fläche / Nebel | 5.7 / 5.3 / 4.8:1 | [Computed] | Links. The PDF prefers Tiefblau on Nebel (6.7:1) |
+| Schiefer on Fläche / Nebel | 6.2 / 5.6:1 | [Computed] | Secondary text on tinted areas |
+| Bestätigt / Fehler on White | 5.4 / 5.3:1 | [Computed] | Status text (paired with an icon) |
+| Lavendel on Nachtblau | 8.6:1 | [Computed] | Accent text on dark is acceptable. Not forbidden by the PDF (which forbids it only on light), and seen on the cover [PDF-observed] |
+| Vizmo Blau on Nachtblau | 2.9:1 | [Computed] | **Fails.** Do not use blue text on dark |
+| Grau on White | 3.1:1 | [Computed] | Fails for body text. Non-text only, as the PDF says |
+| Linie on White | 1.3:1 | [Computed] | **Below the 3:1 non-text minimum.** See 6.3 |
+
+## 3. Typography
+
+- **[PDF]** Headings: **Poppins Bold**. It is related to the wordmark.
+- **[PDF]** Body text and app UI: **Inter Regular / Medium**. It reads better at small sizes.
+- **[PDF]** Both fonts come from Google Fonts.
+- **[PDF]** Never reset the wordmark in another font. Always use the logo asset.
+- **[Assumption]** Inter SemiBold (600) is allowed only where Medium can't carry hierarchy, for example table headers. Poppins appears in headings only, never in controls or body text.
+- **[Assumption]** Type scale. The PDF gives no sizes.
+
+| Role | Font | Size / line-height | Weight |
+|---|---|---|---|
+| Display (rare, hero/empty state) | Poppins | 32 / 40 | 700 |
+| H1 page title | Poppins | 24 / 32 | 700 |
+| H2 section | Poppins | 20 / 28 | 700 |
+| H3 card title | Poppins | 16 / 24 | 700 |
+| Body | Inter | 14 / 20 | 400 |
+| Body emphasis, labels, buttons | Inter | 14 / 20 | 500 |
+| Small / meta / captions | Inter | 12 / 16 | 400–500 |
+
+- Utilities: `font-display` (Poppins), `font-sans` (Inter, default), and `text-display`, `text-h1`, `text-h2`, `text-h3`, `text-body`, `text-small`. Tailwind's default size scale is removed.
+- **[Assumption]** Use sentence case everywhere and no all-caps labels. Use tabular numerals (`font-variant-numeric: tabular-nums`) for times, dates, amounts and counts in tables.
+
+## 4. Logo & mark
+
+- **[PDF]** The default is the **horizontal color logo**. Use the stacked version only when width is tight.
+- **[PDF]** Variants: horizontal color on light (default) · color on dark · blue (original) · single-color Nachtblau · single-color white (on blue or photos) · single-color black (print/fax) · stacked light / dark / white.
+- **[PDF]** Background mapping: on Weiß, Fläche and Nebel use **color on light**. On Nachtblau use **color on dark**. On Vizmo Blau or busy photos use **single-color white**.
+- **[PDF]** Clear space: at least **half the wordmark height** around the logo.
+- **[PDF]** Minimum size: horizontal logo **80 px** (20 mm) wide. Below that, use the mark alone, from **16 px**, and then **always on a Nachtblau tile**.
+- **[PDF]** Chevron colors: upper chevron Vizmo Blau, lower chevron Lavendel. Never recolor or swap them.
+- **[PDF]** App icons: dark (default) is the mark on a Nachtblau rounded tile. Light is the mark on a Nebel tile. The favicon is the mark on a Nachtblau tile.
+- **[PDF]** Not allowed: distorting, rotating or adding a shadow to the logo · recoloring or swapping the chevrons · Lavendel as text on light · resetting the wordmark in another font · the color logo on blue (the upper chevron disappears).
+- **Missing:** no vector logo files are provided. See section 9.
+
+## 5. Spacing, radius, elevation
+
+The PDF defines none of these. Everything below is an **[Assumption]** unless tagged otherwise.
+
+- Spacing: 4 px base grid. Scale: 4, 8, 12, 16, 20, 24, 32, 40, 48, 64.
+- Layout: app shell with a Nachtblau or white sidebar/header. Content on a Fläche background, in white cards. Max content width about 1280 px. Gutters 24 px desktop, 16 px mobile.
+- Radius: the PDF's color tiles, cover and logo frames use clearly rounded corners, about 12–16 px at page scale **[PDF-observed]**. Proposed scale: 6 px (inputs, small badges) · 8 px (buttons) · 12 px (cards, panels) · 16 px (modals, large hero tiles) · full (pills, avatars). Radius follows hierarchy. Don't use one radius for everything.
+- Borders over shadows: the PDF uses 1 px light borders (Linie-like) on white tiles and no shadows **[PDF-observed]**. Default to `border border-line` on cards. Reserve shadows for floating layers (menus, popovers, modals), tinted with Nachtblau (for example `0 8px 24px rgb(21 28 57 / 0.12)`), never pure black.
+- Utilities: spacing uses Tailwind's 4 px scale (`p-4` = 16 px). Radius: `rounded-input`, `rounded-button`, `rounded-card`, `rounded-modal`, `rounded-full`. Shadow: `shadow-overlay` only. Width: `max-w-content`.
+- Motion: 120–200 ms ease-out for state changes. Respect `prefers-reduced-motion`. No decorative entrance animations. This fits "calm, not playful" [PDF].
+
+## 6. Components
+
+The PDF specifies colors and roles only. Component anatomy is an **[Assumption]** built from those roles.
+
+### 6.1 Buttons
+- **Primary:** Vizmo Blau background with white text **[PDF role]**. Hover and pressed use Tiefblau **[PDF]**. One primary per view region.
+- **Secondary:** white background, 1 px border, Nachtblau text. Hover uses a Nebel background.
+- **Tertiary/ghost:** text-only, Vizmo Blau label (Tiefblau on Nebel surfaces **[PDF]**).
+- **Destructive:** Fehler is a status color [PDF]. Express a destructive action as a secondary button with Fehler text/border only inside a confirm step. **[Assumption, review]**
+- Heights: 32 px (compact/table), 40 px (default). Label in Inter Medium 14. Labels name the next step („Slot buchen", „Identität bestätigen") **[PDF tone]**.
+
+### 6.2 Links
+- Vizmo Blau. Hover is Tiefblau with an underline. On Nebel, use Tiefblau **[PDF]**.
+
+### 6.3 Inputs
+- White fill, Linie border **[PDF]**, Nachtblau value text, Grau placeholder **[PDF]**, Schiefer label above the field.
+- Because Linie on white is 1.3:1 [Computed], the field must also be identifiable without the border: a visible label always, and a hover border in Grau. **[Assumption]**
+- Focus: 2 px Vizmo Blau ring (see 7). Error: Fehler border plus an error message with an icon below the field.
+
+### 6.4 Badges / status
+- Neutral/info badge: Nebel background with Nachtblau text **[PDF]**.
+- Status badges use only the functional colors and only for their stated meanings **[PDF]**: Bestätigt (verified, accepted, slot booked), Hinweis (deposit hold, action pending; Nachtblau text), Fehler (rejected, failed check).
+- **[Assumption]** Always pair status color with an icon or text. Color is never the only signal. A subtle variant is allowed: a tinted background with the status color as text or icon, as long as contrast stays at or above 4.5:1.
+
+### 6.5 Cards & surfaces
+- Page background Fläche. Cards white or Nebel **[PDF]**. Dark surfaces and the header are Nachtblau **[PDF]**.
+- Avoid a uniform card grid. Vary density and structure by content (lists, tables, timelines, detail panes). **[Assumption]**
+
+### 6.6 Steps / progress
+- Active step: Vizmo Blau **[PDF]**. Progress on dark: Lavendel **[PDF]**.
+- **[Assumption]** Completed step: Nachtblau with a check (not Bestätigt green, which is for status). Upcoming: Grau. The two-chevron "step by step" idea may be echoed in stepper visuals, not as literal logo copies.
+
+### 6.7 Tables & lists
+- **[Assumption]** Header row in Inter Medium 12–13, Schiefer, Linie dividers, rows 44–52 px, tabular numerals, hover row on Fläche.
+
+### 6.8 Navigation
+- **[Assumption]** Sidebar or top bar in Nachtblau with white/Lavendel items, active item marked with Vizmo Blau or Lavendel indicator; or a white sidebar with Nebel active background. Pick one in the shell and keep it identical on all screens.
+
+### 6.9 Iconography
+- **[Assumption]** No icon set is specified. Use a single outline set with 1.5–2 px strokes and rounded joins (matching the chevrons' rounded strokes), sized 16/20/24, colored Nachtblau or Schiefer.
+
+## 7. Interaction states
+
+| State | Rule | Source |
+|---|---|---|
+| Hover (primary/link) | Tiefblau | [PDF] |
+| Pressed (primary) | Tiefblau. Optionally a slightly darker shade or `scale(0.98)` | [PDF] / [Assumption] |
+| Focus-visible | 2 px Vizmo Blau outline, 2 px offset (white offset on dark surfaces) | [Assumption] |
+| Disabled | Grau for the element; label stays readable, with no hover effect; `aria-disabled`/`disabled` | [PDF] Grau = disabled; rest [Assumption] |
+| Selected / active | Nebel background with Nachtblau text, or Vizmo Blau indicator | [Assumption] built on [PDF] roles |
+| Loading | Skeletons in Nebel/Linie. Keep the button width stable and show a spinner in the label color | [Assumption] |
+| Empty | Short explanation and one primary action naming the next step. The supergraphic is optional | [Assumption] built on [PDF] tone |
+| Error | Fehler, only as status. The message says what happened and how to fix it | [PDF] / [Assumption] |
+| Success | Bestätigt, only as status | [PDF] |
+
+## 8. Voice & copy
+
+- **[PDF]** Matter-of-fact, friendly, clear. Say what happens next instead of selling. Examples: „Slot buchen", „Identität bestätigen".
+- **[PDF-observed]** The brand language is German.
+- **[Assumption]** UI copy is German. Use "Sie" or "du" consistently (not yet decided, see 9). Action names stay the same through a flow (button „Slot buchen" leads to toast „Slot gebucht").
+- **[Assumption]** Mock data uses realistic German names, addresses, dates (DD.MM.YYYY, 24 h) and EUR amounts (`1.250 €`).
+
+## 9. Open questions
+
+1. Logo assets: no SVG/PNG files were provided. Until they arrive, build a placeholder mark in SVG from the PDF (two rounded chevrons in Blau/Lavendel) and **don't** set "vizmo" in Poppins as a substitute wordmark, which the PDF forbids.
+2. Copy: German or English UI? Formal "Sie" or informal "du"?
+3. Audience: the brief says B2B SaaS, but the PDF describes private landlords. Which personas do the 10 screens serve (landlord, applicant, admin)?
+4. The 10 screens: list, priority, and which ones are landlord-facing or applicant-facing.
+5. Is dark mode required? The PDF defines no dark UI theme.
+6. Data visualization palette: the PDF defines none, and functional colors may not be used for charts. Proposed: Blau, Lavendel, Nachtblau and Schiefer tints. Needs confirmation.
+7. Spacing, radius, type sizes and shadows are all assumptions (section 5). Confirm them, or treat them as the demo's de-facto standard.

@@ -1,0 +1,65 @@
+/*
+ * vizmo design tokens: the only place raw brand values live.
+ * Source: docs/vizmo-design-system.md (sections cited per block).
+ * Tailwind defaults for color, type size, radius and shadow are reset,
+ * so only these tokens produce utilities (bg-blue, text-h1, rounded-card, ...).
+ */
+
+@theme {
+  /* 2.1 Color [PDF]. Default Tailwind palette removed. */
+  --color-*: initial;
+  --color-blue: #3c5bda; /* Vizmo Blau: actions, links, active steps */
+  --color-night: #151c39; /* Nachtblau: text, dark surfaces, header */
+  --color-lavender: #a9b8ef; /* Lavendel: accent/graphic only, never text on light */
+  --color-mist: #e6ebfe; /* Nebel: tinted areas, cards, neutral badges */
+  --color-deep-blue: #2b45b5; /* Tiefblau: hover/pressed, links on Nebel */
+  --color-slate: #545b78; /* Schiefer: secondary text, labels */
+  --color-gray: #8c93ad; /* Grau: placeholders, disabled; non-text only */
+  --color-line: #dce1f0; /* Linie: dividers, input borders */
+  --color-surface: #f6f7fc; /* Fläche: app page background */
+  --color-white: #ffffff; /* Weiß: cards, content areas */
+  --color-success: #187a4c; /* Bestätigt: status only, white text */
+  --color-warning: #e5a00d; /* Hinweis: status only, Nachtblau text only */
+  --color-error: #c23a3a; /* Fehler: status only, white text */
+
+  /* 3 Typography: families [PDF], scale [Assumption] */
+  --font-*: initial;
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --text-*: initial;
+  --text-display: 2rem;
+  --text-display--line-height: 2.5rem;
+  --text-h1: 1.5rem;
+  --text-h1--line-height: 2rem;
+  --text-h2: 1.25rem;
+  --text-h2--line-height: 1.75rem;
+  --text-h3: 1rem;
+  --text-h3--line-height: 1.5rem;
+  --text-body: 0.875rem;
+  --text-body--line-height: 1.25rem;
+  --text-small: 0.75rem;
+  --text-small--line-height: 1rem;
+
+  /* 5 Spacing: 4px grid [Assumption]. Tailwind's default --spacing: 0.25rem already matches. */
+
+  /* 5 Radius by hierarchy [Assumption, PDF-observed] */
+  --radius-*: initial;
+  --radius-input: 6px;
+  --radius-button: 8px;
+  --radius-card: 12px;
+  --radius-modal: 16px;
+  --radius-full: 9999px;
+
+  /* 5 Elevation: borders by default, shadow only for floating layers [Assumption] */
+  --shadow-*: initial;
+  --shadow-overlay: 0 8px 24px rgb(21 28 57 / 0.12);
+
+  /* 5 Motion [Assumption] */
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --default-transition-duration: 150ms;
+  --default-transition-timing-function: var(--ease-out);
+
+  /* 5 Layout [Assumption] */
+  --container-content: 80rem;
+}
