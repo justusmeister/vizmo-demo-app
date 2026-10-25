@@ -120,13 +120,14 @@ The PDF defines none of these. Everything below is an **[Assumption]** unless ta
 
 ## 6. Components
 
-The PDF specifies colors and roles only. Component anatomy is an **[Assumption]** built from those roles.
+The PDF specifies colors and roles only. Component anatomy is an **[Assumption]** built from those roles. Implemented in `src/components/ui/` and `src/components/shell/`; live preview at `/primitives`.
 
 ### 6.1 Buttons
 - **Primary:** Vizmo Blau background with white text **[PDF role]**. Hover and pressed use Tiefblau **[PDF]**. One primary per view region.
 - **Secondary:** white background, 1 px border, Nachtblau text. Hover uses a Nebel background.
 - **Tertiary/ghost:** text-only, Vizmo Blau label (Tiefblau on Nebel surfaces **[PDF]**).
-- **Destructive:** Fehler is a status color [PDF]. Express a destructive action as a secondary button with Fehler text/border only inside a confirm step. **[Assumption, review]**
+- **Destructive:** Fehler is a status color [PDF]. Express a destructive action as a secondary button with Fehler text/border only inside a confirm step. **[Assumption, review]** Not implemented yet; add it to `button.tsx` when a screen needs it.
+- Loading: spinner replaces the icon, button disabled with `aria-busy`. Disabled primary uses Grau with a white label.
 - Heights: 32 px (compact/table), 40 px (default). Label in Inter Medium 14. Labels name the next step („Slot buchen", „Identität bestätigen") **[PDF tone]**.
 
 ### 6.2 Links
@@ -140,7 +141,7 @@ The PDF specifies colors and roles only. Component anatomy is an **[Assumption]*
 ### 6.4 Badges / status
 - Neutral/info badge: Nebel background with Nachtblau text **[PDF]**.
 - Status badges use only the functional colors and only for their stated meanings **[PDF]**: Bestätigt (verified, accepted, slot booked), Hinweis (deposit hold, action pending; Nachtblau text), Fehler (rejected, failed check).
-- **[Assumption]** Always pair status color with an icon or text. Color is never the only signal. A subtle variant is allowed: a tinted background with the status color as text or icon, as long as contrast stays at or above 4.5:1.
+- **[Assumption]** Always pair status color with an icon or text. Color is never the only signal. Implemented: solid badges only. Each status tone has a fixed icon (CircleCheck / TriangleAlert / CircleX). A subtle tinted variant isn't built: Hinweis on light fails as text (2.2:1) and as an icon (below 3:1), so a light warning variant would need Nachtblau text and icon and would lose its color signal.
 
 ### 6.5 Cards & surfaces
 - Page background Fläche. Cards white or Nebel **[PDF]**. Dark surfaces and the header are Nachtblau **[PDF]**.
@@ -154,10 +155,10 @@ The PDF specifies colors and roles only. Component anatomy is an **[Assumption]*
 - **[Assumption]** Header row in Inter Medium 12–13, Schiefer, Linie dividers, rows 44–52 px, tabular numerals, hover row on Fläche.
 
 ### 6.8 Navigation
-- **[Assumption]** Sidebar or top bar in Nachtblau with white/Lavendel items, active item marked with Vizmo Blau or Lavendel indicator; or a white sidebar with Nebel active background. Pick one in the shell and keep it identical on all screens.
+- **[Assumption, implemented]** Nachtblau sidebar (240 px) from 768 px up. Below that, a Nachtblau top bar with a menu button opens the same nav as a modal drawer (native `<dialog>`). Inactive items are Lavendel, hover is white on `white/5`, active is white on `white/10` with a Lavendel left indicator. Focus rings on dark surfaces are white. Sections: "Demo" (screens) and "Entwicklung" (`/primitives`) pinned to the bottom. The brand mark sits top-left as a placeholder (see 9.1). Keep this identical on all screens.
 
 ### 6.9 Iconography
-- **[Assumption]** No icon set is specified. Use a single outline set with 1.5–2 px strokes and rounded joins (matching the chevrons' rounded strokes), sized 16/20/24, colored Nachtblau or Schiefer.
+- **[Assumption]** No icon set is specified. Using `lucide-react` (2 px default, rounded joins; nav uses 1.75). Use a single outline set with 1.5–2 px strokes and rounded joins (matching the chevrons' rounded strokes), sized 16/20/24, colored Nachtblau or Schiefer.
 
 ## 7. Interaction states
 
