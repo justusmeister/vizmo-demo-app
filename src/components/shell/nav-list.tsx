@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { landlord } from "@/config/account";
 import { devNav, mainNav, type NavItem } from "@/config/navigation";
 import { cx } from "@/lib/cx";
+import { useDevVisible } from "@/lib/dev-mode";
 
 // Design doc 6.8: Nachtblau navigation, Lavendel inactive items (8.6:1 on Nachtblau),
 // white active item with a Lavendel indicator.
@@ -57,11 +58,12 @@ function NavList({ items, label, onNavigate }: NavListProps) {
 // Icons are components, so the nav config is read here on the client rather than
 // passed in as props from the server shell.
 export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
+  const devVisible = useDevVisible();
   return (
     <nav aria-label="Hauptnavigation" className="flex flex-1 flex-col gap-6">
       <NavList items={mainNav} label="Vermieter" onNavigate={onNavigate} />
       <div className="mt-auto flex flex-col gap-4">
-        <NavList items={devNav} label="Entwicklung" onNavigate={onNavigate} />
+        {devVisible && <NavList items={devNav} label="Entwicklung" onNavigate={onNavigate} />}
         <div className="flex items-center gap-3 border-t border-white/10 px-3 pt-4">
           <span
             aria-hidden

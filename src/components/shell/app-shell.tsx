@@ -1,6 +1,5 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
-import { BrandMark } from "./brand-mark";
+import { LogoToggle } from "./logo-toggle";
 import { MobileNav } from "./mobile-nav";
 import { SidebarNav } from "./nav-list";
 
@@ -18,16 +17,14 @@ export function AppShell({ children }: { children: ReactNode }) {
       </a>
 
       <header className="sticky top-0 z-30 flex h-14 items-center justify-between bg-night px-4 md:hidden">
-        <Link href="/" className="rounded-button focus-visible:outline-white">
-          <BrandMark size={32} />
-        </Link>
+        <LogoToggle width={92} />
         <MobileNav />
       </header>
 
       <aside className="sticky top-0 hidden h-dvh w-60 shrink-0 flex-col gap-8 bg-night px-3 py-5 md:flex">
-        <Link href="/" className="self-start rounded-button px-3 focus-visible:outline-white">
-          <BrandMark size={36} />
-        </Link>
+        <div className="px-2">
+          <LogoToggle width={112} />
+        </div>
         <SidebarNav />
       </aside>
 
