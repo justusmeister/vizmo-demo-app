@@ -1,4 +1,4 @@
-import { House, HousePlus, Shapes, UsersRound, type LucideIcon } from "lucide-react";
+import { House, HousePlus, Shapes, Smartphone, UsersRound, type LucideIcon } from "lucide-react";
 
 export type NavItem = { href: string; label: string; icon: LucideIcon };
 
@@ -10,4 +10,7 @@ export const mainNav: NavItem[] = [
   { href: "/p/inserate/gneisenaustrasse-41/bewerbungen", label: "Bewerbungen", icon: UsersRound },
 ];
 
-export const devNav: NavItem[] = [{ href: "/primitives", label: "Komponenten", icon: Shapes }];
+export const devNav: NavItem[] = [
+  { href: "/u/bewerben/gneisenaustrasse-41-k7m2qx", label: "Bewerberseite", icon: Smartphone },
+  { href: "/primitives", label: "Komponenten", icon: Shapes },
+];

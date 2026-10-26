@@ -28,6 +28,10 @@ export type Listing = {
   applications: { total: number; new: number; invited: number; booked: number };
   criteria: Criteria;
   hasApplicantList?: boolean;
+  /** Public listing content shown on the applicant page. */
+  description?: string;
+  features?: string[];
+  floor?: string;
   draftProgress?: number;
 };
 
@@ -46,6 +50,10 @@ export const listings: Listing[] = [
     status: "aktiv",
     statusNote: "Online seit 23.10.2026",
     link: "https://app.govizmo.de/u/bewerben/gneisenaustrasse-41-k7m2qx",
+    floor: "2. OG",
+    description:
+      "Helle Altbauwohnung mit Dielenböden und hohen Decken in ruhiger Hoflage. Das Wohnzimmer und der Balkon gehen nach Westen, die Küche ist voll ausgestattet. U-Bahn Gneisenaustraße und Südstern in wenigen Minuten zu Fuß.",
+    features: ["Balkon", "Einbauküche", "Badewanne", "Dielenboden", "Altbau"],
     occupancy: "leer",
     smartlock: { state: "online", note: "Nuki Smart Lock online, Akku 86 %" },
     viewing: { days: ["di", "do", "sa"], from: "17:00", to: "19:00", duration: 20, deposit: 25 },
@@ -80,6 +88,10 @@ export const listings: Listing[] = [
     status: "aktiv",
     statusNote: "Online seit gestern",
     link: "https://app.govizmo.de/u/bewerben/koernerstrasse-7-p4hw9t",
+    floor: "EG",
+    description:
+      "Ruhige Erdgeschosswohnung mit eigenem Gartenanteil in einem gepflegten Mehrfamilienhaus. Tageslichtbad, neue Fenster, Keller. Schlossstraße und S-Bahn Rathaus Steglitz in zehn Minuten zu Fuß.",
+    features: ["Garten", "Keller", "Einbauküche"],
     occupancy: "leer",
     smartlock: { state: "unterwegs", note: "Paket bei DHL, Zustellung voraussichtlich Mi" },
     viewing: { days: ["mi", "sa"], from: "10:00", to: "12:00", duration: 30, deposit: 25 },
@@ -158,4 +170,10 @@ export const listings: Listing[] = [
 ];
 
 export const getListing = (slug: string) => listings.find((listing) => listing.slug === slug);
+
+/** Code at the end of the public application link, e.g. "gneisenaustrasse-41-k7m2qx". */
+export const applicationCode = (listing: Listing) => listing.link?.split("/").pop();
+export const getListingByCode = (code: string) => listings.find((listing) => applicationCode(listing) === code);
+/** Local demo route for a public link on app.govizmo.de. */
+export const applicationPath = (listing: Listing) => `/u/bewerben/${applicationCode(listing)}`;
 export const warmRent = (listing: Listing) => listing.coldRent + listing.utilities;

@@ -1,6 +1,6 @@
 "use client";
 
-import { CalendarDays, ChevronRight, LockKeyhole, Package, Users } from "lucide-react";
+import { CalendarDays, ChevronRight, ExternalLink, LockKeyhole, Package, Users } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useState, useSyncExternalStore } from "react";
 import { Badge } from "@/components/ui/badge";
@@ -11,7 +11,7 @@ import { CopyField } from "@/components/ui/copy-field";
 import { Dialog } from "@/components/ui/dialog";
 import { Segmented } from "@/components/ui/segmented";
 import { Toast } from "@/components/ui/toast";
-import { getListing, warmRent } from "@/data/listings";
+import { applicationPath, getListing, warmRent } from "@/data/listings";
 import { CriteriaEditor } from "@/features/criteria/criteria-editor";
 import { criteriaLabels, type Criteria } from "@/features/criteria/types";
 import { useMounted } from "@/lib/use-mounted";
@@ -193,8 +193,11 @@ export function ListingManage({ slug }: { slug: string }) {
             </Card>
 
             {listing.link && !ended && (
-              <Card padding="lg">
+              <Card padding="lg" className="flex flex-col gap-3">
                 <CopyField label="Bewerbungslink für Ihre Anzeige" value={listing.link} />
+                <ButtonLink href={applicationPath(listing)} target="_blank" variant="tertiary" size="sm" className="self-start" icon={<ExternalLink aria-hidden className="size-4" />}>
+                  Bewerbungsseite ansehen
+                </ButtonLink>
               </Card>
             )}
           </div>

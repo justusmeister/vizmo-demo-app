@@ -27,6 +27,15 @@
     margin: 0;
   }
 
+  /* Touch devices: iOS zooms into fields with text under 16px, so form controls use 16px there. */
+  @media (pointer: coarse) {
+    input,
+    select,
+    textarea {
+      font-size: 1rem;
+    }
+  }
+
   /* 7 Focus-visible [Assumption]: 2px Vizmo Blau ring, 2px offset */
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-blue;
