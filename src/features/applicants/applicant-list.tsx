@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronRight, Copy, EyeOff, Mail, MessageSquare, Scale, Sparkles, Video } from "lucide-react";
+import { ChevronRight, Copy, EyeOff, Mail, MessageSquare, Scale, Video } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useMemo, useState } from "react";
 import { landlord } from "@/config/account";
@@ -479,7 +479,7 @@ function BoostHint({ count }: { count: number }) {
   if (!count) return null;
   return (
     <span className="inline-flex items-center gap-1 font-medium text-deep-blue">
-      <Sparkles aria-hidden className="size-3.5" />
+      <MessageSquare aria-hidden className="size-3.5" />
       <span className="sr-only">{count === 1 ? "1 Kriterium durch Nachrichten belegt" : `${count} Kriterien durch Nachrichten belegt`}</span>
       <span aria-hidden>Nachricht</span>
     </span>
@@ -549,7 +549,7 @@ function ApplicantDetail({ applicant, hideNames, videoRequested }: { applicant: 
                 </div>
                 {item.note && (
                   <p className={cx("mt-0.5 flex items-start gap-1.5 text-small", item.fromMessage ? "font-medium text-deep-blue" : "text-slate")}>
-                    {item.fromMessage && <Sparkles aria-hidden className="mt-0.5 size-3.5 shrink-0" />}
+                    {item.fromMessage && <MessageSquare aria-hidden className="mt-0.5 size-3.5 shrink-0" />}
                     {item.note}
                   </p>
                 )}

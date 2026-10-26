@@ -1,6 +1,6 @@
 "use client";
 
-import { CalendarDays, Camera, Check, CircleHelp, MessageSquare, Plus, Scale, Sparkles, ThumbsDown, ThumbsUp } from "lucide-react";
+import { CalendarDays, Camera, Check, CircleHelp, MessageSquare, Plus, Scale, ThumbsDown, ThumbsUp } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -131,7 +131,7 @@ export function ExtraMessages({ applicant }: { applicant: Applicant }) {
       {header}
       {applicant.extraSummary && (
         <div className="flex gap-3 rounded-card bg-mist p-4">
-          <Sparkles aria-hidden className="mt-0.5 size-5 shrink-0 text-deep-blue" />
+          <MessageSquare aria-hidden className="mt-0.5 size-5 shrink-0 text-deep-blue" />
           <div>
             <p className="text-small font-medium text-slate">KI-Zusammenfassung</p>
             <p className="mt-0.5">{applicant.extraSummary}</p>
@@ -188,7 +188,7 @@ function MessageEffect({ text, criterion }: { text: string; criterion?: string }
   if (criterion)
     return (
       <p className="flex items-center gap-1.5 text-small font-medium text-deep-blue">
-        <Sparkles aria-hidden className="size-3.5 shrink-0" />
+        <Check aria-hidden className="size-3.5 shrink-0" strokeWidth={2.5} />
         Fließt in die Passung ein: {criterion}
       </p>
     );

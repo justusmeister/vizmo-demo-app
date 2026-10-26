@@ -52,3 +52,9 @@
     }
   }
 }
+
+/* Unavailable (e.g. taken viewing slots): diagonal hatching in Linie on Fläche, deliberately not blue. */
+@utility bg-unavailable {
+  background-color: var(--color-surface);
+  background-image: repeating-linear-gradient(135deg, var(--color-line) 0 2px, transparent 2px 7px);
+}

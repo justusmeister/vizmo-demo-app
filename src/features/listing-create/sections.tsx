@@ -1,6 +1,6 @@
 "use client";
 
-import { BellRing, Check, DoorOpen, KeyRound, LockKeyhole, Sparkles, Users } from "lucide-react";
+import { BellRing, Check, DoorOpen, FileText, KeyRound, LockKeyhole, Users } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { ChoiceChip, ChoiceGroup } from "@/components/ui/choice-chip";
@@ -116,7 +116,7 @@ function AiImport({ draft, update }: Pick<SectionProps, "draft" | "update">) {
     return (
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-card bg-mist px-4 py-3">
         <p className="flex items-center gap-2 font-medium text-night">
-          <Sparkles aria-hidden className="size-4 text-deep-blue" />
+          <FileText aria-hidden className="size-4 text-deep-blue" />
           {result != null
             ? `${result} Angaben aus Ihrem Text übernommen. Markierte Felder bitte kurz prüfen.`
             : "Sie haben schon einen Anzeigentext? Die KI füllt das Formular für Sie vor."}
@@ -131,7 +131,7 @@ function AiImport({ draft, update }: Pick<SectionProps, "draft" | "update">) {
   return (
     <div className="flex flex-col gap-3 rounded-card border border-line bg-surface p-4">
       <div className="flex items-start gap-3">
-        <Sparkles aria-hidden className="mt-0.5 size-5 shrink-0 text-deep-blue" />
+        <FileText aria-hidden className="mt-0.5 size-5 shrink-0 text-deep-blue" />
         <div>
           <p className="font-medium">Schneller mit KI: Anzeigentext einfügen</p>
           <p className="text-slate">
@@ -156,7 +156,7 @@ function AiImport({ draft, update }: Pick<SectionProps, "draft" | "update">) {
             Selbst ausfüllen
           </Button>
         </div>
-        <Button size="sm" onClick={apply} loading={busy} disabled={text.trim().length < 20} icon={<Sparkles aria-hidden className="size-4" />}>
+        <Button size="sm" onClick={apply} loading={busy} disabled={text.trim().length < 20}>
           {busy ? "Text wird ausgewertet …" : "Formular ausfüllen"}
         </Button>
       </div>

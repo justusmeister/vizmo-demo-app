@@ -1,6 +1,6 @@
 "use client";
 
-import { Clock } from "lucide-react";
+import { Ban, Check, Clock } from "lucide-react";
 import { useState } from "react";
 import type { Listing } from "@/data/listings";
 import { upcomingDays, type Day } from "@/features/listing-manage/slots";
@@ -57,28 +57,46 @@ export function SlotPicker({ days, duration, value, onChange }: SlotPickerProps)
 
   if (!day) return <p className="rounded-card bg-surface p-4 text-slate">Aktuell sind keine Slots frei. Der Vermieter wurde informiert.</p>;
 
+  const freeOnDay = day.slots.filter((s) => !s.booking).length;
+
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-5">
+      <ul className="flex flex-wrap gap-x-5 gap-y-2 text-small text-slate" aria-label="Legende">
+        <li className="flex items-center gap-2">
+          <span aria-hidden className="size-4 rounded-input border border-gray bg-white" /> Frei
+        </li>
+        <li className="flex items-center gap-2">
+          <span aria-hidden className="size-4 rounded-input bg-blue" /> Ihre Wahl
+        </li>
+        <li className="flex items-center gap-2">
+          <span aria-hidden className="bg-unavailable size-4 rounded-input border border-line" /> Vergeben
+        </li>
+      </ul>
+
       <div className="-mx-4 overflow-x-auto px-4 md:mx-0 md:px-0">
         <ul className="flex gap-2 pb-1" aria-label="Tag wählen">
           {days.map((d) => {
             const date = parseIso(d.iso);
             const free = d.slots.filter((s) => !s.booking).length;
             const selected = d.iso === day.iso;
+            const full = free === 0;
             return (
               <li key={d.iso} className="shrink-0">
                 <button
                   type="button"
                   aria-pressed={selected}
+                  aria-label={`${d.label}, ${full ? "ausgebucht" : `${free} Slots frei`}`}
                   onClick={() => setDayIso(d.iso)}
                   className={cx(
-                    "flex w-18 flex-col items-center gap-0.5 rounded-card border px-2 py-2.5 transition-colors",
-                    selected ? "border-blue bg-mist" : "border-line bg-white hover:border-gray",
+                    "flex w-18 flex-col items-center gap-0.5 rounded-card border-2 px-2 py-2.5 transition-colors",
+                    selected && "border-blue bg-mist",
+                    !selected && !full && "border-line bg-white hover:border-gray",
+                    !selected && full && "bg-unavailable border-line",
                   )}
                 >
                   <span className="text-small font-medium text-slate">{weekdayShort.format(date).replace(".", "")}</span>
                   <span className="font-display text-h3 font-bold tabular-nums">{pad(date.getDate())}.{pad(date.getMonth() + 1)}.</span>
-                  <span className={cx("text-small", free ? "text-night" : "text-slate")}>{free ? `${free} frei` : "voll"}</span>
+                  <span className={cx("text-small font-medium", full ? "text-slate" : "text-night")}>{full ? "ausgebucht" : `${free} frei`}</span>
                 </button>
               </li>
             );
@@ -86,8 +104,13 @@ export function SlotPicker({ days, duration, value, onChange }: SlotPickerProps)
         </ul>
       </div>
 
-      <div>
-        <p className="mb-2 font-medium">{day.label}</p>
+      <div className="flex flex-col gap-3">
+        <div className="flex items-baseline justify-between gap-3">
+          <p className="font-medium">{day.label}</p>
+          <p className="text-small text-slate tabular-nums">
+            {freeOnDay} von {day.slots.length} frei
+          </p>
+        </div>
         <ul className="grid grid-cols-3 gap-2 sm:grid-cols-4">
           {day.slots.map((slot) => {
             const taken = Boolean(slot.booking);
@@ -103,20 +126,29 @@ export function SlotPicker({ days, duration, value, onChange }: SlotPickerProps)
                     onChange({ iso: day.iso, time: slot.time, end: addMinutes(slot.time, duration), label: slotLabel(day.iso, slot.time, duration) })
                   }
                   className={cx(
-                    "flex h-12 w-full flex-col items-center justify-center rounded-button border font-medium tabular-nums transition-colors",
-                    taken && "cursor-not-allowed border-line bg-surface text-slate",
-                    !taken && !selected && "border-line bg-white text-night hover:border-blue hover:bg-mist",
-                    selected && "border-blue bg-blue text-white",
+                    "flex h-14 w-full flex-col items-center justify-center gap-0.5 rounded-button border-2 tabular-nums transition-colors",
+                    taken && "bg-unavailable cursor-not-allowed border-line text-slate",
+                    !taken && !selected && "border-line bg-white font-medium text-night hover:border-blue",
+                    selected && "border-blue bg-blue font-medium text-white",
                   )}
                 >
-                  <span className={cx(taken && "line-through")}>{slot.time}</span>
-                  {taken && <span className="text-small font-normal">vergeben</span>}
+                  <span className="flex items-center gap-1 text-body">
+                    {selected && <Check aria-hidden className="size-4" strokeWidth={3} />}
+                    {slot.time}
+                  </span>
+                  {taken && (
+                    <span className="flex items-center gap-1 text-small">
+                      <Ban aria-hidden className="size-3" />
+                      vergeben
+                    </span>
+                  )}
+                  {selected && <span className="text-small">gewählt</span>}
                 </button>
               </li>
             );
           })}
         </ul>
-        <p className="mt-3 flex items-center gap-2 text-small text-slate">
+        <p className="flex items-center gap-2 text-small text-slate">
           <Clock aria-hidden className="size-4 shrink-0" />
           Jede Besichtigung dauert {duration} Minuten. Sie sind in dieser Zeit allein in der Wohnung.
         </p>
