@@ -151,7 +151,7 @@ export const applicants: Applicant[] = [
     id: "a8", ref: "B-2056", firstName: "Felix", lastName: "Neumann", minutesAgo: 15 * hours,
     persons: 4, household: "2 Erwachsene, 2 Kinder", netIncome: 6800, employment: "angestellt",
     occupation: "Vertrieb, unbefristet", moveIn: "2026-12-01", smoker: false,
-    salutation: "Herr", age: 39, status: "neu",
+    salutation: "Herr", age: 39, status: "gebucht", statusNote: "Identität mit Didit geprüft, 25 € Kaution vorgemerkt", slot: { weekday: "sa", weekOffset: 0, time: "17:40" },
     message: "Wir wünschen uns mehr Platz für die Kinder und kennen den Kiez sehr gut.",
   },
   {

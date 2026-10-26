@@ -60,8 +60,9 @@ export const listings: Listing[] = [
     bookings: [
       { weekday: "di", weekOffset: 0, time: "17:20", name: "Lena Hoffmann" },
       { weekday: "do", weekOffset: 0, time: "18:00", name: "Mehmet Yılmaz" },
+      { weekday: "sa", weekOffset: 0, time: "17:40", name: "Felix Neumann" },
     ],
-    applications: { total: 14, new: 8, invited: 1, booked: 2 },
+    applications: { total: 14, new: 7, invited: 1, booked: 3 },
     hasApplicantList: true,
     criteria: {
       income: { enabled: true, min: 3900 },

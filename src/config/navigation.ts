@@ -1,4 +1,4 @@
-import { House, HousePlus, Shapes, Smartphone, UsersRound, type LucideIcon } from "lucide-react";
+import { CalendarCheck, House, HousePlus, Shapes, Smartphone, UsersRound, type LucideIcon } from "lucide-react";
 
 export type NavItem = { href: string; label: string; icon: LucideIcon };
 
@@ -12,5 +12,6 @@ export const mainNav: NavItem[] = [
 
 export const devNav: NavItem[] = [
   { href: "/u/bewerben/gneisenaustrasse-41-k7m2qx", label: "Bewerberseite", icon: Smartphone },
+  { href: "/u/einladung/cr-8f3k2m", label: "Terminbuchung", icon: CalendarCheck },
   { href: "/primitives", label: "Komponenten", icon: Shapes },
 ];
