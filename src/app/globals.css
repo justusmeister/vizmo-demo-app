@@ -17,6 +17,16 @@
     @apply text-gray;
   }
 
+  /* Number fields carry unit suffixes (€, m²), so the native spinners are hidden. */
+  input[type="number"] {
+    appearance: textfield;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+
   /* 7 Focus-visible [Assumption]: 2px Vizmo Blau ring, 2px offset */
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-blue;

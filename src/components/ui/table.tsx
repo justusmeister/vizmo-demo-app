@@ -6,7 +6,7 @@ import { cx } from "@/lib/cx";
 
 export function Table({ className, ...props }: ComponentProps<"table">) {
   return (
-    <div className="overflow-x-auto">
+    <div className="relative overflow-x-auto">
       <table className={cx("w-full border-collapse text-left tabular-nums", className)} {...props} />
     </div>
   );

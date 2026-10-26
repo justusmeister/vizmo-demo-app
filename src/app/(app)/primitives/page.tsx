@@ -2,9 +2,11 @@ import { CalendarPlus, Plus } from "lucide-react";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { PageHeader } from "@/components/shell/page-header";
+import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { ChoiceChip, ChoiceGroup } from "@/components/ui/choice-chip";
 import { CopyField } from "@/components/ui/copy-field";
 import { Input, Select, Textarea } from "@/components/ui/input";
@@ -165,6 +167,19 @@ export default function PrimitivesPage() {
               <ChoiceChip selected>Unbefristet</ChoiceChip>
               <ChoiceChip selected={false}>Befristet</ChoiceChip>
             </ChoiceGroup>
+            <div className="flex flex-wrap items-center gap-6">
+              <label className="flex items-center gap-2 font-medium">
+                <Checkbox defaultChecked /> Ausgewählt
+              </label>
+              <label className="flex items-center gap-2 font-medium">
+                <Checkbox /> Nicht ausgewählt
+              </label>
+              <span className="flex items-center gap-2">
+                <Avatar initials="LH" size="sm" />
+                <Avatar initials="MY" />
+                <Avatar initials="TB" size="lg" />
+              </span>
+            </div>
           </Card>
         </Section>
 
