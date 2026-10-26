@@ -8,7 +8,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/card";
 import { CopyField } from "@/components/ui/copy-field";
 import { StepList } from "@/components/ui/step-list";
-import { addressLine, formatEuro, formatNumber, warmRent, type Draft } from "./draft";
+import { addressLine, formatEuro, formatNumber, PRICE, warmRent, type Draft } from "./draft";
 import { formatDay, formatTime, type ListingResult } from "./listing-result";
 
 type ListingSuccessProps = { draft: Draft; result: ListingResult };
@@ -35,15 +35,23 @@ export function ListingSuccess({ draft, result }: ListingSuccessProps) {
 
   return (
     <>
-      <header className="mb-6 flex flex-col gap-3 md:mb-8">
-        <Badge tone="success" className="self-start">
-          Inserat aktiv
-        </Badge>
-        <h1 className="text-h1">Ihr Inserat ist bereit</h1>
-        <p className="max-w-prose text-slate">
-          {draft.street}, {draft.zip} {draft.city}. Bewerbungen nehmen wir ab sofort über Ihren persönlichen Link
-          entgegen. Eine Zusammenfassung haben wir an {landlord.email} geschickt.
-        </p>
+      <header className="mb-6 flex flex-col gap-5 sm:flex-row sm:items-center md:mb-8">
+        {draft.listingPhotos[0] && (
+          <span className="aspect-[4/3] w-full shrink-0 overflow-hidden rounded-card bg-surface sm:w-48">
+            {/* eslint-disable-next-line @next/next/no-img-element -- local object URL preview */}
+            <img src={draft.listingPhotos[0].url} alt="Titelbild des Inserats" className="size-full object-cover" />
+          </span>
+        )}
+        <div className="flex flex-col gap-3">
+          <Badge tone="success" className="self-start">
+            Inserat aktiv
+          </Badge>
+          <h1 className="text-h1">Ihr Inserat ist bereit</h1>
+          <p className="max-w-prose text-slate">
+            {draft.street}, {draft.zip} {draft.city}. Bewerbungen nehmen wir ab sofort über Ihren persönlichen Link
+            entgegen. Zusammenfassung und Rechnung über {formatEuro(PRICE)} haben wir an {landlord.email} geschickt.
+          </p>
+        </div>
       </header>
 
       <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_22rem] xl:grid-cols-[minmax(0,1fr)_24rem]">
@@ -77,7 +85,7 @@ export function ListingSuccess({ draft, result }: ListingSuccessProps) {
               title="Inserat im Überblick"
               actions={
                 <ButtonLink href="/" variant="secondary" size="sm">
-                  Zur Übersicht
+                  Zu meinen Inseraten
                 </ButtonLink>
               }
             />
@@ -95,6 +103,14 @@ export function ListingSuccess({ draft, result }: ListingSuccessProps) {
               <div>
                 <dt className="text-small text-slate">Besichtigung</dt>
                 <dd className="font-medium">{empty ? "Allein per Smartlock" : "Mit Begleitung"}</dd>
+              </div>
+              <div>
+                <dt className="text-small text-slate">Inseratsfotos</dt>
+                <dd className="font-medium">{draft.listingPhotos.length || "Keine"}</dd>
+              </div>
+              <div>
+                <dt className="text-small text-slate">Kosten</dt>
+                <dd className="font-medium">{formatEuro(PRICE)}, abgerechnet</dd>
               </div>
             </dl>
             <div className="mt-5 border-t border-line pt-4">

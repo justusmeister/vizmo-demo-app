@@ -3,7 +3,7 @@ import type { Draft } from "./draft";
 // Stand-in for the AI extraction: pulls structured fields out of a free-text listing
 // description with German-language patterns. Anything not found is asked for later.
 
-export type Extracted = Partial<Pick<Draft, "street" | "zip" | "city" | "rooms" | "size" | "floor" | "coldRent" | "utilities" | "deposit" | "availableFrom">>;
+export type Extracted = Partial<Pick<Draft, "street" | "zip" | "city" | "rooms" | "size" | "floor" | "coldRent" | "utilities" | "deposit" | "availableFrom" | "features">>;
 
 const amount = String.raw`(\d{1,3}(?:\.\d{3})+|\d+)(?:,(\d{1,2}))?`;
 
@@ -54,6 +54,20 @@ export function extractListing(text: string): Extracted {
   const date = /(?:ab|frei ab|verfügbar ab|bezugsfrei ab)\s*(?:dem\s*)?(\d{1,2})\.(\d{1,2})\.(\d{4})/i.exec(text);
   if (date) result.availableFrom = `${date[3]}-${date[2].padStart(2, "0")}-${date[1].padStart(2, "0")}`;
   else if (/\b(?:ab sofort|sofort frei|sofort verfügbar)\b/i.test(text)) result.availableFrom = isoToday();
+
+  const features: [string, RegExp][] = [
+    ["Balkon", /balkon/i],
+    ["Terrasse", /terrasse/i],
+    ["Garten", /garten/i],
+    ["Einbauküche", /einbauküche|\bEBK\b/i],
+    ["Badewanne", /badewanne|mit wanne/i],
+    ["Aufzug", /aufzug|fahrstuhl|lift\b/i],
+    ["Keller", /keller/i],
+    ["Dielenboden", /dielen/i],
+    ["Altbau", /altbau/i],
+  ];
+  const found = features.filter(([, pattern]) => pattern.test(text)).map(([label]) => label);
+  if (found.length) result.features = found;
 
   for (const key of Object.keys(result) as (keyof Extracted)[]) {
     if (result[key] === undefined) delete result[key];

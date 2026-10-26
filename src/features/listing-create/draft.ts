@@ -1,8 +1,9 @@
-// Listing draft collected by the creation chat. All values are local mock state.
+import type { Criteria } from "@/features/criteria/types";
+
+// Listing draft collected by the creation wizard. All values are local mock state.
 
 export type Weekday = "mo" | "di" | "mi" | "do" | "fr" | "sa" | "so";
 export type Room = "Wohnzimmer" | "Küche" | "Bad" | "Schlafzimmer" | "Kinderzimmer" | "Flur" | "Balkon" | "Sonstiges";
-export type Employment = "angestellt" | "befristet" | "selbststaendig" | "beamtet" | "ausbildung" | "rente";
 
 export type Photo = { id: string; url: string; name: string; room: Room };
 
@@ -14,6 +15,7 @@ export type Draft = {
   rooms?: number;
   size?: number;
   floor?: string;
+  features: string[];
   coldRent?: number;
   utilities?: number;
   deposit?: number;
@@ -22,21 +24,31 @@ export type Draft = {
   leaseEnd?: string;
   occupancy?: "leer" | "bewohnt";
   buildingAccess?: "klingel" | "offen" | "direkt";
-  viewingDays?: Weekday[];
-  viewingFrom?: string;
-  viewingTo?: string;
-  viewingDuration?: number;
+  viewingDays: Weekday[];
+  viewingFrom: string;
+  viewingTo: string;
+  viewingDuration: number;
   viewingDeposit?: number;
-  minIncome?: number;
-  employment?: Employment[];
-  maxPersons?: number;
-  pets?: "ja" | "absprache" | "nein";
-  smoking?: "ja" | "nein";
+  criteria?: Criteria;
+  listingPhotos: Photo[];
   photos: Photo[];
-  shipTo?: "wohnung" | "profil";
+  shipTo?: "profil" | "wohnung";
+  confirmed: boolean;
+  /** Fields filled from the pasted listing text, shown as "please check". */
+  aiFields: string[];
 };
 
-export const emptyDraft: Draft = { photos: [] };
+export const emptyDraft: Draft = {
+  features: [],
+  viewingDays: ["di", "do", "sa"],
+  viewingFrom: "17:00",
+  viewingTo: "19:00",
+  viewingDuration: 20,
+  listingPhotos: [],
+  photos: [],
+  confirmed: false,
+  aiFields: [],
+};
 
 export const weekdays: { id: Weekday; short: string; long: string }[] = [
   { id: "mo", short: "Mo", long: "Montag" },
@@ -50,14 +62,7 @@ export const weekdays: { id: Weekday; short: string; long: string }[] = [
 
 export const rooms: Room[] = ["Wohnzimmer", "Küche", "Bad", "Schlafzimmer", "Kinderzimmer", "Flur", "Balkon", "Sonstiges"];
 
-export const employmentLabels: Record<Employment, string> = {
-  angestellt: "Unbefristet angestellt",
-  befristet: "Befristet angestellt",
-  selbststaendig: "Selbstständig",
-  beamtet: "Verbeamtet",
-  ausbildung: "Studium oder Ausbildung",
-  rente: "Rente oder Pension",
-};
+export const featureOptions = ["Balkon", "Terrasse", "Garten", "Einbauküche", "Badewanne", "Aufzug", "Keller", "Dielenboden", "Altbau"];
 
 export const accessLabels = {
   klingel: "Haustür mit Klingelanlage",
@@ -65,9 +70,9 @@ export const accessLabels = {
   direkt: "Direkter Zugang zur Wohnung",
 } as const;
 
-export const petLabels = { ja: "Erlaubt", absprache: "Nach Absprache", nein: "Nicht erlaubt" } as const;
-
 export const floorOptions = ["EG", "1. OG", "2. OG", "3. OG", "4. OG", "5. OG", "6. OG", "DG"];
+
+export const PRICE = 42;
 
 // Formatting (de-DE)
 
@@ -86,8 +91,8 @@ export function warmRent(draft: Draft) {
   return draft.coldRent != null && draft.utilities != null ? draft.coldRent + draft.utilities : undefined;
 }
 
-export function slotsPerWeek(draft: Draft) {
-  if (!draft.viewingDays?.length || !draft.viewingFrom || !draft.viewingTo || !draft.viewingDuration) return 0;
+export function slotsPerWeek(draft: Pick<Draft, "viewingDays" | "viewingFrom" | "viewingTo" | "viewingDuration">) {
+  if (!draft.viewingDays.length || !draft.viewingFrom || !draft.viewingTo || !draft.viewingDuration) return 0;
   const minutes = (time: string) => Number(time.slice(0, 2)) * 60 + Number(time.slice(3, 5));
   const span = minutes(draft.viewingTo) - minutes(draft.viewingFrom);
   return span > 0 ? draft.viewingDays.length * Math.floor(span / draft.viewingDuration) : 0;
@@ -103,6 +108,11 @@ export function formatDays(days: Weekday[]) {
 export function addressLine(draft: Draft) {
   if (!draft.street) return undefined;
   return [draft.street, [draft.zip, draft.city].filter(Boolean).join(" ")].filter(Boolean).join(", ");
+}
+
+export function todayIso() {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
 }
 
 export function slugify(value: string) {

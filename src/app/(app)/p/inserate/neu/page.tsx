@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { ListingCreator } from "@/features/listing-create/listing-creator";
+import { ListingWizard } from "@/features/listing-create/wizard";
 
 export const metadata: Metadata = { title: "Neues Inserat – vizmo" };
 
-// Demo screen 1 (landlord): create a listing via the guided assistant.
+// Demo screen 1 (landlord): create a listing in a guided six-step wizard.
 export default function NewListingPage() {
-  return <ListingCreator />;
+  return <ListingWizard />;
 }
