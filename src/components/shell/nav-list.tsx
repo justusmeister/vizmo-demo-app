@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { landlord } from "@/config/account";
 import { devNav, mainNav, type NavItem } from "@/config/navigation";
 import { cx } from "@/lib/cx";
 
@@ -58,9 +59,23 @@ function NavList({ items, label, onNavigate }: NavListProps) {
 export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <nav aria-label="Hauptnavigation" className="flex flex-1 flex-col gap-6">
-      <NavList items={mainNav} label="Demo" onNavigate={onNavigate} />
-      <div className="mt-auto">
+      <NavList items={mainNav} label="Vermieter" onNavigate={onNavigate} />
+      <div className="mt-auto flex flex-col gap-4">
         <NavList items={devNav} label="Entwicklung" onNavigate={onNavigate} />
+        <div className="flex items-center gap-3 border-t border-white/10 px-3 pt-4">
+          <span
+            aria-hidden
+            className="flex size-8 shrink-0 items-center justify-center rounded-full bg-lavender text-small font-medium text-night"
+          >
+            {landlord.initials}
+          </span>
+          <div className="min-w-0">
+            <p className="truncate font-medium text-white">
+              {landlord.firstName} {landlord.lastName}
+            </p>
+            <p className="truncate text-small text-lavender">Privatvermieter</p>
+          </div>
+        </div>
       </div>
     </nav>
   );

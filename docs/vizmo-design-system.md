@@ -190,3 +190,13 @@ The PDF specifies colors and roles only. Component anatomy is an **[Assumption]*
 5. Is dark mode required? The PDF defines no dark UI theme.
 6. Data visualization palette: the PDF defines none, and functional colors may not be used for charts. Proposed: Blau, Lavendel, Nachtblau and Schiefer tints. Needs confirmation.
 7. Spacing, radius, type sizes and shadows are all assumptions (section 5). Confirm them, or treat them as the demo's de-facto standard.
+
+## 10. Screens
+
+Product context from the founders' system notes (`System Für 1. Prototypen.pdf`, outside the repo): two roles. Landlord area at `app.govizmo.de/p/…`, applicant area at `app.govizmo.de/u/…`. Demo routes mirror this.
+
+| # | Route | Role | Status |
+|---|---|---|---|
+| 1 | `/p/inserate/neu` | Landlord | Built. Guided assistant (free-text extraction, then only the missing questions), live draft panel, success state with application link (`app.govizmo.de/u/bewerben/<slug>`) and the Nuki + Huawei LTE-stick DHL shipment |
+
+Screen 1 decisions **[Assumption]**: the "AI" is a scripted assistant with a regex extractor (`extract.ts`), with no model call. The Nuki Opener is added for buildings with an intercom. Viewing deposit is 25 € (recommended) or 50 €, pre-authorized via Stripe for at most 7 days. Applicant criteria are limited to what the AGG allows and are used for sorting, never filtering. The 15 € start fee is shown, and further costs apply only once a lease is signed. Occupied flats get accompanied viewings and no shipment.

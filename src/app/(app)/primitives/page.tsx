@@ -5,7 +5,12 @@ import { PageHeader } from "@/components/shell/page-header";
 import { Badge } from "@/components/ui/badge";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { ChoiceChip, ChoiceGroup } from "@/components/ui/choice-chip";
+import { CopyField } from "@/components/ui/copy-field";
+import { Input, Select, Textarea } from "@/components/ui/input";
+import { Notice } from "@/components/ui/notice";
+import { Progress } from "@/components/ui/progress";
+import { StepList } from "@/components/ui/step-list";
 import {
   Table,
   TableBody,
@@ -143,6 +148,41 @@ export default function PrimitivesPage() {
               error="Die Nummer ist zu kurz. Bitte mit Vorwahl eingeben."
             />
             <Input label="Wohnungs-ID" defaultValue="GN-41-2OG" disabled />
+            <Input label="Kaltmiete" type="number" defaultValue={1050} suffix="€" />
+            <Select label="Etage" defaultValue="2. OG">
+              <option>EG</option>
+              <option>1. OG</option>
+              <option>2. OG</option>
+            </Select>
+            <Textarea label="Beschreibung" placeholder="Helle 3-Zimmer-Wohnung …" className="md:col-span-2" />
+            <CopyField label="Link zum Inserat" value="https://app.govizmo.de/u/bewerben/gneisenaustrasse-41-k7m2qx" className="md:col-span-2" />
+          </Card>
+        </Section>
+
+        <Section title="Auswahl">
+          <Card className="flex flex-col gap-5">
+            <ChoiceGroup label="Mietdauer">
+              <ChoiceChip selected>Unbefristet</ChoiceChip>
+              <ChoiceChip selected={false}>Befristet</ChoiceChip>
+            </ChoiceGroup>
+          </Card>
+        </Section>
+
+        <Section title="Hinweis und Fortschritt">
+          <Card className="grid gap-6 md:grid-cols-2">
+            <div className="flex flex-col gap-4">
+              <Notice title="Sortieren statt aussortieren">
+                Bewerbungen werden nach Ihren Kriterien sortiert, niemand wird automatisch abgelehnt.
+              </Notice>
+              <Progress value={6} max={9} label="Beispiel-Fortschritt" />
+            </div>
+            <StepList
+              items={[
+                { label: "Bestellt", description: "Heute, 14:32 Uhr", state: "done" },
+                { label: "Wird verpackt", state: "current" },
+                { label: "Zugestellt", state: "upcoming" },
+              ]}
+            />
           </Card>
         </Section>
 
