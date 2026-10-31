@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ApplicantList } from "@/features/applicants/applicant-list";
 
-export const metadata: Metadata = { title: "Bewerbungen – Gneisenaustraße 41 – vizmo" };
+export const metadata: Metadata = { title: "Bewerbungen – Gneisenaustraße 41" };
 
 // Static export: the demo has an applicant list for one listing only.
 export const dynamicParams = false;

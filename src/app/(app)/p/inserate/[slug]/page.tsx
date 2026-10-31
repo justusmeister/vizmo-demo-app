@@ -10,7 +10,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps<"/p/inserate/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  return { title: `${getListing(slug)?.street ?? "Inserat"} – vizmo` };
+  return { title: `${getListing(slug)?.street ?? "Inserat"}` };
 }
 
 // Landlord: manage one listing (viewing slots, criteria, end listing).

@@ -1,7 +1,9 @@
-import type { Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import { BrandLogo } from "@/components/shell/brand-logo";
 
 export const viewport: Viewport = { themeColor: "white" };
+// Demo with mock data: keep it out of search engines.
+export const metadata: Metadata = { robots: { index: false, follow: false } };
 
 // Applicant area (app.govizmo.de/u/…): a separate, mobile-first unit without the landlord shell.
 export default function ApplicantLayout({ children }: LayoutProps<"/">) {

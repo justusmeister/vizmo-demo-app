@@ -10,9 +10,13 @@ import { useDevVisible } from "@/lib/dev-mode";
 // Design doc 6.8: Nachtblau navigation, Lavendel inactive items (8.6:1 on Nachtblau),
 // white active item with a Lavendel indicator.
 
-function isActive(pathname: string, href: string) {
+/** The most specific nav entry matching the path, so "/p/inserate/neu" doesn't also light up "/p/inserate". */
+function activeHref(pathname: string, items: NavItem[]) {
   const path = pathname.replace(/\/$/, "") || "/";
-  return href === "/" ? path === "/" : path === href || path.startsWith(`${href}/`);
+  return items
+    .map((item) => item.href)
+    .filter((href) => path === href || path.startsWith(`${href}/`))
+    .sort((a, b) => b.length - a.length)[0];
 }
 
 type NavListProps = {
@@ -23,13 +27,14 @@ type NavListProps = {
 
 function NavList({ items, label, onNavigate }: NavListProps) {
   const pathname = usePathname();
+  const current = activeHref(pathname, items);
 
   return (
     <div>
       <p className="px-3 pb-2 text-small font-medium text-lavender">{label}</p>
       <ul className="flex flex-col gap-0.5">
         {items.map(({ href, label: itemLabel, icon: Icon }) => {
-          const active = isActive(pathname, href);
+          const active = href === current;
           return (
             <li key={href}>
               <Link

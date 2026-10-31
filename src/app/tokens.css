@@ -28,6 +28,15 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   --text-*: initial;
+  /* Marketing site only [Assumption]: hero headline and lead paragraph. */
+  --text-hero: clamp(2.25rem, 1.4rem + 3.4vw, 4rem);
+  --text-hero--line-height: 1.08;
+  --text-hero--letter-spacing: -0.02em;
+  --text-section: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem);
+  --text-section--line-height: 1.15;
+  --text-section--letter-spacing: -0.01em;
+  --text-lead: 1.125rem;
+  --text-lead--line-height: 1.75rem;
   --text-display: 2rem;
   --text-display--line-height: 2.5rem;
   --text-h1: 1.5rem;

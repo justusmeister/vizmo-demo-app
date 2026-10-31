@@ -22,7 +22,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-export const metadata: Metadata = { title: "Komponenten – vizmo Demo" };
+export const metadata: Metadata = { title: "Komponenten (Demo)" };
 
 // Internal preview of tokens and primitives for visual QA. Not a demo screen.
 
@@ -106,7 +106,7 @@ export default function PrimitivesPage() {
               <Button icon={<CalendarPlus aria-hidden className="size-4" />}>Slot buchen</Button>
               <Button variant="secondary">Termin verschieben</Button>
               <Button variant="tertiary">Details anzeigen</Button>
-              <ButtonLink href="/" variant="secondary">
+              <ButtonLink href="/p/inserate" variant="secondary">
                 Als Link
               </ButtonLink>
             </div>

@@ -8,7 +8,7 @@ export function generateStaticParams() {
   return invitations.map((invitation) => ({ token: invitation.token }));
 }
 
-export const metadata: Metadata = { title: "Besichtigung buchen – vizmo", robots: { index: false } };
+export const metadata: Metadata = { title: "Besichtigung buchen", robots: { index: false } };
 
 // Applicant screen 2: personal invitation link to book a viewing slot.
 export default async function InvitationPage({ params }: PageProps<"/u/einladung/[token]">) {

@@ -16,8 +16,17 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "vizmo Demo",
-  description: "Besichtigungen, die sich selbst organisieren.",
+  metadataBase: new URL("https://www.govizmo.de"),
+  title: { default: "vizmo: Besichtigungen, die sich selbst organisieren", template: "%s | vizmo" },
+  description:
+    "vizmo organisiert Wohnungsbesichtigungen für private Vermieter: Bewerbungen sortiert nach Ihren Kriterien, Identitätsprüfung und Besichtigung per Smartlock, ohne jeden Termin selbst abzustimmen.",
+  manifest: "/site.webmanifest",
+  openGraph: {
+    type: "website",
+    locale: "de_DE",
+    siteName: "vizmo",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "vizmo: Besichtigungen, die sich selbst organisieren." }],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

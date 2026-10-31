@@ -111,7 +111,7 @@ export function ApplicantList() {
       <nav aria-label="Brotkrumen" className="mb-2 text-small text-slate">
         <ol className="flex flex-wrap items-center gap-1">
           <li>
-            <Link href="/" className="hover:text-night hover:underline">
+            <Link href="/p/inserate" className="hover:text-night hover:underline">
               Meine Inserate
             </Link>
           </li>

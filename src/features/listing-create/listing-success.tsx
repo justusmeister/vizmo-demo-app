@@ -84,7 +84,7 @@ export function ListingSuccess({ draft, result }: ListingSuccessProps) {
             <CardHeader
               title="Inserat im Überblick"
               actions={
-                <ButtonLink href="/" variant="secondary" size="sm">
+                <ButtonLink href="/p/inserate" variant="secondary" size="sm">
                   Zu meinen Inseraten
                 </ButtonLink>
               }

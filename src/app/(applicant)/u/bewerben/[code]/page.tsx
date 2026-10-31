@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: PageProps<"/u/bewerben/[code]
   const { code } = await params;
   const listing = getListingByCode(code);
   return {
-    title: listing ? `Bewerben: ${listing.rooms}-Zimmer-Wohnung in ${listing.city} – vizmo` : "Bewerben – vizmo",
+    title: listing ? `Bewerben: ${listing.rooms}-Zimmer-Wohnung in ${listing.city}` : "Bewerben",
     robots: { index: false },
   };
 }
