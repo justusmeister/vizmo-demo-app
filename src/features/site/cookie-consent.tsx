@@ -77,8 +77,8 @@ export function CookieConsent() {
     <>
       <OpenListener onOpen={openSettings} />
       {showBanner && (
-        <div role="region" aria-label="Cookie-Hinweis" className="fixed inset-x-0 bottom-0 z-50 p-3 md:p-5">
-          <div className="mx-auto flex max-w-3xl flex-col gap-4 rounded-modal border border-line bg-white p-5 shadow-overlay md:flex-row md:items-end">
+        <div role="region" aria-label="Cookie-Hinweis" className="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-white">
+          <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-4 md:flex-row md:items-center md:gap-8 md:px-6 md:py-5">
             <div className="flex min-w-0 flex-1 gap-3">
               <Cookie aria-hidden className="mt-0.5 size-5 shrink-0 text-deep-blue" />
               <div>
@@ -93,8 +93,8 @@ export function CookieConsent() {
                 </p>
               </div>
             </div>
-            <div className="flex flex-col gap-2 sm:flex-row md:flex-col md:items-stretch">
-              <div className="grid grid-cols-2 gap-2">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+              <div className="grid grid-cols-2 gap-2 sm:order-2">
                 <Button variant="secondary" onClick={() => save({ statistics: false })}>
                   Ablehnen
                 </Button>
@@ -142,7 +142,7 @@ export function CookieConsent() {
             <Checkbox checked disabled className="mt-0.5" aria-label="Notwendig, immer aktiv" />
             <div>
               <p className="font-medium">Notwendig</p>
-              <p className="text-small text-slate">Speichert Ihre Cookie-Auswahl im Browser. Ohne Einwilligung zulässig, immer aktiv.</p>
+              <p className="text-body text-slate">Speichert Ihre Cookie-Auswahl im Browser. Ohne Einwilligung zulässig, immer aktiv.</p>
             </div>
           </li>
           <li>
@@ -150,7 +150,7 @@ export function CookieConsent() {
               <Checkbox checked={statistics} onChange={(event) => setStatistics(event.target.checked)} className="mt-0.5" />
               <span>
                 <span className="block font-medium">Statistik</span>
-                <span className="block text-small text-slate">
+                <span className="block text-body text-slate">
                   Anonyme Nutzungsstatistik, um die Seite zu verbessern. Derzeit ist kein Statistik-Dienst im Einsatz.
                 </span>
               </span>

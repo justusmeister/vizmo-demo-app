@@ -16,7 +16,7 @@ export const footerNav = [
       { href: "/#sicherheit", label: "Datenschutz und Sicherheit" },
       { href: "/#preise", label: "Preise" },
       { href: "/faq", label: "Häufige Fragen" },
-      { href: "/p/inserate", label: "Demo ansehen" },
+      { href: "/#pilot", label: "Pilotprojekt" },
     ],
   },
   {

@@ -219,10 +219,17 @@ Applicant decisions **[Assumption]**: only AGG- and data-protection-compatible q
 
 `src/app/(site)/`, built from the same tokens and primitives as the app.
 
-- **[Assumption]** Extra type tokens for marketing only: `text-hero` (fluid 36 to 64 px, Poppins Bold, tight leading), `text-section` (fluid 28 to 40 px) and `text-lead` (18 px). Don't use them inside the app.
+- **[Assumption]** Extra type tokens for marketing only: `text-copy` (16 px body), `text-hero` (fluid 36 to 64 px, Poppins Bold, tight leading), `text-section` (fluid 28 to 40 px) and `text-lead` (18 px). Don't use them inside the app.
 - **[PDF]** The hero uses the brand supergraphic: the double chevron cropped large on Nachtblau, in slightly lightened Nachtblau (`stroke-white/[0.06]`), see `ChevronGraphic`. It's repeated in the footer.
 - **[Assumption]** Section rhythm: white, surface and mist sections alternate, with one Nachtblau section (Was uns ausmacht) for contrast. Content width is `max-w-6xl`.
 - **[Decision]** Cookie banner: "Ablehnen" and "Akzeptieren" are styled identically (secondary), with "Einstellungen" as a tertiary button. Only necessary storage is used today; "Statistik" is prepared but has no service behind it.
-- **[Decision]** The contact form composes a mailto e-mail, because the site has no backend and must not pretend to send.
+- **[Decision]** The contact form and the pilot waitlist (directly below the hero) compose a mailto e-mail to kontakt@govizmo.de, because the site has no backend and must not pretend to send. `features/site/mailto.ts` strips control characters, caps lengths and percent-encodes every part, so fields can't add headers or change the recipient. Replace with a real endpoint later.
+- **[Decision]** "Ein Blick in vizmo" shows real screenshots of the demo, cropped to the part that matters (`public/product/*.webp`, captured from the static build at 2x with the development nav hidden). Desktop crops span the full content width so their text renders at roughly 1:1; landlord screens also have a `-mobil` crop of the responsive layout, served below 640 px via `<picture>`. Frames use borders only, no shadows. Re-capture them when those screens change.
+- **[Decision]** The website doesn't link to the demo (`/p/…`, `/u/…`) yet. Calls to action point to the pilot waitlist (`/#pilot`) and the contact page. The demo routes still exist and are noindex.
+- **[Assumption]** Marketing body copy is 16 px (`text-copy`, set on the site layout); hints and captions use `text-body` (14 px), never 12 px. The app keeps its 14 px body.
+- **[Assumption]** Team portraits are round and identical in size, cropped square as in the pitch deck.
+- **[Assumption]** Mobile site menu: a full-height panel below the header, opened by a three-line toggle that animates into a cross. Pressing only greys the lines (`active:text-gray`); the grey tap highlight is disabled globally, since every control has its own pressed state.
+- **[Assumption]** The contact page has no cards or shadows: plain fields, details as a divided list. The cookie banner is a flat bottom bar with a top border.
+- **[Decision]** Security headers (CSP, HSTS, frame-ancestors none, nosniff, Referrer-Policy, Permissions-Policy) live in `vercel.json`. `script-src` needs `'unsafe-inline'` for Next's inline bootstrap scripts in a static export. Demo routes also get `X-Robots-Tag: noindex`.
 - Content sources: pitch deck "Finale V2" (Oktober 2026). Pricing is 39 € plus 45 % of the first cold rent. Note: the demo's listing wizard still shows 42 €.
 - Favicons, the manifest and the OG image come from `vizmo-brand-original/03_favicon` and `04_social-media`. Team photos come from the pitch deck (`public/team/`).

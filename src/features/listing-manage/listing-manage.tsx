@@ -195,7 +195,7 @@ export function ListingManage({ slug }: { slug: string }) {
             {listing.link && !ended && (
               <Card padding="lg" className="flex flex-col gap-3">
                 <CopyField label="Bewerbungslink für Ihre Anzeige" value={listing.link} />
-                <ButtonLink href={applicationPath(listing)} target="_blank" variant="tertiary" size="sm" className="self-start" icon={<ExternalLink aria-hidden className="size-4" />}>
+                <ButtonLink href={applicationPath(listing)} target="_blank" rel="noopener noreferrer" variant="tertiary" size="sm" className="self-start" icon={<ExternalLink aria-hidden className="size-4" />}>
                   Bewerbungsseite ansehen
                 </ButtonLink>
               </Card>

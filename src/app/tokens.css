@@ -37,6 +37,8 @@
   --text-section--letter-spacing: -0.01em;
   --text-lead: 1.125rem;
   --text-lead--line-height: 1.75rem;
+  --text-copy: 1rem; /* marketing body copy, 16px */
+  --text-copy--line-height: 1.625rem;
   --text-display: 2rem;
   --text-display--line-height: 2.5rem;
   --text-h1: 1.5rem;

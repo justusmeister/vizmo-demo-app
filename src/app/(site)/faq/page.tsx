@@ -85,7 +85,7 @@ export default function FaqPage() {
                   {group.items.map((item) => (
                     <li key={item.q}>
                       <details className="group">
-                        <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-h3 font-display font-bold">
+                        <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-h2 font-display font-bold">
                           {item.q}
                           <ChevronDown aria-hidden className="size-5 shrink-0 text-slate transition-transform group-open:rotate-180" />
                         </summary>

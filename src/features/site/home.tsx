@@ -16,6 +16,8 @@ import type { ReactNode } from "react";
 import { ButtonLink } from "@/components/ui/button";
 import { ChevronGraphic } from "./chevron-graphic";
 import { HeroVisual } from "./hero-visual";
+import { PilotSignup } from "./pilot-signup";
+import { ProductShots } from "./product-shots";
 import { Container, Section, SectionHeading } from "./section";
 import { company } from "./site-nav";
 
@@ -23,25 +25,25 @@ import { company } from "./site-nav";
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-night text-white">
+    <section className="relative overflow-hidden bg-night text-white [&_a:focus-visible]:outline-white">
       <ChevronGraphic className="absolute -top-24 -right-40 w-184 md:-right-24 lg:w-224" />
       <Container className="relative grid items-center gap-16 py-16 md:py-24 lg:grid-cols-[1.1fr_1fr] lg:gap-12 lg:py-28">
         <div className="flex flex-col items-start gap-6">
-          <p className="rounded-full bg-white/10 px-3 py-1 text-small font-medium text-lavender">Für private Vermieter</p>
+          <p className="rounded-full bg-white/10 px-3 py-1 text-body font-medium text-lavender">Für private Vermieter</p>
           <h1 className="font-display text-hero font-bold text-balance">{company.claim}</h1>
           <p className="max-w-xl text-lead text-lavender">
             vizmo übernimmt alles zwischen Inserat und Wohnungstür: Bewerbungen sortiert nach Ihren Kriterien, geprüfte
             Identitäten und Besichtigungen per Smartlock. Ohne dass Sie einen einzigen Termin selbst abstimmen.
           </p>
-          <div className="flex flex-wrap gap-3">
-            <ButtonLink href="/p/inserate" className="h-12 px-6">
-              Demo ansehen
+          <div className="grid w-full gap-3 sm:flex sm:w-auto sm:flex-wrap">
+            <ButtonLink href="#pilot" className="h-12 px-6">
+              Für den Pilot vormerken
             </ButtonLink>
-            <ButtonLink href="/kontakt" variant="secondary" className="h-12 px-6">
-              Kontakt aufnehmen
+            <ButtonLink href="#ablauf" variant="secondary" className="h-12 px-6">
+              So funktioniert&apos;s
             </ButtonLink>
           </div>
-          <ul className="mt-2 flex flex-wrap gap-x-6 gap-y-2 text-small text-lavender">
+          <ul className="mt-2 flex flex-wrap gap-x-6 gap-y-2 text-body text-lavender">
             {["DSGVO-konform", "Entwickelt und gehostet in Deutschland", "AGG-konforme Auswahl"].map((item) => (
               <li key={item} className="flex items-center gap-2">
                 <Check aria-hidden className="size-4 text-white" strokeWidth={2.5} />
@@ -58,6 +60,46 @@ function Hero() {
   );
 }
 
+const team = [
+  { name: "Jan Witte", photo: "/team/jan-witte.jpg" },
+  { name: "Johanna Spratte", photo: "/team/johanna-spratte.jpg" },
+  { name: "Justus Meister", photo: "/team/justus-meister.jpg" },
+  { name: "Theo Gutendorf", photo: "/team/theo-gutendorf.jpg" },
+];
+
+function Pilot() {
+  return (
+    <Section id="pilot" tone="mist">
+      <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-16">
+        <div className="flex flex-col gap-5">
+          <p className="w-fit rounded-full bg-white px-3 py-1 text-body font-medium text-night">Pilotprojekt</p>
+          <h2 id="pilot-title" className="font-display text-section font-bold text-balance">
+            Vermieten Sie bald neu? Werden Sie Pilotvermieter.
+          </h2>
+          <p className="text-lead text-slate">
+            Wir starten vizmo mit einer kleinen Gruppe privater Vermieter. Tragen Sie sich ein, dann melden wir uns persönlich,
+            sobald es losgeht.
+          </p>
+          <div className="flex items-center gap-3">
+            <ul className="flex -space-x-2" aria-hidden>
+              {team.map((person) => (
+                <li key={person.name} className="size-10 overflow-hidden rounded-full bg-surface ring-2 ring-mist">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- static export without image optimization */}
+                  <img src={person.photo} alt="" width={40} height={40} className="size-full object-cover" />
+                </li>
+              ))}
+            </ul>
+            <p className="text-body text-slate">Sie sprechen direkt mit uns, dem Gründerteam.</p>
+          </div>
+        </div>
+        <div className="rounded-modal border border-line bg-white p-5 md:p-8">
+          <PilotSignup />
+        </div>
+      </div>
+    </Section>
+  );
+}
+
 const stats = [
   { value: ">75", label: "Kontaktanfragen pro Inserat", note: "schon in Mittelstädten wie Osnabrück" },
   { value: "15–30", label: "Stunden Handarbeit", note: "pro Vermietung, vor allem Vorauswahl und Besichtigungen" },
@@ -66,7 +108,7 @@ const stats = [
 
 function Problem() {
   return (
-    <Section>
+    <Section tone="surface">
       <SectionHeading
         title="Eine Wohnung neu zu vermieten ist bis heute Handarbeit."
         lead="Auf eine Wohnung kommen dutzende, in Großstädten hunderte Anfragen. Wer privat vermietet, sortiert Postfächer, stimmt Termine ab und steht am Wochenende in der leeren Wohnung."
@@ -80,7 +122,7 @@ function Problem() {
           </div>
         ))}
       </dl>
-      <p className="mt-4 text-small text-slate">Quellen: IW Köln Vermieterreport (2026), ImmoScout24 WohnBarometer (Q2/2026)</p>
+      <p className="mt-4 text-body text-slate">Quellen: IW Köln Vermieterreport (2026), ImmoScout24 WohnBarometer (Q2/2026)</p>
     </Section>
   );
 }
@@ -133,10 +175,10 @@ function HowItWorks() {
               <span className="text-deep-blue">{step.icon}</span>
             </span>
             <div>
-              <h3 className="text-h3">{step.title}</h3>
+              <h3 className="text-h2">{step.title}</h3>
               <p className="mt-2 text-slate">{step.text}</p>
             </div>
-            <p className="mt-auto border-t border-line pt-3 text-small font-medium">{step.detail}</p>
+            <p className="mt-auto border-t border-line pt-3 text-body font-medium">{step.detail}</p>
           </li>
         ))}
       </ol>
@@ -209,7 +251,7 @@ function Comparison() {
         <table className="w-full min-w-160 border-collapse text-left">
           <thead>
             <tr className="border-b border-line">
-              <th scope="col" className="p-4 text-small font-medium text-slate">
+              <th scope="col" className="p-4 text-body font-medium text-slate">
                 <span className="sr-only">Merkmal</span>
               </th>
               <th scope="col" className="p-4 font-medium">Makler</th>
@@ -229,7 +271,7 @@ function Comparison() {
           </tbody>
         </table>
       </div>
-      <p className="mt-4 text-small text-slate">Quellen: eigene Darstellung; ImmoScout24 WohnBarometer 2026, IW Köln Vermieterreport 2026, § 3 WoVermittG</p>
+      <p className="mt-4 text-body text-slate">Quellen: eigene Darstellung; ImmoScout24 WohnBarometer 2026, IW Köln Vermieterreport 2026, § 3 WoVermittG</p>
     </Section>
   );
 }
@@ -279,7 +321,7 @@ function Trust() {
         {trust.map((item) => (
           <li key={item.title} className="flex flex-col gap-3">
             <span className="flex size-12 items-center justify-center rounded-card bg-white/10 text-lavender">{item.icon}</span>
-            <h3 className="text-h3">{item.title}</h3>
+            <h3 className="text-h2">{item.title}</h3>
             <p className="text-lavender">{item.text}</p>
           </li>
         ))}
@@ -299,12 +341,12 @@ function Pricing() {
         <div className="overflow-hidden rounded-modal border border-line">
           <div className="grid divide-y divide-line sm:grid-cols-2 sm:divide-x sm:divide-y-0">
             <div className="flex flex-col gap-2 p-6">
-              <p className="text-small font-medium text-slate">Bei der Anmeldung</p>
+              <p className="text-body font-medium text-slate">Bei der Anmeldung</p>
               <p className="font-display text-hero font-bold tabular-nums">39 €</p>
               <p className="text-slate">Software freischalten, Smartlock und Zubehör werden geliefert.</p>
             </div>
             <div className="flex flex-col gap-2 bg-mist p-6">
-              <p className="text-small font-medium text-slate">Nur wenn vermietet wird</p>
+              <p className="text-body font-medium text-slate">Nur wenn vermietet wird</p>
               <p className="font-display text-hero font-bold tabular-nums">45 %</p>
               <p className="text-slate">der ersten Kaltmiete als Erfolgsgebühr.</p>
             </div>
@@ -331,11 +373,11 @@ function FinalCta() {
       <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
         <div className="max-w-2xl">
           <h2 className="font-display text-section font-bold">{company.claim}</h2>
-          <p className="mt-3 text-lead text-slate">Sehen Sie in der Demo, wie eine Vermietung mit vizmo abläuft, oder schreiben Sie uns.</p>
+          <p className="mt-3 text-lead text-slate">Werden Sie Pilotvermieter oder schreiben Sie uns, wenn Sie Fragen haben.</p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <ButtonLink href="/p/inserate" className="h-12 px-6">
-            Demo ansehen
+          <ButtonLink href="#pilot" className="h-12 px-6">
+            Für den Pilot vormerken
           </ButtonLink>
           <ButtonLink href="/kontakt" variant="secondary" className="h-12 px-6">
             Kontakt aufnehmen
@@ -350,7 +392,9 @@ export function Home() {
   return (
     <>
       <Hero />
+      <Pilot />
       <Problem />
+      <ProductShots />
       <HowItWorks />
       <BothSides />
       <Comparison />

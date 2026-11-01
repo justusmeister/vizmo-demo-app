@@ -3,7 +3,7 @@
 
 const stamp = (iso: string, time: string) => `${iso.replace(/-/g, "")}T${time.replace(":", "")}00`;
 
-const escape = (text: string) => text.replace(/\\/g, "\\\\").replace(/([,;])/g, "\\$1").replace(/\n/g, "\\n");
+const escape = (text: string) => text.replace(/\\/g, "\\\\").replace(/([,;])/g, "\\$1").replace(/\r?\n|\r/g, "\\n");
 
 export function downloadIcs({ iso, start, end, title, location, description }: { iso: string; start: string; end: string; title: string; location: string; description: string }) {
   const now = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");

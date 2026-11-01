@@ -13,6 +13,14 @@
     @apply font-display font-bold;
   }
 
+  /* Touch: no grey tap flash. Controls show their own pressed state. [Assumption] */
+  a,
+  button,
+  label,
+  summary {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   ::placeholder {
     @apply text-gray;
   }

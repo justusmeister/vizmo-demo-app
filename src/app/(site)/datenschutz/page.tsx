@@ -83,10 +83,10 @@ export default function PrivacyPage() {
         </p>
       </LegalSection>
 
-      <LegalSection title="7. Kontakt per E-Mail">
+      <LegalSection title="7. Kontakt und Pilot-Anmeldung per E-Mail">
         <p>
-          Wenn Sie uns eine E-Mail schreiben, auch über das Kontaktformular, das eine Nachricht in Ihrem E-Mail-Programm
-          vorbereitet, verarbeiten wir Ihre Angaben, um Ihre Anfrage zu beantworten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b
+          Wenn Sie uns eine E-Mail schreiben, auch über das Kontaktformular oder die Anmeldung zum Pilotprojekt, die jeweils
+          eine Nachricht in Ihrem E-Mail-Programm vorbereiten, verarbeiten wir Ihre Angaben, um Ihre Anfrage zu beantworten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b
           DSGVO, wenn es um einen Vertrag geht, sonst Art. 6 Abs. 1 lit. f DSGVO. Wir löschen die Daten, wenn die Anfrage
           erledigt ist und keine gesetzlichen Aufbewahrungspflichten bestehen.
         </p>
@@ -95,14 +95,7 @@ export default function PrivacyPage() {
         </p>
       </LegalSection>
 
-      <LegalSection title="8. Demo der vizmo-Plattform">
-        <p>
-          Unter „Demo ansehen“ finden Sie eine Vorschau der Plattform mit erfundenen Beispieldaten. Eingaben in der Demo, zum
-          Beispiel hochgeladene Fotos oder Formulare, bleiben in Ihrem Browser und werden nicht an uns übertragen.
-        </p>
-      </LegalSection>
-
-      <LegalSection title="9. Empfänger und Drittländer">
+      <LegalSection title="8. Empfänger und Drittländer">
         <p>
           Wir geben Daten nur an Auftragsverarbeiter weiter, die wir sorgfältig ausgewählt und vertraglich verpflichtet haben.
           Eine Übermittlung in Länder außerhalb der EU oder des EWR findet <Ph>nicht statt / nur auf Grundlage von
@@ -110,7 +103,7 @@ export default function PrivacyPage() {
         </p>
       </LegalSection>
 
-      <LegalSection title="10. Ihre Rechte">
+      <LegalSection title="9. Ihre Rechte">
         <p>Sie haben jederzeit das Recht auf</p>
         <ul>
           <li>Auskunft über Ihre gespeicherten Daten (Art. 15 DSGVO)</li>
@@ -126,7 +119,7 @@ export default function PrivacyPage() {
         </p>
       </LegalSection>
 
-      <LegalSection title="11. Änderungen">
+      <LegalSection title="10. Änderungen">
         <p>Wir passen diese Datenschutzerklärung an, wenn sich die Website oder die Rechtslage ändert. Es gilt die jeweils hier veröffentlichte Fassung.</p>
       </LegalSection>
     </LegalPage>

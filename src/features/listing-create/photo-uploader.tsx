@@ -23,7 +23,10 @@ export function PhotoUploader({ photos, onChange, mode, hint }: PhotoUploaderPro
 
   function addFiles(files: FileList | null) {
     if (!files) return;
-    const images = [...files].filter((file) => file.type.startsWith("image/"));
+    // Only images up to 20 MB, at most 30 photos in total. Previews stay in the browser.
+    const images = [...files]
+      .filter((file) => file.type.startsWith("image/") && file.size <= 20 * 1024 * 1024)
+      .slice(0, Math.max(0, 30 - photos.length));
     const used = new Set(photos.map((photo) => photo.room));
     const next = images.map((file, index) => {
       const room = suggestedRooms.find((r) => !used.has(r)) ?? "Sonstiges";

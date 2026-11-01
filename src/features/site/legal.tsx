@@ -14,7 +14,7 @@ export function LegalPage({ title, updated, notice, children }: { title: string;
       <div className="mx-auto max-w-3xl">
         <h1 className="font-display text-hero font-bold">{title}</h1>
         <p className="mt-3 text-slate">Stand: {updated}</p>
-        {notice && <div className="mt-6 rounded-card border border-line bg-surface p-4 text-small text-night">{notice}</div>}
+        {notice && <div className="mt-6 rounded-card border border-line bg-surface p-4 text-body text-night">{notice}</div>}
         <div className="mt-10 flex flex-col gap-10">{children}</div>
       </div>
     </Container>

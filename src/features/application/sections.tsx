@@ -276,9 +276,13 @@ function DocumentUpload({ data, update }: Pick<SectionProps, "data" | "update">)
           accept="application/pdf,image/*"
           className="sr-only"
           onChange={(event) => {
-            const files = [...(event.target.files ?? [])].map((file, i) => ({
+            // `accept` is only a hint to the picker: check type and size again (max. 20 MB).
+            const allowed = [...(event.target.files ?? [])].filter(
+              (file) => (file.type === "application/pdf" || file.type.startsWith("image/")) && file.size <= 20 * 1024 * 1024,
+            );
+            const files = allowed.map((file, i) => ({
               id: `${Date.now()}-${i}`,
-              name: file.name,
+              name: file.name.slice(0, 120),
               size: file.size,
               kind: file.type,
             }));

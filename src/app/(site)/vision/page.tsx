@@ -47,7 +47,7 @@ export default function VisionPage() {
             </li>
           ))}
         </ul>
-        <p className="mt-4 text-small text-slate">Schlagzeilen aus der Presse, u. a. t-online (2023)</p>
+        <p className="mt-4 text-body text-slate">Schlagzeilen aus der Presse, u. a. t-online (2023)</p>
       </Section>
 
       <Section tone="surface">
@@ -77,7 +77,7 @@ export default function VisionPage() {
         <ol className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {roadmap.map((item, index) => (
             <li key={item.title} className="flex flex-col gap-3 border-t-2 border-white/15 pt-5">
-              <span className="text-small font-medium text-lavender">
+              <span className="text-body font-medium text-lavender">
                 {index + 1}. {item.phase}
               </span>
               <h3 className="text-h2">{item.title}</h3>
@@ -85,7 +85,7 @@ export default function VisionPage() {
             </li>
           ))}
         </ol>
-        <p className="mt-10 text-small text-lavender">Quellen: Zensus 2022, IW Köln 2025, Hochrechnung auf Basis Eurostat 2024</p>
+        <p className="mt-10 text-body text-lavender">Quellen: Zensus 2022, IW Köln 2025, Hochrechnung auf Basis Eurostat 2024</p>
       </Section>
 
       <Section tone="mist">

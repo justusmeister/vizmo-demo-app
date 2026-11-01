@@ -22,17 +22,25 @@ export default function TeamPage() {
         lead="Wir sind vier Gründerinnen und Gründer mit einem gemeinsamen Ziel: Wohnungen zu vermieten soll sich nicht mehr wie ein zweiter Job anfühlen."
       />
       <Section>
-        <ul className="grid grid-cols-2 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-10 lg:grid-cols-4">
+        {/* Round portraits of identical size, as in the pitch deck. */}
+        <ul className="grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-8 lg:grid-cols-4">
           {team.map((person) => (
-            <li key={person.name} className="flex flex-col gap-4">
-              <div className="aspect-[4/5] overflow-hidden rounded-card bg-surface">
+            <li key={person.name} className="flex flex-col items-center gap-4 text-center">
+              <div className="size-32 shrink-0 overflow-hidden rounded-full bg-surface ring-1 ring-line sm:size-40 md:size-44">
                 {/* eslint-disable-next-line @next/next/no-img-element -- static export without image optimization */}
-                <img src={person.photo} alt={`Porträt von ${person.name}`} loading="lazy" className="size-full object-cover object-top" />
+                <img
+                  src={person.photo}
+                  alt={`Porträt von ${person.name}`}
+                  width={176}
+                  height={176}
+                  loading="lazy"
+                  className="size-full object-cover"
+                />
               </div>
-              <div>
+              <div className="flex flex-col items-center">
                 <h2 className="text-h3 md:text-h2">{person.name}</h2>
                 <p className="font-medium text-deep-blue">{person.role}</p>
-                <p className="mt-2 hidden text-slate sm:block">{person.focus}</p>
+                <p className="mt-2 max-w-64 text-body text-slate sm:text-copy">{person.focus}</p>
               </div>
             </li>
           ))}

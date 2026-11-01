@@ -21,7 +21,7 @@ export function SiteFooter() {
         <nav aria-label="Fußzeile" className="grid gap-8 sm:grid-cols-3">
           {footerNav.map((group) => (
             <div key={group.title}>
-              <p className="mb-3 text-small font-medium text-lavender">{group.title}</p>
+              <p className="mb-3 text-body font-medium text-lavender">{group.title}</p>
               <ul className="flex flex-col gap-2">
                 {group.links.map((link) => (
                   <li key={link.href}>
@@ -41,7 +41,7 @@ export function SiteFooter() {
         </nav>
       </div>
       <div className="relative border-t border-white/10">
-        <div className="mx-auto flex max-w-6xl flex-wrap justify-between gap-2 px-4 py-5 text-small text-lavender md:px-6">
+        <div className="mx-auto flex max-w-6xl flex-wrap justify-between gap-2 px-4 py-5 text-body text-lavender md:px-6">
           <p>© 2026 {company.name}</p>
           <p>Entwickelt und gehostet in Deutschland</p>
         </div>

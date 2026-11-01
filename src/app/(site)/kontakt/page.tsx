@@ -1,8 +1,6 @@
-import { Mail, MapPin } from "lucide-react";
 import type { Metadata } from "next";
-import { Card } from "@/components/ui/card";
 import { ContactForm } from "@/features/site/contact-form";
-import { PageIntro, Section } from "@/features/site/section";
+import { Container } from "@/features/site/section";
 import { company } from "@/features/site/site-nav";
 
 export const metadata: Metadata = {
@@ -12,39 +10,35 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <>
-      <PageIntro title="Kontakt" lead="Fragen, Feedback oder Interesse am Pilot? Wir freuen uns auf Ihre Nachricht." />
-      <Section>
-        <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
+    <Container className="py-12 md:py-20">
+      {/* Phones: intro, form, details. Desktop: intro and details left, form right. */}
+      <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:grid-rows-[auto_1fr] lg:gap-x-20">
+        <div className="lg:col-start-1">
+          <h1 className="font-display text-hero font-bold">Kontakt</h1>
+          <p className="mt-4 text-lead text-slate">Fragen, Feedback oder Interesse am Pilot? Wir freuen uns auf Ihre Nachricht.</p>
+        </div>
+        <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
           <ContactForm />
-          <aside className="flex flex-col gap-4">
-            <Card padding="lg" className="flex flex-col gap-4">
-              <h2 className="text-h2">Direkt erreichen</h2>
-              <a href={`mailto:${company.email}`} className="flex items-center gap-3 font-medium text-blue hover:text-deep-blue">
-                <Mail aria-hidden className="size-5 shrink-0" />
+        </div>
+        <dl className="flex flex-col divide-y divide-line self-start border-y border-line lg:col-start-1">
+          <div className="flex flex-col gap-1 py-4">
+            <dt className="text-body text-slate">E-Mail</dt>
+            <dd>
+              <a href={`mailto:${company.email}`} className="font-medium text-blue hover:text-deep-blue hover:underline">
                 {company.email}
               </a>
-              <p className="flex items-start gap-3 text-slate">
-                <MapPin aria-hidden className="mt-0.5 size-5 shrink-0 text-deep-blue" />
-                <span>
-                  {company.name}
-                  <br />
-                  [Straße und Hausnummer]
-                  <br />
-                  [PLZ Ort]
-                </span>
-              </p>
-            </Card>
-            <Card tone="mist">
-              <p className="font-medium">Für Interessenten</p>
-              <p className="mt-1">
-                Fragen zu einer konkreten Bewerbung oder Besichtigung beantworten wir am schnellsten über den Link in Ihrer E-Mail
-                von vizmo.
-              </p>
-            </Card>
-          </aside>
-        </div>
-      </Section>
-    </>
+            </dd>
+          </div>
+          <div className="flex flex-col gap-1 py-4">
+            <dt className="text-body text-slate">Anschrift</dt>
+            <dd>{company.name}, [Straße und Hausnummer], [PLZ Ort]</dd>
+          </div>
+          <div className="flex flex-col gap-1 py-4">
+            <dt className="text-body text-slate">Sie haben sich auf eine Wohnung beworben?</dt>
+            <dd>Fragen zu Ihrer Bewerbung oder Besichtigung klären Sie am schnellsten über den Link in Ihrer E-Mail von vizmo.</dd>
+          </div>
+        </dl>
+    </div>
+  </Container>
   );
 }
