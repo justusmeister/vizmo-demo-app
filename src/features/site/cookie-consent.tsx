@@ -102,7 +102,7 @@ export function CookieConsent() {
                   Akzeptieren
                 </Button>
               </div>
-              <Button variant="tertiary" size="sm" onClick={openSettings}>
+              <Button variant="tertiary" onClick={openSettings}>
                 Einstellungen
               </Button>
             </div>
@@ -113,8 +113,9 @@ export function CookieConsent() {
       <Dialog
         open={settingsOpen}
         onClose={() => setSettingsOpen(false)}
+        size="lg"
         title="Cookie-Einstellungen"
-        description="Sie können Ihre Auswahl jederzeit ändern."
+        description="Wählen Sie, welche Speicher wir nutzen dürfen. Sie können Ihre Auswahl jederzeit im Fuß der Seite ändern."
         footer={
           <>
             <Button
@@ -137,20 +138,20 @@ export function CookieConsent() {
           </>
         }
       >
-        <ul className="flex flex-col gap-3">
-          <li className="flex items-start gap-3 rounded-card border border-line p-4">
-            <Checkbox checked disabled className="mt-0.5" aria-label="Notwendig, immer aktiv" />
+        <ul className="flex flex-col gap-4">
+          <li className="flex flex-col gap-2 rounded-card border border-line p-5 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
             <div>
-              <p className="font-medium">Notwendig</p>
-              <p className="text-body text-slate">Speichert Ihre Cookie-Auswahl im Browser. Ohne Einwilligung zulässig, immer aktiv.</p>
+              <p className="text-h2 font-medium">Notwendig</p>
+              <p className="mt-1 text-slate">Speichert Ihre Cookie-Auswahl im Browser. Ohne Einwilligung zulässig.</p>
             </div>
+            <span className="w-fit shrink-0 rounded-full bg-mist px-3 py-1 text-body font-medium text-night">Immer aktiv</span>
           </li>
           <li>
-            <label className="flex cursor-pointer items-start gap-3 rounded-card border border-line p-4">
-              <Checkbox checked={statistics} onChange={(event) => setStatistics(event.target.checked)} className="mt-0.5" />
+            <label className="flex cursor-pointer items-start gap-4 rounded-card border border-line p-5 hover:border-gray">
+              <Checkbox checked={statistics} onChange={(event) => setStatistics(event.target.checked)} className="mt-1" />
               <span>
-                <span className="block font-medium">Statistik</span>
-                <span className="block text-body text-slate">
+                <span className="block text-h2 font-medium">Statistik</span>
+                <span className="mt-1 block text-slate">
                   Anonyme Nutzungsstatistik, um die Seite zu verbessern. Derzeit ist kein Statistik-Dienst im Einsatz.
                 </span>
               </span>

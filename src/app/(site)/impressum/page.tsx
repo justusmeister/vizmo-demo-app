@@ -12,30 +12,26 @@ export default function ImprintPage() {
       updated="Oktober 2026"
       notice={
         <>
-          Vorlage: Markierte Angaben in eckigen Klammern vor Veröffentlichung ersetzen und den Text rechtlich prüfen lassen.
-          Solange die GmbH in Gründung ist, haften die Gründerinnen und Gründer persönlich. Das Impressum muss dann die
-          handelnden Personen nennen.
+          vizmo befindet sich in der Vorgründungsphase. Es gibt noch keine eingetragene Gesellschaft, daher auch keinen
+          Registereintrag und keine Umsatzsteuer-ID. Grün markierte Angaben vor Veröffentlichung ergänzen und das Impressum
+          rechtlich prüfen lassen. Nach der Gründung müssen Rechtsform, Vertretung und Registerangaben ergänzt werden.
         </>
       }
     >
       <LegalSection title="Angaben gemäß § 5 DDG">
         <p>
-          {company.name}
+          vizmo, ein Gründungsvorhaben von
           <br />
+          {company.founders}
+          <br />
+          <Ph>Rechtsform prüfen, z. B. Gesellschaft bürgerlichen Rechts der Gründer</Ph>
+        </p>
+        <p>
           <Ph>Straße und Hausnummer</Ph>
           <br />
           <Ph>PLZ Ort</Ph>
           <br />
           Deutschland
-        </p>
-      </LegalSection>
-
-      <LegalSection title="Vertreten durch">
-        <p>
-          Die Geschäftsführung: <Ph>Vor- und Nachname der Geschäftsführerin oder des Geschäftsführers</Ph>
-        </p>
-        <p>
-          Gründungsgesellschafter: Jan Witte, Johanna Spratte, Justus Meister, Theo Gutendorf <Ph>bitte prüfen</Ph>
         </p>
       </LegalSection>
 
@@ -47,25 +43,9 @@ export default function ImprintPage() {
         </p>
       </LegalSection>
 
-      <LegalSection title="Registereintrag">
-        <p>
-          Die Gesellschaft befindet sich in Gründung. Nach Eintragung:
-          <br />
-          Registergericht: <Ph>Amtsgericht Ort</Ph>
-          <br />
-          Registernummer: <Ph>HRB 000000</Ph>
-        </p>
-      </LegalSection>
-
-      <LegalSection title="Umsatzsteuer-ID">
-        <p>
-          Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: <Ph>DE000000000</Ph>
-        </p>
-      </LegalSection>
-
       <LegalSection title="Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV">
         <p>
-          <Ph>Vor- und Nachname</Ph>
+          <Ph>Vor- und Nachname einer der Gründerinnen oder Gründer</Ph>
           <br />
           <Ph>Anschrift wie oben</Ph>
         </p>
@@ -108,8 +88,8 @@ export default function ImprintPage() {
 
       <LegalSection title="Marken und Bildnachweise">
         <p>
-          vizmo ist eine Bezeichnung der {company.name}. Genannte Produkt- und Firmennamen wie Nuki, Huawei, Didit, Stripe und
-          DHL sind Marken ihrer jeweiligen Inhaber. Teamfotos: <Ph>Fotograf oder eigene Aufnahmen</Ph>.
+          vizmo ist der Name des Gründungsvorhabens von {company.founders}. Genannte Produkt- und Firmennamen wie
+          Nuki, Huawei, Didit, Stripe und DHL sind Marken ihrer jeweiligen Inhaber.
         </p>
       </LegalSection>
     </LegalPage>

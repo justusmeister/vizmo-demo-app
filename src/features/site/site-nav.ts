@@ -4,7 +4,6 @@ export const siteNav = [
   { href: "/#ablauf", label: "So funktioniert's" },
   { href: "/#preise", label: "Preise" },
   { href: "/vision", label: "Vision" },
-  { href: "/team", label: "Team" },
   { href: "/faq", label: "FAQ" },
 ];
 
@@ -23,8 +22,7 @@ export const footerNav = [
     title: "Unternehmen",
     links: [
       { href: "/vision", label: "Vision" },
-      { href: "/team", label: "Team" },
-      { href: "/kontakt", label: "Kontakt" },
+          { href: "/kontakt", label: "Kontakt" },
     ],
   },
   {
@@ -37,7 +35,9 @@ export const footerNav = [
 ];
 
 export const company = {
-  name: "vizmo GmbH i.G.",
+  name: "vizmo",
+  // Pre-founding phase: no company registered yet. The legal pages name the founders.
+  founders: "Jan Witte, Johanna Spratte, Justus Meister und Theo Gutendorf",
   email: "kontakt@govizmo.de",
   web: "www.govizmo.de",
   claim: "Besichtigungen, die sich selbst organisieren.",

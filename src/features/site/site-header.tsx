@@ -42,7 +42,7 @@ export function SiteHeader() {
       <header className="sticky top-0 z-40 border-b border-line bg-white/90 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-4 md:px-6">
           <Link href="/" aria-label="vizmo Startseite" className="rounded-button" onClick={() => setOpen(false)}>
-            <BrandLogo tone="light" width={104} />
+            <BrandLogo tone="light" width={108} />
           </Link>
 
           <nav aria-label="Hauptnavigation" className="hidden lg:block">
@@ -93,10 +93,13 @@ export function SiteHeader() {
   );
 }
 
-// Three lines that turn into a cross. Pressing only greys the lines: no background flash,
-// no tap highlight. The middle line fades, the outer two rotate.
+// Three lines that turn into a cross in two clear steps: opening, the outer lines first
+// slide to the middle, then rotate; closing reverses the order. Each line is split into a
+// sliding wrapper and a rotating bar so the two steps can be timed separately. Pressing only
+// greys the lines: no background flash, no tap highlight.
 function MenuToggle({ open, onToggle }: { open: boolean; onToggle: () => void }) {
-  const line = "absolute left-0 h-0.5 w-6 rounded-full bg-current transition-[transform,opacity] duration-200 ease-out";
+  const slide = "absolute left-0 w-6 transition-transform duration-200 ease-in-out motion-reduce:transition-none";
+  const bar = "block h-0.5 w-6 rounded-full bg-current transition-transform duration-200 ease-in-out motion-reduce:transition-none";
   return (
     <button
       type="button"
@@ -107,9 +110,18 @@ function MenuToggle({ open, onToggle }: { open: boolean; onToggle: () => void })
       className="-mr-2.5 inline-flex size-11 items-center justify-center rounded-button text-night transition-colors active:text-gray lg:hidden"
     >
       <span aria-hidden className="relative block h-4 w-6">
-        <span className={cx(line, "top-0", open && "translate-y-1.75 rotate-45")} />
-        <span className={cx(line, "top-1.75", open && "opacity-0")} />
-        <span className={cx(line, "top-3.5", open && "-translate-y-1.75 -rotate-45")} />
+        <span className={cx(slide, "top-0", open ? "translate-y-1.75 delay-0" : "delay-200")}>
+          <span className={cx(bar, open ? "rotate-45 delay-200" : "delay-0")} />
+        </span>
+        <span
+          className={cx(
+            "absolute top-1.75 left-0 h-0.5 w-6 rounded-full bg-current transition-opacity duration-100 delay-150 motion-reduce:transition-none",
+            open && "opacity-0",
+          )}
+        />
+        <span className={cx(slide, "top-3.5", open ? "-translate-y-1.75 delay-0" : "delay-200")}>
+          <span className={cx(bar, open ? "-rotate-45 delay-200" : "delay-0")} />
+        </span>
       </span>
     </button>
   );

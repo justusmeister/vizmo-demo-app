@@ -6,6 +6,7 @@ import {
   KeyRound,
   LockKeyhole,
   MailOpen,
+  MessagesSquare,
   Scale,
   ScanFace,
   Server,
@@ -60,13 +61,6 @@ function Hero() {
   );
 }
 
-const team = [
-  { name: "Jan Witte", photo: "/team/jan-witte.jpg" },
-  { name: "Johanna Spratte", photo: "/team/johanna-spratte.jpg" },
-  { name: "Justus Meister", photo: "/team/justus-meister.jpg" },
-  { name: "Theo Gutendorf", photo: "/team/theo-gutendorf.jpg" },
-];
-
 function Pilot() {
   return (
     <Section id="pilot" tone="mist">
@@ -80,17 +74,10 @@ function Pilot() {
             Wir starten vizmo mit einer kleinen Gruppe privater Vermieter. Tragen Sie sich ein, dann melden wir uns persönlich,
             sobald es losgeht.
           </p>
-          <div className="flex items-center gap-3">
-            <ul className="flex -space-x-2" aria-hidden>
-              {team.map((person) => (
-                <li key={person.name} className="size-10 overflow-hidden rounded-full bg-surface ring-2 ring-mist">
-                  {/* eslint-disable-next-line @next/next/no-img-element -- static export without image optimization */}
-                  <img src={person.photo} alt="" width={40} height={40} className="size-full object-cover" />
-                </li>
-              ))}
-            </ul>
-            <p className="text-body text-slate">Sie sprechen direkt mit uns, dem Gründerteam.</p>
-          </div>
+          <p className="flex items-center gap-2 text-body text-slate">
+            <MessagesSquare aria-hidden className="size-4 shrink-0 text-deep-blue" />
+            Sie sprechen direkt mit uns, dem Gründerteam.
+          </p>
         </div>
         <div className="rounded-modal border border-line bg-white p-5 md:p-8">
           <PilotSignup />

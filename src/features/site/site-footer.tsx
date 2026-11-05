@@ -42,7 +42,7 @@ export function SiteFooter() {
       </div>
       <div className="relative border-t border-white/10">
         <div className="mx-auto flex max-w-6xl flex-wrap justify-between gap-2 px-4 py-5 text-body text-lavender md:px-6">
-          <p>© 2026 {company.name}</p>
+          <p>© 2026 {company.name}. Alle Rechte vorbehalten.</p>
           <p>Entwickelt und gehostet in Deutschland</p>
         </div>
       </div>

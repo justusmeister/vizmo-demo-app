@@ -21,7 +21,7 @@ export default function PrivacyPage() {
     >
       <LegalSection title="1. Verantwortlicher">
         <p>
-          {company.name}
+          vizmo, ein Gründungsvorhaben von {company.founders} (noch keine eingetragene Gesellschaft)
           <br />
           <Ph>Straße und Hausnummer</Ph>, <Ph>PLZ Ort</Ph>
           <br />
@@ -115,7 +115,7 @@ export default function PrivacyPage() {
         </ul>
         <p>
           Schreiben Sie uns dazu an <a href={`mailto:${company.email}`}>{company.email}</a>. Außerdem können Sie sich bei einer
-          Datenschutz-Aufsichtsbehörde beschweren, zum Beispiel bei <Ph>zuständige Landesbehörde am Sitz des Unternehmens</Ph>.
+          Datenschutz-Aufsichtsbehörde beschweren, zum Beispiel bei <Ph>zuständige Landesbehörde am Wohn- oder Geschäftssitz</Ph>.
         </p>
       </LegalSection>
 
