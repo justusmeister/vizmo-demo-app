@@ -4,8 +4,9 @@ import { cx } from "@/lib/cx";
 import { Section, SectionHeading } from "./section";
 
 // Real screenshots of the demo, cropped to the part that matters (public/product, captured
-// from the static build at 2x). Landlord screens also have a phone crop of the responsive
-// layout, so the text stays readable at every width. Borders only, no shadows.
+// from the static build at 3x, WebP q92 with sharp YUV so text stays crisp). Landlord screens
+// also have a phone crop of the responsive layout, so the text stays readable at every
+// width. Borders only, no shadows.
 
 type Image = { src: string; width: number; height: number };
 
@@ -78,8 +79,8 @@ export function ProductShots() {
           points={["Passung, Haushalt und Einkommen in einer Zeile", "Gebuchte Termine direkt in der Liste", "Herkunft, Religion, Geschlecht und Alter spielen keine Rolle"]}
           shot={
             <Shot
-              desktop={{ src: "/product/bewerbungen.webp", width: 2064, height: 1226 }}
-              mobile={{ src: "/product/bewerbungen-mobil.webp", width: 780, height: 1328 }}
+              desktop={{ src: "/product/bewerbungen.webp", width: 3096, height: 1839 }}
+              mobile={{ src: "/product/bewerbungen-mobil.webp", width: 1170, height: 2280 }}
               alt="Bewerbungsliste: Kriterien wie ab 3.900 € netto, bis 3 Personen und Nichtraucher. Darunter Bewerbungen mit Passung 6 von 6, Haushalt, Einkommen, Einzug und Status wie Neu, Slot gebucht und Eingeladen."
               caption="Bewerbungsliste mit Ihren Kriterien und dem Stand jeder Bewerbung"
             />
@@ -98,13 +99,13 @@ export function ProductShots() {
           <div className="grid items-start gap-8 sm:grid-cols-2 sm:gap-6">
             <Shot
               className="mx-auto w-full max-w-sm"
-              desktop={{ src: "/product/bewerbung.webp", width: 780, height: 1128 }}
+              desktop={{ src: "/product/bewerbung.webp", width: 1170, height: 1692 }}
               alt="Bewerbungsformular, Schritt 1 von 5: Ihre Kontaktdaten mit Anrede, Vorname und Nachname"
               caption="Bewerbung in fünf Schritten"
             />
             <Shot
               className="mx-auto w-full max-w-sm sm:mt-16"
-              desktop={{ src: "/product/terminbuchung.webp", width: 764, height: 910 }}
+              desktop={{ src: "/product/terminbuchung.webp", width: 1146, height: 1365 }}
               alt="Terminwahl: Tage mit freien Slots, Dienstag 03.11. gewählt, 17:20 Uhr ist schraffiert und vergeben"
               caption="Terminwahl, vergebene Zeiten sind schraffiert"
             />
@@ -122,8 +123,8 @@ export function ProductShots() {
           points={["Neue Bewerbungen und gebuchte Slots je Wohnung", "Status von Smartlock und Lieferung", "Entwürfe jederzeit fortsetzen"]}
           shot={
             <Shot
-              desktop={{ src: "/product/inserate.webp", width: 2384, height: 960 }}
-              mobile={{ src: "/product/inserate-mobil.webp", width: 780, height: 1380 }}
+              desktop={{ src: "/product/inserate.webp", width: 3576, height: 1440 }}
+              mobile={{ src: "/product/inserate-mobil.webp", width: 1170, height: 2100 }}
               alt="Offene Inserate: Gneisenaustraße 41 mit 14 Bewerbungen und Smartlock online, Körnerstraße 7 mit Paket bei DHL unterwegs, Fichtestraße 12 als Entwurf"
               caption="Übersicht Ihrer Inserate mit Bewerbungen, Terminen und Smartlock"
             />

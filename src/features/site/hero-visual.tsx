@@ -15,7 +15,7 @@ function Meter({ value }: { value: number }) {
   return (
     <span className="flex gap-0.5">
       {Array.from({ length: 6 }, (_, i) => (
-        <span key={i} className={cx("h-1.5 w-3 rounded-full", i < value ? "bg-night" : "bg-line")} />
+        <span key={i} className={cx("h-1.5 w-2 rounded-full min-[360px]:w-3", i < value ? "bg-night" : "bg-line")} />
       ))}
     </span>
   );
@@ -38,7 +38,8 @@ export function HeroVisual() {
                 <span className="block font-medium">{row.name}</span>
                 <span className="mt-1 flex items-center gap-2 text-small text-slate">
                   <Meter value={row.score} />
-                  {row.score} von 6
+                  {/* Hidden on the narrowest phones so the row never overflows. */}
+                  <span className="hidden min-[360px]:inline">{row.score} von 6</span>
                 </span>
               </span>
               <Badge tone={row.status === "Slot gebucht" ? "success" : "neutral"}>{row.status}</Badge>

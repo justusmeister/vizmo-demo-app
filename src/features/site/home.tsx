@@ -28,10 +28,10 @@ function Hero() {
   return (
     <section className="relative overflow-hidden bg-night text-white [&_a:focus-visible]:outline-white">
       <ChevronGraphic className="absolute -top-24 -right-40 w-184 md:-right-24 lg:w-224" />
-      <Container className="relative grid items-center gap-16 py-16 md:py-24 lg:grid-cols-[1.1fr_1fr] lg:gap-12 lg:py-28">
-        <div className="flex flex-col items-start gap-6">
+      <Container className="relative grid grid-cols-1 items-center gap-16 py-16 md:py-24 lg:grid-cols-[1.1fr_1fr] lg:gap-12 lg:py-28">
+        <div className="flex min-w-0 flex-col items-start gap-6">
           <p className="rounded-full bg-white/10 px-3 py-1 text-body font-medium text-lavender">Für private Vermieter</p>
-          <h1 className="font-display text-hero font-bold text-balance">{company.claim}</h1>
+          <h1 className="font-display text-hero font-bold text-balance hyphens-auto">{company.claim}</h1>
           <p className="max-w-xl text-lead text-lavender">
             vizmo übernimmt alles zwischen Inserat und Wohnungstür: Bewerbungen sortiert nach Ihren Kriterien, geprüfte
             Identitäten und Besichtigungen per Smartlock. Ohne dass Sie einen einzigen Termin selbst abstimmen.
@@ -234,8 +234,30 @@ function Comparison() {
   return (
     <Section tone="surface">
       <SectionHeading title="Schneller als selbst, günstiger als ein Makler" lead="Ein Vergleich für eine typische Wohnung mit 865 € Kaltmiete." />
-      <div className="mt-10 overflow-x-auto rounded-card border border-line bg-white">
-        <table className="w-full min-w-160 border-collapse text-left">
+      {/* Phones: one card per criterion, so nothing scrolls sideways. */}
+      <ul className="mt-10 flex flex-col gap-3 md:hidden">
+        {comparison.map((row) => (
+          <li key={row.label} className="rounded-card border border-line bg-white">
+            <p className="px-4 pt-4 pb-2 font-medium text-slate">{row.label}</p>
+            <dl className="divide-y divide-line">
+              <div className="flex justify-between gap-4 px-4 py-3">
+                <dt className="text-slate">Makler</dt>
+                <dd className="text-right">{row.makler}</dd>
+              </div>
+              <div className="flex justify-between gap-4 px-4 py-3">
+                <dt className="text-slate">Selbst vermieten</dt>
+                <dd className="text-right">{row.selbst}</dd>
+              </div>
+              <div className="flex justify-between gap-4 rounded-b-card bg-mist px-4 py-3">
+                <dt className="font-display font-bold">vizmo</dt>
+                <dd className="text-right font-medium">{row.vizmo}</dd>
+              </div>
+            </dl>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-10 hidden overflow-hidden rounded-card border border-line bg-white md:block">
+        <table className="w-full border-collapse text-left">
           <thead>
             <tr className="border-b border-line">
               <th scope="col" className="p-4 text-body font-medium text-slate">

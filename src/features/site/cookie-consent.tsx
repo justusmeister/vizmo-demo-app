@@ -115,7 +115,7 @@ export function CookieConsent() {
         onClose={() => setSettingsOpen(false)}
         size="lg"
         title="Cookie-Einstellungen"
-        description="Wählen Sie, welche Speicher wir nutzen dürfen. Sie können Ihre Auswahl jederzeit im Fuß der Seite ändern."
+        description="Sie können Ihre Auswahl jederzeit im Fuß der Seite ändern."
         footer={
           <>
             <Button

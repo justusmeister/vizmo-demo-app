@@ -7,7 +7,8 @@ import { cx } from "@/lib/cx";
 // Modal built on the native <dialog>: focus trap, Escape and inert background for free.
 // "center" for confirmations, "side" for a detail panel (full screen on mobile).
 // size "lg" (center only) is for reading-heavy dialogs on the marketing site, sized to its
-// 16 px copy: wider, roomier, larger title, footer buttons full width on phones.
+// 16 px copy: wider, roomier, larger title, full screen on phones. The whole dialog scrolls
+// (not a small inner area) and the footer stays pinned at the bottom.
 
 type DialogProps = {
   open: boolean;
@@ -40,8 +41,11 @@ export function Dialog({ open, onClose, title, description, variant = "center", 
       className={cx(
         "flex-col bg-white text-night backdrop:bg-night/60 not-open:hidden open:flex",
         variant === "center" &&
-          "m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] rounded-modal shadow-overlay",
-        variant === "center" && (size === "lg" ? "max-w-2xl" : "max-w-lg"),
+          size === "md" &&
+          "m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-lg rounded-modal shadow-overlay",
+        variant === "center" &&
+          size === "lg" &&
+          "m-0 h-dvh max-h-none w-full max-w-none overflow-y-auto overscroll-contain sm:m-auto sm:h-fit sm:max-h-[calc(100dvh-2rem)] sm:w-[calc(100%-2rem)] sm:max-w-2xl sm:rounded-modal sm:shadow-overlay",
         variant === "side" && "m-0 ml-auto h-dvh max-h-none w-full max-w-none sm:max-w-xl",
       )}
     >
@@ -61,12 +65,12 @@ export function Dialog({ open, onClose, title, description, variant = "center", 
           <X aria-hidden className="size-5" />
         </button>
       </header>
-      <div className={cx("min-h-0 flex-1 overflow-y-auto", size === "lg" ? "px-5 py-6 md:px-8" : "px-5 py-5")}>{children}</div>
+      <div className={cx(size === "lg" ? "flex-1 px-5 py-6 md:px-8" : "min-h-0 flex-1 overflow-y-auto px-5 py-5")}>{children}</div>
       {footer && (
         <footer
           className={cx(
             "flex flex-wrap justify-end gap-2 border-t border-line bg-surface",
-            size === "lg" ? "flex-col-reverse px-5 py-5 sm:flex-row md:px-8 [&>*]:h-12 [&>*]:px-6" : "px-5 py-4",
+            size === "lg" ? "sticky bottom-0 flex-col-reverse px-5 py-5 sm:flex-row md:px-8 [&>*]:h-12 [&>*]:px-6" : "px-5 py-4",
           )}
         >
           {footer}
