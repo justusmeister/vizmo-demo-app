@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Datenschutz" };
 export default function PrivacyPage() {
   return (
     <LegalPage
-      title="Datenschutzerklärung"
+      title={"Datenschutz\u00ADerklärung"}
       updated="Oktober 2026"
       notice={
         <>

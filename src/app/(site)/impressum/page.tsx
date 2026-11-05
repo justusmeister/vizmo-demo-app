@@ -51,7 +51,7 @@ export default function ImprintPage() {
         </p>
       </LegalSection>
 
-      <LegalSection title="Verbraucherstreitbeilegung">
+      <LegalSection title={"Verbraucher\u00ADstreit\u00ADbeilegung"}>
         <p>
           Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
           teilzunehmen.

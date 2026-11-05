@@ -1,8 +1,8 @@
 import {
+  ArrowRight,
   BadgeEuro,
   Camera,
   Check,
-  Clock,
   KeyRound,
   LockKeyhole,
   MailOpen,
@@ -13,11 +13,13 @@ import {
   ShieldCheck,
   Users,
 } from "lucide-react";
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { ButtonLink } from "@/components/ui/button";
 import { ChevronGraphic } from "./chevron-graphic";
 import { HeroVisual } from "./hero-visual";
 import { PilotSignup } from "./pilot-signup";
+import { ComparisonTable, PricingCard } from "./pricing";
 import { ProductShots } from "./product-shots";
 import { Container, Section, SectionHeading } from "./section";
 import { company } from "./site-nav";
@@ -31,7 +33,7 @@ function Hero() {
       <Container className="relative grid grid-cols-1 items-center gap-16 py-16 md:py-24 lg:grid-cols-[1.1fr_1fr] lg:gap-12 lg:py-28">
         <div className="flex min-w-0 flex-col items-start gap-6">
           <p className="rounded-full bg-white/10 px-3 py-1 text-body font-medium text-lavender">Für private Vermieter</p>
-          <h1 className="font-display text-hero font-bold text-balance hyphens-auto">{company.claim}</h1>
+          <h1 className="font-display text-hero font-bold text-balance">{company.claim}</h1>
           <p className="max-w-xl text-lead text-lavender">
             vizmo übernimmt alles zwischen Inserat und Wohnungstür: Bewerbungen sortiert nach Ihren Kriterien, geprüfte
             Identitäten und Besichtigungen per Smartlock. Ohne dass Sie einen einzigen Termin selbst abstimmen.
@@ -223,64 +225,11 @@ function BothSides() {
   );
 }
 
-const comparison = [
-  { label: "Direkte Kosten", makler: "2 Kaltmieten zzgl. MwSt.", selbst: "50–150 €", vizmo: "39 € + 45 % der ersten Kaltmiete" },
-  { label: "Leerstand", makler: "1–2 Kaltmieten", selbst: "1–2 Kaltmieten", vizmo: "ca. 1 Kaltmiete" },
-  { label: "Ihr Zeitaufwand", makler: "1–2 Stunden", selbst: "15–30 Stunden", vizmo: "Minimal, läuft automatisch" },
-  { label: "Tempo", makler: "Langsam bis mittel", selbst: "Langsam", vizmo: "Schnell, Slots rund um die Uhr" },
-];
-
 function Comparison() {
   return (
     <Section tone="surface">
       <SectionHeading title="Schneller als selbst, günstiger als ein Makler" lead="Ein Vergleich für eine typische Wohnung mit 865 € Kaltmiete." />
-      {/* Phones: one card per criterion, so nothing scrolls sideways. */}
-      <ul className="mt-10 flex flex-col gap-3 md:hidden">
-        {comparison.map((row) => (
-          <li key={row.label} className="rounded-card border border-line bg-white">
-            <p className="px-4 pt-4 pb-2 font-medium text-slate">{row.label}</p>
-            <dl className="divide-y divide-line">
-              <div className="flex justify-between gap-4 px-4 py-3">
-                <dt className="text-slate">Makler</dt>
-                <dd className="text-right">{row.makler}</dd>
-              </div>
-              <div className="flex justify-between gap-4 px-4 py-3">
-                <dt className="text-slate">Selbst vermieten</dt>
-                <dd className="text-right">{row.selbst}</dd>
-              </div>
-              <div className="flex justify-between gap-4 rounded-b-card bg-mist px-4 py-3">
-                <dt className="font-display font-bold">vizmo</dt>
-                <dd className="text-right font-medium">{row.vizmo}</dd>
-              </div>
-            </dl>
-          </li>
-        ))}
-      </ul>
-      <div className="mt-10 hidden overflow-hidden rounded-card border border-line bg-white md:block">
-        <table className="w-full border-collapse text-left">
-          <thead>
-            <tr className="border-b border-line">
-              <th scope="col" className="p-4 text-body font-medium text-slate">
-                <span className="sr-only">Merkmal</span>
-              </th>
-              <th scope="col" className="p-4 font-medium">Makler</th>
-              <th scope="col" className="p-4 font-medium">Selbst vermieten</th>
-              <th scope="col" className="bg-mist p-4 font-display font-bold">vizmo</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-line">
-            {comparison.map((row) => (
-              <tr key={row.label}>
-                <th scope="row" className="p-4 font-medium text-slate">{row.label}</th>
-                <td className="p-4">{row.makler}</td>
-                <td className="p-4">{row.selbst}</td>
-                <td className="bg-mist p-4 font-medium">{row.vizmo}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <p className="mt-4 text-body text-slate">Quellen: eigene Darstellung; ImmoScout24 WohnBarometer 2026, IW Köln Vermieterreport 2026, § 3 WoVermittG</p>
+      <ComparisonTable />
     </Section>
   );
 }
@@ -347,29 +296,12 @@ function Pricing() {
           title="Sie zahlen vor allem, wenn es klappt"
           lead="Eine kleine Grundgebühr zum Start, der Rest nur bei erfolgreicher Vermietung. Ohne Vermietung bleibt es bei der Grundgebühr."
         />
-        <div className="overflow-hidden rounded-modal border border-line">
-          <div className="grid divide-y divide-line sm:grid-cols-2 sm:divide-x sm:divide-y-0">
-            <div className="flex flex-col gap-2 p-6">
-              <p className="text-body font-medium text-slate">Bei der Anmeldung</p>
-              <p className="font-display text-hero font-bold tabular-nums">39 €</p>
-              <p className="text-slate">Software freischalten, Smartlock und Zubehör werden geliefert.</p>
-            </div>
-            <div className="flex flex-col gap-2 bg-mist p-6">
-              <p className="text-body font-medium text-slate">Nur wenn vermietet wird</p>
-              <p className="font-display text-hero font-bold tabular-nums">45 %</p>
-              <p className="text-slate">der ersten Kaltmiete als Erfolgsgebühr.</p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2 border-t border-line bg-surface p-6">
-            <p className="flex items-center gap-2 font-medium">
-              <Clock aria-hidden className="size-4 text-deep-blue" />
-              Beispiel bei 865 € Kaltmiete
-            </p>
-            <p className="text-slate tabular-nums">
-              39 € + 389 € = <span className="font-medium text-night">428 €</span>. Ein Makler kostet bis zu zwei Kaltmieten, also bis zu
-              1.730 € zzgl. MwSt.
-            </p>
-          </div>
+        <div className="flex flex-col gap-4">
+          <PricingCard />
+          <Link href="/preise" className="inline-flex items-center gap-1 self-start rounded-button font-medium text-blue hover:text-deep-blue hover:underline">
+            Alle Details zu den Preisen
+            <ArrowRight aria-hidden className="size-4" />
+          </Link>
         </div>
       </div>
     </Section>

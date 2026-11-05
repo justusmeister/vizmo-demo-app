@@ -4,8 +4,8 @@ import { SiteFooter } from "./site-footer";
 import { SiteHeader } from "./site-header";
 
 // Frame of the public website: skip link, header, footer, cookie banner. Shared by the
-// (site) layout and the global 404 page. Long German words wrap and hyphenate instead of
-// widening the page; overflow-x-clip is the safety net (unlike hidden, it keeps sticky).
+// (site) layout and the global 404 page. Long German words wrap (soft hyphens in the few
+// very long headings) instead of widening the page; overflow-x-clip is the safety net.
 export function SiteFrame({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-dvh flex-col overflow-x-clip bg-white text-copy break-words">

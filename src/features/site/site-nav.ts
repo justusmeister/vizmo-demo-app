@@ -2,7 +2,7 @@
 
 export const siteNav = [
   { href: "/#ablauf", label: "So funktioniert's" },
-  { href: "/#preise", label: "Preise" },
+  { href: "/preise", label: "Preise" },
   { href: "/vision", label: "Vision" },
   { href: "/faq", label: "FAQ" },
 ];
@@ -13,7 +13,7 @@ export const footerNav = [
     links: [
       { href: "/#ablauf", label: "So funktioniert's" },
       { href: "/#sicherheit", label: "Datenschutz und Sicherheit" },
-      { href: "/#preise", label: "Preise" },
+      { href: "/preise", label: "Preise" },
       { href: "/faq", label: "Häufige Fragen" },
       { href: "/#pilot", label: "Pilotprojekt" },
     ],
