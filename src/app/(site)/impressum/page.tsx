@@ -9,7 +9,7 @@ export default function ImprintPage() {
   return (
     <LegalPage
       title="Impressum"
-      updated="Oktober 2026"
+      updated="November 2026"
       notice={
         <>
           vizmo befindet sich in der Vorgründungsphase. Es gibt noch keine eingetragene Gesellschaft, daher auch keinen
@@ -20,16 +20,14 @@ export default function ImprintPage() {
     >
       <LegalSection title="Angaben gemäß § 5 DDG">
         <p>
-          vizmo, ein Gründungsvorhaben von
+          {company.responsible}
           <br />
-          {company.founders}
-          <br />
-          <Ph>Rechtsform prüfen, z. B. Gesellschaft bürgerlichen Rechts der Gründer</Ph>
+          vizmo, Gründungsvorhaben (noch keine eingetragene Gesellschaft)
         </p>
         <p>
-          <Ph>Straße und Hausnummer</Ph>
+          <Ph>{company.street}</Ph>
           <br />
-          <Ph>PLZ Ort</Ph>
+          <Ph>{company.city}</Ph>
           <br />
           Deutschland
         </p>
@@ -38,16 +36,14 @@ export default function ImprintPage() {
       <LegalSection title="Kontakt">
         <p>
           E-Mail: <a href={`mailto:${company.email}`}>{company.email}</a>
-          <br />
-          Telefon: <Ph>Telefonnummer</Ph>
         </p>
       </LegalSection>
 
       <LegalSection title="Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV">
         <p>
-          <Ph>Vor- und Nachname einer der Gründerinnen oder Gründer</Ph>
+          {company.responsible}
           <br />
-          <Ph>Anschrift wie oben</Ph>
+          Anschrift wie oben
         </p>
       </LegalSection>
 
@@ -88,7 +84,7 @@ export default function ImprintPage() {
 
       <LegalSection title="Marken und Bildnachweise">
         <p>
-          vizmo ist der Name des Gründungsvorhabens von {company.founders}. Genannte Produkt- und Firmennamen wie
+          vizmo ist der Name des Gründungsvorhabens von {company.responsible}. Genannte Produkt- und Firmennamen wie
           Nuki, Huawei, Didit, Stripe und DHL sind Marken ihrer jeweiligen Inhaber.
         </p>
       </LegalSection>

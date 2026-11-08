@@ -16,6 +16,7 @@ import {
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { ButtonLink } from "@/components/ui/button";
+import { cx } from "@/lib/cx";
 import { ChevronGraphic } from "./chevron-graphic";
 import { HeroVisual } from "./hero-visual";
 import { PilotSignup } from "./pilot-signup";
@@ -63,15 +64,17 @@ function Hero() {
   );
 }
 
-function Pilot() {
+/** Pilot waitlist. On /pilot it is the page itself, so its heading becomes the h1. */
+export function Pilot({ asPage = false }: { asPage?: boolean }) {
+  const Heading = asPage ? "h1" : "h2";
   return (
     <Section id="pilot" tone="mist">
       <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-16">
         <div className="flex flex-col gap-5">
           <p className="w-fit rounded-full bg-white px-3 py-1 text-body font-medium text-night">Pilotprojekt</p>
-          <h2 id="pilot-title" className="font-display text-section font-bold text-balance">
+          <Heading id="pilot-title" className={cx("font-display font-bold text-balance", asPage ? "text-hero" : "text-section")}>
             Vermieten Sie bald neu? Werden Sie Pilotvermieter.
-          </h2>
+          </Heading>
           <p className="text-lead text-slate">
             Wir starten vizmo mit einer kleinen Gruppe privater Vermieter. Tragen Sie sich ein, dann melden wir uns persönlich,
             sobald es losgeht.
@@ -149,14 +152,15 @@ const steps: { title: string; text: string; icon: ReactNode; detail: string }[] 
   },
 ];
 
-function HowItWorks() {
+export const howItWorksLead =
+  "Fünf Schritte von der Anzeige bis zur Wohnungstür. Sie entscheiden, wer besichtigen darf, den Rest erledigt vizmo.";
+
+/** The five steps. On /so-funktioniert the page intro carries the heading instead. */
+export function HowItWorks({ withHeading = true }: { withHeading?: boolean }) {
   return (
     <Section id="ablauf" tone="surface">
-      <SectionHeading
-        title="So funktioniert vizmo"
-        lead="Fünf Schritte von der Anzeige bis zur Wohnungstür. Sie entscheiden, wer besichtigen darf, den Rest erledigt vizmo."
-      />
-      <ol className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+      {withHeading && <SectionHeading title="So funktioniert vizmo" lead={howItWorksLead} />}
+      <ol className={cx("grid gap-4 md:grid-cols-2 xl:grid-cols-5", withHeading && "mt-12")}>
         {steps.map((step, index) => (
           <li key={step.title} className="flex flex-col gap-4 rounded-card border border-line bg-white p-5">
             <span className="flex items-center justify-between">
@@ -175,7 +179,7 @@ function HowItWorks() {
   );
 }
 
-function BothSides() {
+export function BothSides() {
   const sides = [
     {
       title: "Für Vermieter",
@@ -267,7 +271,7 @@ const trust: { title: string; text: string; icon: ReactNode }[] = [
   },
 ];
 
-function Trust() {
+export function Trust() {
   return (
     <Section id="sicherheit" tone="night" className="relative overflow-hidden">
       <SectionHeading

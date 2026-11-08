@@ -88,7 +88,7 @@ export default function PricingPage() {
             <p className="mt-3 text-lead text-slate">Tragen Sie sich ein oder schreiben Sie uns, wenn Sie Fragen zu den Preisen haben.</p>
           </div>
           <div className="grid w-full gap-3 sm:flex sm:w-auto sm:flex-wrap">
-            <ButtonLink href="/#pilot" className="h-12 px-6">
+            <ButtonLink href="/pilot" className="h-12 px-6">
               Für den Pilot vormerken
             </ButtonLink>
             <ButtonLink href="/kontakt" variant="secondary" className="h-12 px-6">

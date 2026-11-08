@@ -5,6 +5,7 @@ import { useEffect, useId, useRef, type ReactNode } from "react";
 import { cx } from "@/lib/cx";
 
 // Modal built on the native <dialog>: focus trap, Escape and inert background for free.
+// The close button never shows the blue focus ring; keyboard focus tints it like hover.
 // "center" for confirmations, "side" for a detail panel (full screen on mobile).
 // size "lg" (center only) is for reading-heavy dialogs on the marketing site, sized to its
 // 16 px copy: wider, roomier, larger title, full screen on phones. The whole dialog scrolls
@@ -28,7 +29,11 @@ export function Dialog({ open, onClose, title, description, variant = "center", 
   useEffect(() => {
     const dialog = ref.current;
     if (!dialog) return;
-    if (open && !dialog.open) dialog.showModal();
+    if (open && !dialog.open) {
+      dialog.showModal();
+      // Focus the dialog itself, not the close button, so nothing is highlighted on open.
+      dialog.focus();
+    }
     if (!open && dialog.open) dialog.close();
   }, [open]);
 
@@ -36,10 +41,11 @@ export function Dialog({ open, onClose, title, description, variant = "center", 
     <dialog
       ref={ref}
       aria-labelledby={titleId}
+      tabIndex={-1}
       onClose={onClose}
       onClick={(event) => event.target === ref.current && onClose()}
       className={cx(
-        "flex-col bg-white text-night backdrop:bg-night/60 not-open:hidden open:flex",
+        "flex-col bg-white text-night outline-hidden backdrop:bg-night/60 not-open:hidden open:flex",
         variant === "center" &&
           size === "md" &&
           "m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-lg rounded-modal shadow-overlay",
@@ -60,7 +66,7 @@ export function Dialog({ open, onClose, title, description, variant = "center", 
           type="button"
           onClick={onClose}
           aria-label="Schließen"
-          className="-mr-2 inline-flex size-10 shrink-0 items-center justify-center rounded-button text-night hover:bg-mist"
+          className="-mr-2 inline-flex size-10 shrink-0 items-center justify-center rounded-button text-night outline-hidden hover:bg-mist focus-visible:bg-mist"
         >
           <X aria-hidden className="size-5" />
         </button>

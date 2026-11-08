@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/features/site/contact-form";
 import { Container } from "@/features/site/section";
-import { Ph } from "@/features/site/legal";
 import { company } from "@/features/site/site-nav";
 
 export const metadata: Metadata = {
@@ -28,12 +27,6 @@ export default function ContactPage() {
               <a href={`mailto:${company.email}`} className="font-medium text-blue hover:text-deep-blue hover:underline">
                 {company.email}
               </a>
-            </dd>
-          </div>
-          <div className="flex flex-col gap-1 py-4">
-            <dt className="text-body text-slate">Anschrift</dt>
-            <dd>
-              {company.name}, <Ph>Straße und Hausnummer</Ph>, <Ph>PLZ Ort</Ph>
             </dd>
           </div>
           <div className="flex flex-col gap-1 py-4">

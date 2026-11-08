@@ -10,7 +10,7 @@ export default function PrivacyPage() {
   return (
     <LegalPage
       title={"Datenschutz\u00ADerklärung"}
-      updated="Oktober 2026"
+      updated="November 2026"
       notice={
         <>
           Vorlage für die Website govizmo.de. Markierte Angaben ersetzen und vor Veröffentlichung rechtlich prüfen lassen. Für
@@ -21,9 +21,9 @@ export default function PrivacyPage() {
     >
       <LegalSection title="1. Verantwortlicher">
         <p>
-          vizmo, ein Gründungsvorhaben von {company.founders} (noch keine eingetragene Gesellschaft)
+          {company.responsible}, vizmo (Gründungsvorhaben, noch keine eingetragene Gesellschaft)
           <br />
-          <Ph>Straße und Hausnummer</Ph>, <Ph>PLZ Ort</Ph>
+          <Ph>{company.street}</Ph>, <Ph>{company.city}</Ph>
           <br />
           E-Mail: <a href={`mailto:${company.email}`}>{company.email}</a>
         </p>

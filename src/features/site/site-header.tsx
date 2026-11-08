@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { BrandLogo } from "@/components/shell/brand-logo";
 import { ButtonLink } from "@/components/ui/button";
 import { cx } from "@/lib/cx";
@@ -10,16 +10,22 @@ import { siteNav } from "./site-nav";
 
 const mobileNav = [...siteNav, { href: "/kontakt", label: "Kontakt" }];
 
+const trimSlash = (path: string) => path.replace(/(.)\/$/, "$1");
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const [lastPath, setLastPath] = useState(pathname);
 
-  // Links to another page keep the menu open until that page has rendered, then this closes
-  // it; closing on click would flash the old page while the next one loads. Links within
-  // the current page (e.g. /#pilot on /) close right away.
-  function closeIfSamePage(href: string) {
-    if (new URL(href, window.location.href).pathname === pathname) setOpen(false);
+  // Every nav entry has its own page. Clicking the entry of the page you're on reloads it
+  // (client navigation to the same URL would do nothing). Links to another page keep the
+  // mobile menu open until that page has rendered, then the check below closes it; closing
+  // on click would flash the old page while the next one loads.
+  const isCurrent = (href: string) => trimSlash(href) === trimSlash(pathname);
+  function reloadIfCurrent(event: MouseEvent<HTMLAnchorElement>, href: string) {
+    if (!isCurrent(href)) return;
+    event.preventDefault();
+    window.location.reload();
   }
 
   // Close the menu after navigating (adjusting state during render, not in an effect).
@@ -58,7 +64,12 @@ export function SiteHeader() {
             <ul className="flex items-center gap-1">
               {siteNav.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="rounded-button px-3 py-2 font-medium text-night hover:bg-mist">
+                  <Link
+                    href={item.href}
+                    onClick={(event) => reloadIfCurrent(event, item.href)}
+                    aria-current={isCurrent(item.href) ? "page" : undefined}
+                    className="rounded-button px-3 py-2 font-medium text-night hover:bg-mist"
+                  >
                     {item.label}
                   </Link>
                 </li>
@@ -67,10 +78,12 @@ export function SiteHeader() {
           </nav>
 
           <div className="hidden items-center gap-2 lg:flex">
-            <ButtonLink href="/kontakt" variant="tertiary">
+            <ButtonLink href="/kontakt" variant="tertiary" onClick={(event) => reloadIfCurrent(event, "/kontakt")}>
               Kontakt
             </ButtonLink>
-            <ButtonLink href="/#pilot">Pilot vormerken</ButtonLink>
+            <ButtonLink href="/pilot" onClick={(event) => reloadIfCurrent(event, "/pilot")}>
+              Pilot vormerken
+            </ButtonLink>
           </div>
 
           <MenuToggle open={open} onToggle={() => setOpen((value) => !value)} />
@@ -85,7 +98,8 @@ export function SiteHeader() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  onClick={() => closeIfSamePage(item.href)}
+                  onClick={(event) => reloadIfCurrent(event, item.href)}
+                  aria-current={isCurrent(item.href) ? "page" : undefined}
                   className="block border-b border-line py-4 font-display text-h2 font-bold text-night"
                 >
                   {item.label}
@@ -93,7 +107,7 @@ export function SiteHeader() {
               </li>
             ))}
           </ul>
-          <ButtonLink href="/#pilot" onClick={() => closeIfSamePage("/#pilot")} className="h-12 w-full">
+          <ButtonLink href="/pilot" onClick={(event) => reloadIfCurrent(event, "/pilot")} className="h-12 w-full">
             Für den Pilot vormerken
           </ButtonLink>
         </nav>
