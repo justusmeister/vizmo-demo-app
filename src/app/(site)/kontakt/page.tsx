@@ -4,6 +4,7 @@ import { Container } from "@/features/site/section";
 import { company } from "@/features/site/site-nav";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/kontakt/" },
   title: "Kontakt",
   description: "Schreiben Sie dem vizmo-Team: für Vermieter, Wohnungssuchende, Presse und Partner.",
 };

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { PageIntro, Section } from "@/features/site/section";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/faq/" },
   title: "Häufige Fragen",
   description: "Antworten zu Ablauf, Kosten, Smartlock, Datenschutz und fairer Auswahl bei vizmo.",
 };

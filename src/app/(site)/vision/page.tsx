@@ -4,6 +4,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { PageIntro, Section, SectionHeading } from "@/features/site/section";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/vision/" },
   title: "Vision",
   description: "Warum wir vizmo bauen: Vermietung ohne Terminchaos, fair für Vermieter und Wohnungssuchende.",
 };

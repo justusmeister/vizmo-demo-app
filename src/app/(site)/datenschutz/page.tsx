@@ -1,34 +1,30 @@
 import type { Metadata } from "next";
-import { LegalPage, LegalSection, Ph } from "@/features/site/legal";
+import { LegalPage, LegalSection } from "@/features/site/legal";
 import { company } from "@/features/site/site-nav";
 
-export const metadata: Metadata = { title: "Datenschutz" };
+export const metadata: Metadata = {
+  alternates: { canonical: "/datenschutz/" }, title: "Datenschutz" };
 
-// Privacy policy for the website govizmo.de (not the vizmo platform). Template with
-// placeholders; have it reviewed before going live.
+// Privacy policy for the website govizmo.de (not the vizmo platform, which needs its own,
+// more detailed one). Hosting: Vercel; DNS: Cloudflare (DNS only, no proxy); e-mail: IONOS.
 export default function PrivacyPage() {
   return (
     <LegalPage
       title={"Datenschutz\u00ADerklärung"}
       updated="November 2026"
-      notice={
-        <>
-          Vorlage für die Website govizmo.de. Markierte Angaben ersetzen und vor Veröffentlichung rechtlich prüfen lassen. Für
-          die vizmo-Plattform (Bewerbung, Identitätsprüfung, Besichtigung) braucht es eine eigene, ausführlichere
-          Datenschutzerklärung.
-        </>
-      }
     >
       <LegalSection title="1. Verantwortlicher">
         <p>
           {company.responsible}, vizmo (Gründungsvorhaben, noch keine eingetragene Gesellschaft)
           <br />
-          <Ph>{company.street}</Ph>, <Ph>{company.city}</Ph>
+          {company.street}, {company.city}
           <br />
           E-Mail: <a href={`mailto:${company.email}`}>{company.email}</a>
         </p>
         <p>
-          Datenschutzbeauftragte Person: <Ph>Name und Kontakt, falls bestellt, sonst Abschnitt streichen</Ph>
+          Einen Datenschutzbeauftragten haben wir nicht bestellt, weil dafür keine gesetzliche Pflicht besteht. Ansprechpartner
+          für alle Fragen zum Datenschutz ist {company.responsible}, erreichbar unter{" "}
+          <a href={`mailto:${company.email}`}>{company.email}</a>.
         </p>
       </LegalSection>
 
@@ -42,24 +38,31 @@ export default function PrivacyPage() {
 
       <LegalSection title="3. Hosting">
         <p>
-          Diese Website wird bei <Ph>Hosting-Anbieter, Anschrift</Ph> gehostet. Beim Aufruf verarbeitet der Anbieter in unserem
-          Auftrag technisch notwendige Daten (siehe Abschnitt 4). Mit dem Anbieter besteht ein Vertrag zur Auftragsverarbeitung
-          nach Art. 28 DSGVO. Die Server stehen in <Ph>Land, z. B. Deutschland</Ph>.
+          Diese Website wird bei Vercel Inc., 440 N Barranca Ave, Suite 4133, Covina, CA 91723, USA, gehostet. Vercel liefert die
+          Seiten über ein weltweites Servernetz aus; dabei können Daten auch in den USA verarbeitet werden. Beim Aufruf
+          verarbeitet Vercel in unserem Auftrag technisch notwendige Daten (siehe Abschnitt 4). Grundlage ist das Data
+          Processing Addendum von Vercel, ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO.
         </p>
         <p>Rechtsgrundlage ist unser berechtigtes Interesse an einer sicheren und zuverlässigen Bereitstellung (Art. 6 Abs. 1 lit. f DSGVO).</p>
+        <p>
+          Die Domain govizmo.de ist bei der IONOS SE registriert. Die Namensauflösung (DNS) übernimmt Cloudflare, Inc. Dabei
+          wird nur der Domainname in die Adresse des Servers übersetzt; der Datenverkehr der Website läuft nicht über
+          Cloudflare.
+        </p>
       </LegalSection>
 
       <LegalSection title="4. Server-Logfiles">
         <p>Bei jedem Aufruf werden automatisch folgende Daten erfasst:</p>
         <ul>
-          <li>IP-Adresse, gekürzt oder vollständig je nach Anbieter</li>
+          <li>IP-Adresse</li>
           <li>Datum und Uhrzeit des Zugriffs</li>
           <li>aufgerufene Seite und übertragene Datenmenge</li>
           <li>Browser, Betriebssystem und zuvor besuchte Seite (Referrer)</li>
         </ul>
         <p>
-          Die Daten dienen der Sicherheit und Fehleranalyse und werden nach <Ph>Anzahl</Ph> Tagen gelöscht. Rechtsgrundlage ist
-          Art. 6 Abs. 1 lit. f DSGVO.
+          Die Daten dienen der Sicherheit und Fehleranalyse. Wir werten sie nicht aus und führen sie nicht mit anderen Daten
+          zusammen. Vercel speichert sie nur so lange, wie es für diese Zwecke nötig ist, und löscht sie danach automatisch.
+          Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO.
         </p>
       </LegalSection>
 
@@ -91,15 +94,18 @@ export default function PrivacyPage() {
           erledigt ist und keine gesetzlichen Aufbewahrungspflichten bestehen.
         </p>
         <p>
-          E-Mails werden über <Ph>E-Mail-Anbieter</Ph> verarbeitet.
+          E-Mails an {company.email} werden über die IONOS SE, Elgendorfer Str. 57, 56410 Montabaur, verarbeitet, mit der ein
+          Vertrag zur Auftragsverarbeitung besteht. Die Server stehen in der EU.
         </p>
       </LegalSection>
 
       <LegalSection title="8. Empfänger und Drittländer">
         <p>
           Wir geben Daten nur an Auftragsverarbeiter weiter, die wir sorgfältig ausgewählt und vertraglich verpflichtet haben.
-          Eine Übermittlung in Länder außerhalb der EU oder des EWR findet <Ph>nicht statt / nur auf Grundlage von
-          Standardvertragsklauseln oder eines Angemessenheitsbeschlusses</Ph>.
+          Beim Hosting durch Vercel und bei der Namensauflösung durch Cloudflare können Daten in die USA übermittelt werden.
+          Beide Unternehmen sind nach dem EU-US Data Privacy Framework zertifiziert, für das die EU-Kommission einen
+          Angemessenheitsbeschluss erlassen hat (Art. 45 DSGVO). Zusätzlich sind die Standardvertragsklauseln der
+          EU-Kommission vereinbart (Art. 46 Abs. 2 lit. c DSGVO).
         </p>
       </LegalSection>
 
@@ -115,7 +121,8 @@ export default function PrivacyPage() {
         </ul>
         <p>
           Schreiben Sie uns dazu an <a href={`mailto:${company.email}`}>{company.email}</a>. Außerdem können Sie sich bei einer
-          Datenschutz-Aufsichtsbehörde beschweren, zum Beispiel bei <Ph>zuständige Landesbehörde am Wohn- oder Geschäftssitz</Ph>.
+          Datenschutz-Aufsichtsbehörde beschweren, zum Beispiel bei der für uns zuständigen Behörde: Die Landesbeauftragte für den Datenschutz Niedersachsen, Prinzenstraße 5,
+          30159 Hannover.
         </p>
       </LegalSection>
 

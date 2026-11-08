@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
+import { siteUrl } from "@/config/site-pages";
 import "./globals.css";
 
 // Brand fonts per Markenhandbuch: Poppins Bold for headings, Inter for UI and body text.
@@ -16,7 +17,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.govizmo.de"),
+  metadataBase: new URL(siteUrl),
   title: { default: "vizmo: Besichtigungen, die sich selbst organisieren", template: "%s | vizmo" },
   description:
     "vizmo organisiert Wohnungsbesichtigungen für private Vermieter: Bewerbungen sortiert nach Ihren Kriterien, Identitätsprüfung und Besichtigung per Smartlock, ohne jeden Termin selbst abzustimmen.",
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
     siteName: "vizmo",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "vizmo: Besichtigungen, die sich selbst organisieren." }],
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

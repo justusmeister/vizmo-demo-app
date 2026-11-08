@@ -1,22 +1,16 @@
 import type { Metadata } from "next";
-import { LegalPage, LegalSection, Ph } from "@/features/site/legal";
+import { LegalPage, LegalSection } from "@/features/site/legal";
 import { company } from "@/features/site/site-nav";
 
-export const metadata: Metadata = { title: "Impressum", robots: { index: true, follow: true } };
+export const metadata: Metadata = {
+  alternates: { canonical: "/impressum/" }, title: "Impressum", robots: { index: true, follow: true } };
 
-// Template with placeholders. Have it reviewed before going live.
+// Pre-founding phase: no register entry or VAT ID yet. Update after founding.
 export default function ImprintPage() {
   return (
     <LegalPage
       title="Impressum"
       updated="November 2026"
-      notice={
-        <>
-          vizmo befindet sich in der Vorgründungsphase. Es gibt noch keine eingetragene Gesellschaft, daher auch keinen
-          Registereintrag und keine Umsatzsteuer-ID. Grün markierte Angaben vor Veröffentlichung ergänzen und das Impressum
-          rechtlich prüfen lassen. Nach der Gründung müssen Rechtsform, Vertretung und Registerangaben ergänzt werden.
-        </>
-      }
     >
       <LegalSection title="Angaben gemäß § 5 DDG">
         <p>
@@ -25,9 +19,9 @@ export default function ImprintPage() {
           vizmo, Gründungsvorhaben (noch keine eingetragene Gesellschaft)
         </p>
         <p>
-          <Ph>{company.street}</Ph>
+          {company.street}
           <br />
-          <Ph>{company.city}</Ph>
+          {company.city}
           <br />
           Deutschland
         </p>

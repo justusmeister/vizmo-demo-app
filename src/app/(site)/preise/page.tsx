@@ -6,6 +6,7 @@ import { ComparisonTable, PricingCard } from "@/features/site/pricing";
 import { PageIntro, Section, SectionHeading } from "@/features/site/section";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/preise/" },
   title: "Preise",
   description:
     "39 € bei der Anmeldung, 45 % der ersten Kaltmiete nur bei erfolgreicher Vermietung. Smartlock, Identitätsprüfung und Besichtigungsslots inklusive.",

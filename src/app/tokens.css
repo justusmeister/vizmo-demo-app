@@ -22,7 +22,6 @@
   --color-warning: #e5a00d; /* Hinweis: status only, Nachtblau text only */
   --color-error: #c23a3a; /* Fehler: status only, white text */
   --color-ink: #000000; /* Schwarz [Decision]: website header wordmark only, never for text */
-  --color-todo: #b9f3cf; /* Platzhalter-Markierung [Assumption]: temporary, Nachtblau text, remove before launch */
 
   /* 3 Typography: families [PDF], scale [Assumption] */
   --font-*: initial;

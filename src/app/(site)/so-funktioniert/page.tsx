@@ -5,6 +5,7 @@ import { ProductShots } from "@/features/site/product-shots";
 import { PageIntro, Section } from "@/features/site/section";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/so-funktioniert/" },
   title: "So funktioniert's",
   description:
     "Vom Inserat bis zur Wohnungstür: Bewerbungen nach Ihren Kriterien, geprüfte Identitäten und Besichtigungen per Smartlock, ohne Termine selbst abzustimmen.",

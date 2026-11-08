@@ -1,12 +1,7 @@
 import type { ReactNode } from "react";
 import { Container } from "./section";
 
-// Shared layout for legal texts. Placeholders are highlighted in green so they're easy to
-// find and replace before going live; use Ph for every open detail across the site.
-
-export function Ph({ children }: { children: ReactNode }) {
-  return <mark className="rounded-input bg-todo px-1 py-0.5 font-medium text-night ring-1 ring-success">[{children}]</mark>;
-}
+// Shared layout for legal texts.
 
 export function LegalPage({ title, updated, notice, children }: { title: string; updated: string; notice?: ReactNode; children: ReactNode }) {
   return (
