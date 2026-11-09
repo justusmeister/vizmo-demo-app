@@ -67,5 +67,11 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/google63e49ec8a8c870e5.html",
+      "destination": "/google63e49ec8a8c870e5/"
+    }
   ]
 }
