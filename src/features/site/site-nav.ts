@@ -1,7 +1,7 @@
 // Navigation of the public website (govizmo.de). The demo app lives under /p and /u.
 
 export const siteNav = [
-  { href: "/so-funktioniert", label: "So funktioniert's" },
+  { href: "/so-funktioniert", label: "So funktioniert’s" },
   { href: "/preise", label: "Preise" },
   { href: "/vision", label: "Vision" },
   { href: "/faq", label: "FAQ" },
@@ -11,7 +11,7 @@ export const footerNav = [
   {
     title: "Produkt",
     links: [
-      { href: "/so-funktioniert", label: "So funktioniert's" },
+      { href: "/so-funktioniert", label: "So funktioniert’s" },
       { href: "/so-funktioniert#sicherheit", label: "Datenschutz und Sicherheit" },
       { href: "/preise", label: "Preise" },
       { href: "/faq", label: "Häufige Fragen" },

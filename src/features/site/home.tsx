@@ -43,7 +43,7 @@ function Hero() {
               Für den Pilot vormerken
             </ButtonLink>
             <ButtonLink href="#ablauf" variant="secondary" className="h-12 px-6">
-              So funktioniert&apos;s
+              So funktioniert’s
             </ButtonLink>
           </div>
         </div>
@@ -77,7 +77,7 @@ function Hero() {
 export function Pilot({ asPage = false }: { asPage?: boolean }) {
   const Heading = asPage ? "h1" : "h2";
   return (
-    <Section id="pilot" tone="mist">
+    <Section id="pilot" tone="mist" className={cx(asPage && "-mt-16 pt-32 md:pt-40")}>
       <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-16">
         <div className="flex flex-col gap-5">
           <p className="w-fit rounded-full bg-white px-3 py-1 text-body font-medium text-night">Pilotprojekt</p>

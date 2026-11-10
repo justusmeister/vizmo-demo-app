@@ -44,10 +44,10 @@ export function SectionHeading({ title, lead, className, dark = false }: { title
   );
 }
 
-/** Page intro for subpages. */
+/** Page intro for subpages. Runs up behind the transparent header (-mt-16/pt-16), so no edge shows. */
 export function PageIntro({ title, lead }: { title: string; lead?: ReactNode }) {
   return (
-    <div className="border-b border-line bg-surface">
+    <div className="-mt-16 border-b border-line bg-surface pt-16">
       <Container className="py-14 md:py-20">
         <h1 className="max-w-3xl font-display text-hero font-bold">{title}</h1>
         {lead && <p className="mt-5 max-w-2xl text-lead text-slate">{lead}</p>}
