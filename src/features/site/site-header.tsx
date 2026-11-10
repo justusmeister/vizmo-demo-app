@@ -16,6 +16,15 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const [lastPath, setLastPath] = useState(pathname);
+  // Transparent at the very top, so the hero's tint runs up behind the header without an
+  // edge; frosted white once the page scrolls.
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 4);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Every nav entry has its own page. Clicking the entry of the page you're on reloads it
   // (client navigation to the same URL would do nothing). Links to another page keep the
@@ -52,7 +61,7 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-line bg-white/90 backdrop-blur">
+      <header className={cx("sticky top-0 z-40 transition-colors duration-200 motion-reduce:transition-none", scrolled || open ? "bg-white/85 backdrop-blur" : "bg-transparent")}>
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-4 md:px-6">
           {/* Plain link on purpose: clicking the logo reloads the start page, as visitors expect. */}
           {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- deliberate full reload */}

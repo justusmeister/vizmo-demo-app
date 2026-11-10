@@ -39,7 +39,7 @@ export function HeroVisual() {
                 <span className="mt-1 flex items-center gap-2 text-small text-slate">
                   <Meter value={row.score} />
                   {/* Hidden on the narrowest phones so the row never overflows. */}
-                  <span className="hidden min-[360px]:inline">{row.score} von 6</span>
+                  <span className="hidden whitespace-nowrap min-[360px]:inline">{row.score} von 6</span>
                 </span>
               </span>
               <Badge tone={row.status === "Slot gebucht" ? "success" : "neutral"}>{row.status}</Badge>

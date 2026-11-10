@@ -33,6 +33,12 @@
   --text-hero: clamp(2.25rem, 1.4rem + 3.4vw, 4rem);
   --text-hero--line-height: 1.08;
   --text-hero--letter-spacing: -0.02em;
+  /* Homepage hero only [Decision]: larger, open headline and the intro below it. */
+  --text-stage: clamp(2.125rem, 1.25rem + 4.6vw, 4.75rem);
+  --text-stage--line-height: 1.04;
+  --text-stage--letter-spacing: -0.025em;
+  --text-intro: clamp(1.1875rem, 1rem + 0.75vw, 1.5rem);
+  --text-intro--line-height: 1.45;
   --text-section: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem);
   --text-section--line-height: 1.15;
   --text-section--letter-spacing: -0.01em;
@@ -52,6 +58,17 @@
   --text-body--line-height: 1.25rem;
   --text-small: 0.75rem;
   --text-small--line-height: 1rem;
+
+  /* Motion [Decision]: the hero chevrons draw themselves once on load. */
+  --animate-draw: draw 1.6s cubic-bezier(0.22, 0.7, 0.2, 1) both;
+  @keyframes draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
 
   /* 5 Spacing: 4px grid [Assumption]. Tailwind's default --spacing: 0.25rem already matches. */
 

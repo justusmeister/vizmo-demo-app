@@ -17,7 +17,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ButtonLink } from "@/components/ui/button";
 import { cx } from "@/lib/cx";
-import { ChevronGraphic } from "./chevron-graphic";
+import { HeroRibbon } from "./hero-ribbon";
 import { HeroVisual } from "./hero-visual";
 import { PilotSignup } from "./pilot-signup";
 import { ComparisonTable, PricingCard } from "./pricing";
@@ -29,17 +29,16 @@ import { company } from "./site-nav";
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-night text-white [&_a:focus-visible]:outline-white">
-      <ChevronGraphic className="absolute -top-24 -right-40 w-184 md:-right-24 lg:w-224" />
-      <Container className="relative grid grid-cols-1 items-center gap-16 py-16 md:py-24 lg:grid-cols-[1.1fr_1fr] lg:gap-12 lg:py-28">
-        <div className="flex min-w-0 flex-col items-start gap-6">
-          <p className="rounded-full bg-white/10 px-3 py-1 text-body font-medium text-lavender">Für private Vermieter</p>
-          <h1 className="font-display text-hero font-bold text-balance">{company.claim}</h1>
-          <p className="max-w-xl text-lead text-lavender">
-            vizmo übernimmt alles zwischen Inserat und Wohnungstür: Bewerbungen sortiert nach Ihren Kriterien, geprüfte
-            Identitäten und Besichtigungen per Smartlock. Ohne dass Sie einen einzigen Termin selbst abstimmen.
+    <section className="relative -mt-16 overflow-hidden bg-linear-to-b from-mist/80 to-white to-60% pt-16">
+      <Container className="relative grid grid-cols-1 items-center gap-14 pt-14 pb-20 md:pt-20 lg:grid-cols-[1.35fr_1fr] lg:gap-8 lg:pt-24 lg:pb-28">
+        <div className="relative z-10 flex min-w-0 flex-col items-start">
+          <p className="text-body font-medium text-slate">Für private Vermieter</p>
+          <h1 className="mt-5 max-w-[13ch] font-display text-stage font-bold text-balance text-night">{company.claim}</h1>
+          <p className="mt-6 max-w-[34ch] text-intro text-slate">
+            Bewerbungen sortiert nach Ihren Kriterien, geprüfte Identitäten und Besichtigungen per Smartlock. Ohne dass Sie
+            einen einzigen Termin selbst abstimmen.
           </p>
-          <div className="grid w-full gap-3 sm:flex sm:w-auto sm:flex-wrap">
+          <div className="mt-9 grid w-full gap-3 sm:flex sm:w-auto sm:flex-wrap">
             <ButtonLink href="#pilot" className="h-12 px-6">
               Für den Pilot vormerken
             </ButtonLink>
@@ -47,19 +46,29 @@ function Hero() {
               So funktioniert&apos;s
             </ButtonLink>
           </div>
-          <ul className="mt-2 flex flex-wrap gap-x-6 gap-y-2 text-body text-lavender">
+        </div>
+
+        <div className="relative pt-6 pb-12 lg:py-0">
+          {/* The ribbon bleeds off the right edge and above the column, like a backdrop. */}
+          <HeroRibbon className="pointer-events-none absolute max-lg:[mask-image:linear-gradient(to_bottom,transparent,black_45%)] top-1/2 left-1/2 w-[150%] max-w-none -translate-x-[38%] -translate-y-1/2 sm:w-[95%] sm:-translate-x-1/2 lg:w-[235%] lg:-translate-x-[22%]" />
+          <div className="relative">
+            <HeroVisual />
+          </div>
+        </div>
+      </Container>
+
+      <div className="relative border-t border-line bg-white">
+        <Container>
+          <ul className="flex flex-col gap-3 py-5 text-body text-slate sm:flex-row sm:flex-wrap sm:gap-x-10">
             {["DSGVO-konform", "Entwickelt und gehostet in Deutschland", "AGG-konforme Auswahl"].map((item) => (
               <li key={item} className="flex items-center gap-2">
-                <Check aria-hidden className="size-4 text-white" strokeWidth={2.5} />
+                <Check aria-hidden className="size-4 shrink-0 text-deep-blue" strokeWidth={2.5} />
                 {item}
               </li>
             ))}
           </ul>
-        </div>
-        <div className="pb-10 lg:pb-0">
-          <HeroVisual />
-        </div>
-      </Container>
+        </Container>
+      </div>
     </section>
   );
 }
