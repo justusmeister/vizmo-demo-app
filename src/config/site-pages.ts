@@ -1,5 +1,5 @@
 // Public pages of govizmo.de, used for the sitemap. The demo (/p, /u) is not listed.
-export const siteUrl = "https://govizmo.de";
+export const siteUrl = "https://www.govizmo.de";
 
 export const sitePages: { path: string; priority: number; changeFrequency: "weekly" | "monthly" | "yearly" }[] = [
   { path: "/", priority: 1, changeFrequency: "weekly" },
