@@ -4,6 +4,7 @@ export const siteNav = [
   { href: "/so-funktioniert", label: "So funktioniert’s" },
   { href: "/preise", label: "Preise" },
   { href: "/vision", label: "Vision" },
+  { href: "/team", label: "Team" },
   { href: "/faq", label: "FAQ" },
 ];
 
@@ -22,7 +23,8 @@ export const footerNav = [
     title: "Unternehmen",
     links: [
       { href: "/vision", label: "Vision" },
-          { href: "/kontakt", label: "Kontakt" },
+      { href: "/team", label: "Team" },
+      { href: "/kontakt", label: "Kontakt" },
     ],
   },
   {

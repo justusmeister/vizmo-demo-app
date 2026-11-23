@@ -8,6 +8,7 @@ export const sitePages: { path: string; priority: number; changeFrequency: "week
   { path: "/pilot/", priority: 0.8, changeFrequency: "monthly" },
   { path: "/faq/", priority: 0.7, changeFrequency: "monthly" },
   { path: "/vision/", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/team/", priority: 0.6, changeFrequency: "monthly" },
   { path: "/kontakt/", priority: 0.6, changeFrequency: "yearly" },
   { path: "/impressum/", priority: 0.2, changeFrequency: "yearly" },
   { path: "/datenschutz/", priority: 0.2, changeFrequency: "yearly" },
