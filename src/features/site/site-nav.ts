@@ -43,5 +43,6 @@ export const company = {
   city: "49074 Osnabrück",
   email: "kontakt@govizmo.de",
   web: "www.govizmo.de",
+  linkedin: "https://www.linkedin.com/company/govizmo/",
   claim: "Besichtigungen, die sich selbst organisieren.",
 };

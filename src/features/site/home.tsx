@@ -1,17 +1,13 @@
 import {
   ArrowRight,
   BadgeEuro,
-  Camera,
   Check,
   KeyRound,
-  LockKeyhole,
-  MailOpen,
   MessagesSquare,
   Scale,
   ScanFace,
   Server,
   ShieldCheck,
-  Users,
 } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -62,7 +58,7 @@ function Hero() {
           <ul className="flex flex-col gap-3 py-5 text-body text-slate sm:flex-row sm:flex-wrap sm:gap-x-10">
             {["DSGVO-konform", "Entwickelt und gehostet in Deutschland", "AGG-konforme Auswahl"].map((item) => (
               <li key={item} className="flex items-center gap-2">
-                <Check aria-hidden className="size-4 shrink-0 text-deep-blue" strokeWidth={2.5} />
+                <Check aria-hidden className="size-4 shrink-0 text-night" strokeWidth={2.5} />
                 {item}
               </li>
             ))}
@@ -80,16 +76,16 @@ export function Pilot({ asPage = false }: { asPage?: boolean }) {
     <Section id="pilot" tone="mist" className={cx(asPage && "-mt-16 pt-32 md:pt-40")}>
       <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-16">
         <div className="flex flex-col gap-5">
-          <p className="w-fit rounded-full bg-white px-3 py-1 text-body font-medium text-night">Pilotprojekt</p>
+          <p className="text-body font-medium text-slate">Pilotprojekt</p>
           <Heading id="pilot-title" className={cx("font-display font-bold text-balance", asPage ? "text-hero" : "text-section")}>
-            Vermieten Sie bald neu? Werden Sie Pilotvermieter.
+            Vermieten Sie bald neu? Werden Sie Pilotvermieter
           </Heading>
           <p className="text-lead text-slate">
             Wir starten vizmo mit einer kleinen Gruppe privater Vermieter. Tragen Sie sich ein, dann melden wir uns persönlich,
             sobald es losgeht.
           </p>
           <p className="flex items-center gap-2 text-body text-slate">
-            <MessagesSquare aria-hidden className="size-4 shrink-0 text-deep-blue" />
+            <MessagesSquare aria-hidden className="size-4 shrink-0 text-slate" />
             Sie sprechen direkt mit uns, dem Gründerteam.
           </p>
         </div>
@@ -111,14 +107,14 @@ function Problem() {
   return (
     <Section tone="surface">
       <SectionHeading
-        title="Eine Wohnung neu zu vermieten ist bis heute Handarbeit."
+        title="Eine Wohnung neu zu vermieten ist bis heute Handarbeit"
         lead="Auf eine Wohnung kommen dutzende, in Großstädten hunderte Anfragen. Wer privat vermietet, sortiert Postfächer, stimmt Termine ab und steht am Wochenende in der leeren Wohnung."
       />
       <dl className="mt-12 grid gap-px overflow-hidden rounded-card border border-line bg-line md:grid-cols-3">
         {stats.map((stat) => (
           <div key={stat.label} className="flex flex-col gap-1 bg-white p-6 md:p-8">
             <dt className="order-2 font-medium">{stat.label}</dt>
-            <dd className="order-1 font-display text-hero font-bold tabular-nums text-blue">{stat.value}</dd>
+            <dd className="order-1 font-display text-hero font-bold tabular-nums text-night">{stat.value}</dd>
             <dd className="order-3 text-slate">{stat.note}</dd>
           </div>
         ))}
@@ -128,35 +124,30 @@ function Problem() {
   );
 }
 
-const steps: { title: string; text: string; icon: ReactNode; detail: string }[] = [
+const steps: { title: string; text: string; detail: string }[] = [
   {
     title: "Inserat anlegen",
     text: "In wenigen Minuten, auf Wunsch direkt aus Ihrem bestehenden Anzeigentext. Sie bekommen einen Bewerbungslink für ImmoScout24, Kleinanzeigen und Co.",
-    icon: <MailOpen aria-hidden className="size-5" />,
     detail: "Link im Inserat",
   },
   {
     title: "Smartlock kommt per Post",
     text: "Nuki Smart Lock und LTE-Stick, montiert in etwa zehn Minuten, ohne Bohren. Ein WLAN in der Wohnung brauchen Sie nicht.",
-    icon: <LockKeyhole aria-hidden className="size-5" />,
     detail: "Montage ohne Bohren",
   },
   {
     title: "Bewerbungen kommen sortiert an",
     text: "Interessenten bewerben sich über Ihren Link. vizmo sortiert nach Ihren Kriterien, niemand wird automatisch aussortiert. Sie laden mit einem Klick ein.",
-    icon: <Users aria-hidden className="size-5" />,
     detail: "Sortiert, nicht aussortiert",
   },
   {
     title: "Termin und Identität",
     text: "Eingeladene buchen selbst einen freien Slot, bestätigen ihre Identität mit Didit und hinterlegen eine kleine Kaution, die nur vorgemerkt wird.",
-    icon: <ScanFace aria-hidden className="size-5" />,
     detail: "Slots rund um die Uhr buchbar",
   },
   {
     title: "Besichtigung ohne Sie",
     text: "Die Tür öffnet sich nur im gebuchten Zeitfenster. Am Ende fotografieren Interessenten die Räume, vizmo gleicht mit dem Zustand vorher ab.",
-    icon: <Camera aria-hidden className="size-5" />,
     detail: "Fotoabgleich nach jeder Besichtigung",
   },
 ];
@@ -172,10 +163,7 @@ export function HowItWorks({ withHeading = true }: { withHeading?: boolean }) {
       <ol className={cx("grid gap-4 md:grid-cols-2 xl:grid-cols-5", withHeading && "mt-12")}>
         {steps.map((step, index) => (
           <li key={step.title} className="flex flex-col gap-4 rounded-card border border-line bg-white p-5">
-            <span className="flex items-center justify-between">
-              <span className="flex size-9 items-center justify-center rounded-full bg-night font-display font-bold text-white">{index + 1}</span>
-              <span className="text-deep-blue">{step.icon}</span>
-            </span>
+            <span className="flex size-9 items-center justify-center rounded-full bg-night font-display font-bold text-white">{index + 1}</span>
             <div>
               <h3 className="text-h2">{step.title}</h3>
               <p className="mt-2 text-slate">{step.text}</p>
@@ -215,7 +203,7 @@ export function BothSides() {
   ];
   return (
     <Section>
-      <SectionHeading title="Gut für beide Seiten" lead="Vermieter sparen Zeit, Interessenten bekommen einen fairen, planbaren Ablauf." />
+      <SectionHeading title="Weniger Aufwand für Sie, ein eigener Termin für Interessenten" lead="vizmo nimmt Vermietern die Abstimmung ab und gibt Interessenten einen fairen, planbaren Ablauf." />
       <div className="mt-12 grid gap-6 md:grid-cols-2">
         {sides.map((side) => (
           <div key={side.title} className="rounded-card border border-line p-6 md:p-8">
@@ -224,7 +212,7 @@ export function BothSides() {
             <ul className="mt-6 flex flex-col gap-3">
               {side.points.map((point) => (
                 <li key={point} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-mist text-deep-blue">
+                  <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-mist text-night">
                     <Check aria-hidden className="size-3.5" strokeWidth={3} />
                   </span>
                   {point}
@@ -285,13 +273,13 @@ export function Trust() {
     <Section id="sicherheit" tone="night" className="relative overflow-hidden">
       <SectionHeading
         dark
-        title="Was uns ausmacht"
+        title="Sicher für Ihre Wohnung, fair für Interessenten"
         lead="Fremde Menschen in die eigene Wohnung zu lassen, braucht Vertrauen. Deshalb sind Datenschutz, Fairness und Sicherheit bei vizmo eingebaut, nicht nachgerüstet."
       />
       <ul className="mt-12 grid gap-x-10 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
         {trust.map((item) => (
           <li key={item.title} className="flex flex-col gap-3">
-            <span className="flex size-12 items-center justify-center rounded-card bg-white/10 text-lavender">{item.icon}</span>
+            <span className="text-lavender">{item.icon}</span>
             <h3 className="text-h2">{item.title}</h3>
             <p className="text-lavender">{item.text}</p>
           </li>

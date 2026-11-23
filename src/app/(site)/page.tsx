@@ -16,6 +16,7 @@ const jsonLd = {
       url: siteUrl,
       logo: `${siteUrl}/android-chrome-512.png`,
       email: company.email,
+      sameAs: [company.linkedin],
       slogan: company.claim,
     },
     { "@type": "WebSite", "@id": `${siteUrl}/#website`, url: siteUrl, name: company.name, inLanguage: "de-DE", publisher: { "@id": `${siteUrl}/#organization` } },
