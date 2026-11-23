@@ -24,7 +24,7 @@ const team = [
   },
   {
     name: "Johanna Spratte",
-    role: "Marktverständnis",
+    role: "Marktverständnis und Vertrieb",
     photo: "/team/johanna-spratte.jpg",
     focus: "Spricht mit Vermietern und Interessenten und übersetzt ihre Erfahrungen ins Produkt.",
   },
