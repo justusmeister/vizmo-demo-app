@@ -28,8 +28,7 @@ function Hero() {
     <section className="relative -mt-16 overflow-hidden bg-linear-to-b from-mist/80 to-white to-60% pt-16">
       <Container className="relative grid grid-cols-1 items-center gap-14 pt-14 pb-20 md:pt-20 lg:grid-cols-[1.35fr_1fr] lg:gap-8 lg:pt-24 lg:pb-28">
         <div className="relative z-10 flex min-w-0 flex-col items-start">
-          <p className="text-body font-medium text-slate">Für private Vermieter</p>
-          <h1 className="mt-5 max-w-[13ch] font-display text-stage font-bold text-balance text-night">{company.claim}</h1>
+          <h1 className="max-w-[13ch] font-display text-stage font-bold text-balance text-night">{company.claim}</h1>
           <p className="mt-6 max-w-[34ch] text-intro text-slate">
             Bewerbungen sortiert nach Ihren Kriterien, geprüfte Identitäten und Besichtigungen per Smartlock. Ohne dass Sie
             einen einzigen Termin selbst abstimmen.
