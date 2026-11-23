@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
+import { maskIconColor } from "@/config/brand-meta";
 import { siteUrl } from "@/config/site-pages";
 import "./globals.css";
 
@@ -34,6 +35,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="de" className={`${poppins.variable} ${inter.variable} h-full antialiased`}>
+      {/* Favicon, SVG and apple icon come from the file conventions in src/app. Setting metadata.icons would
+          replace them, so Safari's pinned-tab mask is added here. */}
+      <head>
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color={maskIconColor} />
+      </head>
       <body className="min-h-full">{children}</body>
     </html>
   );
