@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Drei Gründerinnen und Gründer aus Osnabrück und ein Ziel: Vermietung ohne Terminchaos. Das Team hinter vizmo.",
 };
 
-// Portraits from the pitch deck; Justus' photo is a square crop with the head centered.
+// Portraits share one framing: eye line at 40 % of the square, eye-to-chin about 21 %, shoulders level.
 const team = [
   {
     name: "Justus Meister",
