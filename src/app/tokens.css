@@ -92,3 +92,26 @@
   /* 5 Layout [Assumption] */
   --container-content: 80rem;
 }
+
+/*
+ * 5 Squircle corners [Decision] (owner's request): continuous, Apple-like corners where the
+ * browser supports `corner-shape` (Chromium 139+); others keep the plain round corners above.
+ * A squircle hugs the corner more tightly than a circular arc of the same radius, so the radii
+ * are scaled by about 1.7 to keep the same visual corner size. Full rounding (pills, avatars,
+ * dots) stays circular.
+ */
+@supports (corner-shape: squircle) {
+  :root {
+    --radius-input: 10px;
+    --radius-button: 14px;
+    --radius-card: 20px;
+    --radius-modal: 28px;
+  }
+
+  [class*="rounded-input"],
+  [class*="rounded-button"],
+  [class*="rounded-card"],
+  [class*="rounded-modal"] {
+    corner-shape: squircle;
+  }
+}
