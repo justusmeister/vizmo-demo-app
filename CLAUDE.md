@@ -20,7 +20,7 @@ Frontend-only demo of **vizmo**, a platform that lets landlords run apartment vi
 ## Design requirements
 - The brand feels calm, precise and reliable, not playful. Blue is reserved for actions and brand. Status colors appear in status indicators only. Use Nachtblau instead of black. Never use Lavendel as text on a light background.
 - No sparkle or star icons for AI features. Use content icons and plain labels instead.
-- Fonts: Poppins Bold for headings only. Inter Regular/Medium for everything else.
+- Fonts: Schibsted Grotesk Medium (`font-display font-medium`) for headings only. Inter Regular/Medium for everything else.
 - Logo: use the asset only and follow the background mapping and minimum sizes in the doc. Never typeset the wordmark.
 - Copy follows the PDF tone: name the next step („Slot buchen"). Use sentence case and keep action names consistent across a flow.
 - Quality floor: WCAG AA contrast, visible focus, keyboard reachable, `prefers-reduced-motion` respected, works at 375 px and 1440 px. Every screen covers empty, loading and error states where they apply.

@@ -81,7 +81,7 @@ export default function PrivacyPage() {
 
       <LegalSection title="6. Schriftarten">
         <p>
-          Die Schriften Poppins und Inter sind lokal in diese Website eingebunden. Beim Aufruf wird keine Verbindung zu Servern
+          Die Schriften Schibsted Grotesk und Inter sind lokal in diese Website eingebunden. Beim Aufruf wird keine Verbindung zu Servern
           von Google oder anderen Drittanbietern hergestellt.
         </p>
       </LegalSection>

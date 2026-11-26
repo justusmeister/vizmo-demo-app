@@ -38,7 +38,7 @@ export function Fieldset({ title, description, children }: { title: string; desc
     <fieldset className="flex flex-col gap-4 border-t border-line pt-6 first:border-t-0 first:pt-0">
       <legend className="contents">
         <span className="block">
-          <span className="block text-h3 font-display font-bold">{title}</span>
+          <span className="block text-h3 font-display font-medium">{title}</span>
           {description && <span className="mt-0.5 block text-slate">{description}</span>}
         </span>
       </legend>

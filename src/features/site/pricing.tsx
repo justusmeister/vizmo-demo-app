@@ -17,12 +17,12 @@ export function PricingCard() {
       <div className="grid divide-y divide-line sm:grid-cols-2 sm:divide-x sm:divide-y-0">
         <div className="flex flex-col gap-2 p-6">
           <p className="text-body font-medium text-slate">Bei der Anmeldung</p>
-          <p className="font-display text-hero font-bold tabular-nums">39 €</p>
+          <p className="font-display text-hero font-medium tabular-nums">39 €</p>
           <p className="text-slate">Software freischalten, Smartlock und Zubehör werden geliefert.</p>
         </div>
         <div className="flex flex-col gap-2 bg-mist p-6">
           <p className="text-body font-medium text-slate">Nur wenn vermietet wird</p>
-          <p className="font-display text-hero font-bold tabular-nums">45 %</p>
+          <p className="font-display text-hero font-medium tabular-nums">45 %</p>
           <p className="text-slate">der ersten Kaltmiete als Erfolgsgebühr.</p>
         </div>
       </div>
@@ -59,7 +59,7 @@ export function ComparisonTable() {
                 <dd className="text-right">{row.selbst}</dd>
               </div>
               <div className="flex justify-between gap-4 rounded-b-card bg-mist px-4 py-3">
-                <dt className="font-display font-bold">vizmo</dt>
+                <dt className="font-display font-medium">vizmo</dt>
                 <dd className="text-right font-medium">{row.vizmo}</dd>
               </div>
             </dl>
@@ -75,7 +75,7 @@ export function ComparisonTable() {
               </th>
               <th scope="col" className="p-4 font-medium">Makler</th>
               <th scope="col" className="p-4 font-medium">Selbst vermieten</th>
-              <th scope="col" className="bg-mist p-4 font-display font-bold">vizmo</th>
+              <th scope="col" className="bg-mist p-4 font-display font-medium">vizmo</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-line">

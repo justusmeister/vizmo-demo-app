@@ -153,7 +153,7 @@ export function IdentityCheck({ open, name, onClose, onVerified }: IdentityCheck
       {phase === "checking" && (
         <div className="flex flex-col items-center gap-6 py-6 text-center" aria-live="polite">
           <LoaderCircle aria-hidden className="size-10 animate-spin text-blue" />
-          <p className="text-h3 font-display font-bold">Ihre Identität wird geprüft</p>
+          <p className="text-h3 font-display font-medium">Ihre Identität wird geprüft</p>
           <StepList
             className="w-full max-w-xs text-left"
             items={[
@@ -170,7 +170,7 @@ export function IdentityCheck({ open, name, onClose, onVerified }: IdentityCheck
           <span className="flex size-16 items-center justify-center rounded-full bg-success text-white">
             <ScanFace aria-hidden className="size-8" />
           </span>
-          <p className="text-h2 font-display font-bold">Identität bestätigt</p>
+          <p className="text-h2 font-display font-medium">Identität bestätigt</p>
           <p className="text-slate">
             {documents[docType].label} und Selfie passen zusammen. Der Name {name} stimmt mit Ihrer Bewerbung überein.
           </p>

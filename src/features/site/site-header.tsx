@@ -109,7 +109,7 @@ export function SiteHeader() {
                   href={item.href}
                   onClick={(event) => reloadIfCurrent(event, item.href)}
                   aria-current={isCurrent(item.href) ? "page" : undefined}
-                  className="block border-b border-line py-4 font-display text-h2 font-bold text-night"
+                  className="block border-b border-line py-4 font-display text-h2 font-medium text-night"
                 >
                   {item.label}
                 </Link>

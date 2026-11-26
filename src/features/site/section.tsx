@@ -38,7 +38,7 @@ export function Section({
 export function SectionHeading({ title, lead, className, dark = false }: { title: string; lead?: ReactNode; className?: string; dark?: boolean }) {
   return (
     <div className={cx("max-w-2xl", className)}>
-      <h2 className="font-display text-section font-bold">{title}</h2>
+      <h2 className="font-display text-section font-medium">{title}</h2>
       {lead && <p className={cx("mt-4 text-lead", dark ? "text-lavender" : "text-slate")}>{lead}</p>}
     </div>
   );
@@ -49,7 +49,7 @@ export function PageIntro({ title, lead }: { title: string; lead?: ReactNode }) 
   return (
     <div className="-mt-16 border-b border-line bg-surface pt-16">
       <Container className="py-14 md:py-20">
-        <h1 className="max-w-3xl font-display text-hero font-bold">{title}</h1>
+        <h1 className="max-w-3xl font-display text-hero font-medium">{title}</h1>
         {lead && <p className="mt-5 max-w-2xl text-lead text-slate">{lead}</p>}
       </Container>
     </div>

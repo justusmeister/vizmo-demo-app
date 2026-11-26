@@ -25,7 +25,7 @@
 
   /* 3 Typography: families [PDF], scale [Assumption] */
   --font-*: initial;
-  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   --text-*: initial;
@@ -59,14 +59,25 @@
   --text-small: 0.75rem;
   --text-small--line-height: 1rem;
 
-  /* Motion [Decision]: the hero chevrons draw themselves once on load. */
-  --animate-draw: draw 1.6s cubic-bezier(0.22, 0.7, 0.2, 1) both;
-  @keyframes draw {
+  /* Motion [Decision]: the hero log builds up once on load, row by row, with its track filling. */
+  --animate-rise: rise 0.5s cubic-bezier(0.2, 0, 0, 1) both;
+  @keyframes rise {
     from {
-      stroke-dashoffset: 1;
+      opacity: 0;
+      transform: translateY(6px);
     }
     to {
-      stroke-dashoffset: 0;
+      opacity: 1;
+      transform: none;
+    }
+  }
+  --animate-fill: fill 4.2s cubic-bezier(0.4, 0, 0.6, 1) both;
+  @keyframes fill {
+    from {
+      transform: scaleY(0);
+    }
+    to {
+      transform: scaleY(1);
     }
   }
 

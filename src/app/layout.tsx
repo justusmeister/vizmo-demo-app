@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Inter, Schibsted_Grotesk } from "next/font/google";
 import { maskIconColor } from "@/config/brand-meta";
 import { siteUrl } from "@/config/site-pages";
 import "./globals.css";
 
-// Brand fonts per Markenhandbuch: Poppins Bold for headings, Inter for UI and body text.
-const poppins = Poppins({
-  variable: "--font-poppins",
-  weight: "700",
+// Headings: Schibsted Grotesk Medium (owner's decision, replaces Poppins Bold from the Markenhandbuch).
+// Inter stays for UI and body text.
+const schibsted = Schibsted_Grotesk({
+  variable: "--font-schibsted",
+  weight: ["500"],
   subsets: ["latin"],
 });
 
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="de" className={`${poppins.variable} ${inter.variable} h-full antialiased`}>
+    <html lang="de" className={`${schibsted.variable} ${inter.variable} h-full antialiased`}>
       {/* Favicon, SVG and apple icon come from the file conventions in src/app. Setting metadata.icons would
           replace them, so Safari's pinned-tab mask is added here. */}
       <head>

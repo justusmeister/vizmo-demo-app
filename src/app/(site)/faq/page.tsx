@@ -81,12 +81,12 @@ export default function FaqPage() {
           <div className="flex flex-col gap-12">
             {groups.map((group) => (
               <section key={group.title} id={group.title.replace(/\s+/g, "-").toLowerCase()} className="scroll-mt-24">
-                <h2 className="mb-4 font-display text-section font-bold">{group.title}</h2>
+                <h2 className="mb-4 font-display text-section font-medium">{group.title}</h2>
                 <ul className="divide-y divide-line border-y border-line">
                   {group.items.map((item) => (
                     <li key={item.q}>
                       <details className="group">
-                        <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-h2 font-display font-bold">
+                        <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-h2 font-display font-medium">
                           {item.q}
                           <ChevronDown aria-hidden className="size-5 shrink-0 text-slate transition-transform group-open:rotate-180" />
                         </summary>

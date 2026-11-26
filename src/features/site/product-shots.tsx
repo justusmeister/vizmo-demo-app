@@ -1,12 +1,11 @@
-import type { ReactNode } from "react";
 import { Check } from "lucide-react";
 import { cx } from "@/lib/cx";
-import { Section, SectionHeading } from "./section";
+import { BookingDemo, SortDemo } from "./process-demos";
+import { Section } from "./section";
 
-// Real screenshots of the demo, cropped to the part that matters (public/product, captured
-// from the static build at 3x, WebP q92 with sharp YUV so text stays crisp). Landlord screens
-// also have a phone crop of the responsive layout, so the text stays readable at every
-// width. Borders only, no shadows.
+// "So sieht vizmo im Alltag aus": two animated product moments (process-demos.tsx) and one
+// real screenshot of the demo (public/product, captured from the static build at 3x, WebP q92),
+// with a phone crop so its text stays readable at every width. Borders only, no shadows.
 
 type Image = { src: string; width: number; height: number };
 
@@ -41,95 +40,71 @@ function Intro({ eyebrow, title, text }: { eyebrow: string; title: string; text:
   return (
     <div className="flex flex-col gap-3">
       <p className="text-body font-medium text-deep-blue">{eyebrow}</p>
-      <h3 className="font-display text-h1 font-bold md:text-section">{title}</h3>
+      <h3 className="font-display text-h1 font-medium md:text-section">{title}</h3>
       <p className="text-slate">{text}</p>
-    </div>
-  );
-}
-
-/** Desktop screen: text above, the screenshot across the full content width. */
-function WideFeature({ intro, points, shot }: { intro: ReactNode; points: string[]; shot: ReactNode }) {
-  return (
-    <div className="flex flex-col gap-8">
-      <div className="grid gap-6 lg:grid-cols-2 lg:items-end lg:gap-14">
-        {intro}
-        <Points items={points} />
-      </div>
-      {shot}
     </div>
   );
 }
 
 export function ProductShots() {
   return (
-    <Section id="produkt" tone="white">
-      <SectionHeading
-        title="Ein Blick in vizmo"
-        lead="Ausschnitte aus vizmo, für Vermieter am Schreibtisch und für Interessenten unterwegs am Handy. Alle Namen und Daten sind Beispiele."
-      />
-      <div className="mt-12 flex flex-col gap-20 md:mt-16 md:gap-28">
-        <WideFeature
-          intro={
+    <Section id="produkt" tone="white" className="overflow-hidden">
+      <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
+        <h2 className="max-w-[16ch] font-display text-section font-medium">So sieht vizmo im Alltag aus</h2>
+        <p className="max-w-xl text-lead text-slate">
+          Für Vermieter am Schreibtisch, für Interessenten unterwegs am Handy. Alle Namen und Daten sind Beispiele.
+        </p>
+      </div>
+
+      <div className="mt-16 flex flex-col gap-24 md:mt-20 md:gap-32">
+        {/* Sorting: text narrow on the left, the list wide on the right. */}
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-16">
+          <div className="flex flex-col gap-6 lg:pt-6">
             <Intro
               eyebrow="Für Vermieter"
-              title="Alle Bewerbungen auf einen Blick"
-              text="Bewerbungen kommen sortiert nach Ihren Kriterien an. Wer besser passt, steht weiter oben, aussortiert wird niemand."
+              title="Bewerbungen kommen sortiert an"
+              text="Wer besser zu Ihren Kriterien passt, rückt nach oben. Aussortiert wird niemand, und Sie laden mit einem Klick ein."
             />
-          }
-          points={["Passung, Haushalt und Einkommen in einer Zeile", "Gebuchte Termine direkt in der Liste", "Herkunft, Religion, Geschlecht und Alter spielen keine Rolle"]}
-          shot={
-            <Shot
-              desktop={{ src: "/product/bewerbungen.webp", width: 3096, height: 1839 }}
-              mobile={{ src: "/product/bewerbungen-mobil.webp", width: 1170, height: 2280 }}
-              alt="Bewerbungsliste: Kriterien wie ab 3.900 € netto, bis 3 Personen und Nichtraucher. Darunter Bewerbungen mit Passung 6 von 6, Haushalt, Einkommen, Einzug und Status wie Neu, Slot gebucht und Eingeladen."
-              caption="Bewerbungsliste mit Ihren Kriterien und dem Stand jeder Bewerbung"
-            />
-          }
-        />
+            <Points items={["Passung, Haushalt und Einkommen in einer Zeile", "Herkunft, Religion, Geschlecht und Alter spielen keine Rolle"]} />
+          </div>
+          <SortDemo />
+        </div>
 
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,20rem)_1fr] lg:items-center lg:gap-14">
-          <div className="flex flex-col gap-6">
+        {/* Booking: mirrored, the phone sits on a Nebel block that is cut off at the left edge. */}
+        <div className="grid gap-10 lg:grid-cols-[1fr_minmax(0,24rem)] lg:items-center lg:gap-20">
+          <div className="relative py-10 lg:order-1 lg:py-14">
+            <div aria-hidden className="absolute inset-y-0 -left-[50vw] right-[18%] bg-mist max-lg:-right-[50vw]" />
+            <div className="relative">
+              <BookingDemo />
+            </div>
+          </div>
+          <div className="flex flex-col gap-6 lg:order-2">
             <Intro
               eyebrow="Für Interessenten"
-              title="Bewerben und Termin buchen, am Handy"
-              text="Interessenten bewerben sich in wenigen Minuten. Wer eingeladen wird, sucht sich selbst einen freien Termin aus, ohne Hin und Her per Nachricht."
+              title="Termin buchen ohne Hin und Her"
+              text="Eingeladene sehen nur freie Zeiten und buchen selbst. Vergebene Termine sind schraffiert, Rückfragen per Nachricht entfallen."
             />
-            <Points items={["Bewerbung in fünf kurzen Schritten", "Freie und vergebene Termine klar erkennbar", "Identität und Kaution im selben Ablauf"]} />
-          </div>
-          <div className="grid items-start gap-8 sm:grid-cols-2 sm:gap-6">
-            <Shot
-              className="mx-auto w-full max-w-sm"
-              desktop={{ src: "/product/bewerbung.webp", width: 1170, height: 1692 }}
-              alt="Bewerbungsformular, Schritt 1 von 5: Ihre Kontaktdaten mit Anrede, Vorname und Nachname"
-              caption="Bewerbung in fünf Schritten"
-            />
-            <Shot
-              className="mx-auto w-full max-w-sm sm:mt-16"
-              desktop={{ src: "/product/terminbuchung.webp", width: 1146, height: 1365 }}
-              alt="Terminwahl: Tage mit freien Slots, Dienstag 03.11. gewählt, 17:20 Uhr ist schraffiert und vergeben"
-              caption="Terminwahl, vergebene Zeiten sind schraffiert"
-            />
+            <Points items={["Bewerbung in fünf kurzen Schritten", "Identität und Kaution im selben Ablauf"]} />
           </div>
         </div>
 
-        <WideFeature
-          intro={
+        {/* Overview: a real screenshot, running off the right edge of the page. */}
+        <div className="flex flex-col gap-8">
+          <div className="max-w-xl">
             <Intro
               eyebrow="Ihr Überblick"
               title="Alle Inserate an einem Ort"
-              text="Sehen Sie auf einen Blick, wie viele Bewerbungen neu sind, welche Termine gebucht sind und ob das Smartlock bereit ist."
+              text="Neue Bewerbungen, gebuchte Termine und der Stand jedes Smartlocks, je Wohnung auf einen Blick."
             />
-          }
-          points={["Neue Bewerbungen und gebuchte Slots je Wohnung", "Status von Smartlock und Lieferung", "Entwürfe jederzeit fortsetzen"]}
-          shot={
-            <Shot
-              desktop={{ src: "/product/inserate.webp", width: 3576, height: 1440 }}
-              mobile={{ src: "/product/inserate-mobil.webp", width: 1170, height: 2100 }}
-              alt="Offene Inserate: Gneisenaustraße 41 mit 14 Bewerbungen und Smartlock online, Körnerstraße 7 mit Paket bei DHL unterwegs, Fichtestraße 12 als Entwurf"
-              caption="Übersicht Ihrer Inserate mit Bewerbungen, Terminen und Smartlock"
-            />
-          }
-        />
+          </div>
+          <Shot
+            className="lg:mr-[calc(50%-50vw)]"
+            desktop={{ src: "/product/inserate.webp", width: 3576, height: 1440 }}
+            mobile={{ src: "/product/inserate-mobil.webp", width: 1170, height: 2100 }}
+            alt="Offene Inserate: Gneisenaustraße 41 mit 14 Bewerbungen und Smartlock online, Körnerstraße 7 mit Paket bei DHL unterwegs, Fichtestraße 12 als Entwurf"
+            caption="Echter Ausschnitt aus der Übersicht Ihrer Inserate"
+          />
+        </div>
       </div>
     </Section>
   );

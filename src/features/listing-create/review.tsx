@@ -188,7 +188,7 @@ export function Review({ draft, update, showErrors, goTo }: ReviewProps) {
             <h3 className="text-h3">Kosten</h3>
             <p className="text-slate">Einmalig für dieses Inserat, inkl. 19 % MwSt.</p>
           </div>
-          <p className="font-display text-h2 font-bold tabular-nums">{formatEuro(PRICE)}</p>
+          <p className="font-display text-h2 font-medium tabular-nums">{formatEuro(PRICE)}</p>
         </div>
         <p className="text-small text-slate">Abrechnung über {landlord.paymentMethod}. Die Rechnung kommt per E-Mail an {landlord.email}.</p>
         <label className="flex cursor-pointer items-start gap-3">
