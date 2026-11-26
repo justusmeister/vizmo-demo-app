@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { CookieConsent } from "./cookie-consent";
+import { SiteAnalytics } from "./site-analytics";
 import { SiteFooter } from "./site-footer";
 import { SiteHeader } from "./site-header";
 
@@ -21,6 +22,7 @@ export function SiteFrame({ children }: { children: ReactNode }) {
       </main>
       <SiteFooter />
       <CookieConsent />
+      <SiteAnalytics />
     </div>
   );
 }

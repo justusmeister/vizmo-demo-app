@@ -135,10 +135,16 @@ export default function PrimitivesPage() {
           </Card>
         </Section>
 
-        <Section title="E-Mail-Erfassung auf Nachtblau">
-          <div className="flex flex-col gap-8 rounded-card bg-night p-6 md:flex-row">
-            <EmailCapture label="E-Mail-Adresse" placeholder="Ihre E-Mail-Adresse" action="Pilot vormerken" hint="Öffnet Ihr E-Mail-Programm, Sie senden selbst." />
-            <EmailCapture label="E-Mail-Adresse" placeholder="Ihre E-Mail-Adresse" action="Pilot vormerken" defaultValue="lena@" error="Bitte eine gültige E-Mail-Adresse angeben" />
+        <Section title="E-Mail-Erfassung">
+          <div className="flex flex-col gap-6">
+            <Card className="flex flex-col gap-8 md:flex-row">
+              <EmailCapture label="E-Mail-Adresse" placeholder="Ihre E-Mail-Adresse" action="Pilot vormerken" hint="Öffnet Ihr E-Mail-Programm, Sie senden selbst." />
+              <EmailCapture label="E-Mail-Adresse" placeholder="Ihre E-Mail-Adresse" action="Pilot vormerken" defaultValue="lena@" error="Bitte eine gültige E-Mail-Adresse angeben" />
+            </Card>
+            <div className="flex flex-col gap-8 rounded-card bg-night p-6 md:flex-row">
+              <EmailCapture tone="dark" label="E-Mail-Adresse" placeholder="Ihre E-Mail-Adresse" action="Pilot vormerken" hint="Öffnet Ihr E-Mail-Programm, Sie senden selbst." />
+              <EmailCapture tone="dark" label="E-Mail-Adresse" placeholder="Ihre E-Mail-Adresse" action="Pilot vormerken" defaultValue="lena@" error="Bitte eine gültige E-Mail-Adresse angeben" />
+            </div>
           </div>
         </Section>
 

@@ -10,7 +10,7 @@ type Variant = "primary" | "secondary" | "tertiary";
 type Size = "sm" | "md";
 
 const base =
-  "inline-flex shrink-0 items-center justify-center gap-2 rounded-button font-medium whitespace-nowrap transition-colors select-none disabled:cursor-not-allowed aria-disabled:pointer-events-none";
+  "inline-flex shrink-0 items-center justify-center gap-2 font-medium whitespace-nowrap transition-colors select-none disabled:cursor-not-allowed aria-disabled:pointer-events-none";
 
 const variants: Record<Variant, string> = {
   primary:
@@ -26,12 +26,17 @@ const sizes: Record<Size, string> = {
   md: "h-10 px-4 text-body",
 };
 
+/**
+ * `inset` is for a button nested inside a rounded control (EmailCapture): it takes the smaller
+ * input radius, so the inner and outer corners stay concentric.
+ */
 export function buttonStyles({
   variant = "primary",
   size = "md",
+  inset = false,
   className,
-}: { variant?: Variant; size?: Size; className?: string } = {}) {
-  return cx(base, variants[variant], sizes[size], className);
+}: { variant?: Variant; size?: Size; inset?: boolean; className?: string } = {}) {
+  return cx(base, inset ? "rounded-input" : "rounded-button", variants[variant], sizes[size], className);
 }
 
 type ButtonProps = ComponentProps<"button"> & {
@@ -39,6 +44,7 @@ type ButtonProps = ComponentProps<"button"> & {
   size?: Size;
   icon?: ReactNode;
   loading?: boolean;
+  inset?: boolean;
 };
 
 export function Button({
@@ -46,6 +52,7 @@ export function Button({
   size,
   icon,
   loading = false,
+  inset,
   disabled,
   className,
   children,
@@ -57,7 +64,7 @@ export function Button({
       type={type}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
-      className={buttonStyles({ variant, size, className })}
+      className={buttonStyles({ variant, size, inset, className })}
       {...props}
     >
       {loading ? (

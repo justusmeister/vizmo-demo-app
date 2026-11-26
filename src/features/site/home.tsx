@@ -14,7 +14,7 @@ import type { ReactNode } from "react";
 import { ButtonLink } from "@/components/ui/button";
 import { cx } from "@/lib/cx";
 import { ChevronEdge } from "./chevron-edge";
-import { HeroChevrons } from "./hero-chevrons";
+import { HeroRibbon } from "./hero-ribbon";
 import { HeroSignup } from "./hero-signup";
 import { HeroVisual } from "./hero-visual";
 import { PilotSignup } from "./pilot-signup";
@@ -26,19 +26,19 @@ import { Container, Section, SectionHeading } from "./section";
 
 function Hero() {
   return (
-    <section className="relative -mt-16 overflow-hidden bg-night pt-16 text-white">
-      <Container className="relative grid grid-cols-1 items-center gap-12 pt-12 pb-20 md:pt-20 lg:grid-cols-[1.1fr_1fr] lg:gap-12 lg:pt-24 lg:pb-28">
+    <section className="relative -mt-16 overflow-hidden bg-linear-to-b from-mist/80 to-white to-60% pt-16">
+      <Container className="relative grid grid-cols-1 items-center gap-14 pt-14 pb-20 md:pt-20 lg:grid-cols-[1.35fr_1fr] lg:gap-8 lg:pt-24 lg:pb-28">
         <div className="relative z-10 flex min-w-0 flex-col items-start">
-          <h1 className="max-w-[18ch] font-display text-stage font-bold text-balance">Wohnungen zeigen, ohne selbst dabei zu sein</h1>
-          <p className="mt-6 max-w-[34ch] text-intro text-lavender">Interessenten buchen selbst einen Termin, das Smartlock öffnet die Tür.</p>
+          <h1 className="max-w-[16ch] font-display text-stage font-bold text-balance text-night">Die Plattform für Besichtigungen ohne Terminabsprache</h1>
+          <p className="mt-6 max-w-[34ch] text-intro text-slate">Interessenten buchen selbst, das Smartlock öffnet die Tür.</p>
           <div className="mt-10 w-full">
             <HeroSignup />
           </div>
         </div>
-        {/* The mark at hero scale sits behind the product visual and runs off the edge. */}
-        {/* Below lg the chevrons rise well above the visual, so the mark is seen, not hidden. */}
-        <div className="relative px-2 pt-44 pb-10 sm:px-10 sm:pt-56 lg:py-6 lg:pl-12">
-          <HeroChevrons className="absolute top-0 left-1/2 w-[120%] max-w-none -translate-x-[40%] sm:w-[85%] sm:-translate-x-1/2 lg:top-1/2 lg:w-[135%] lg:-translate-x-[38%] lg:-translate-y-1/2" />
+
+        <div className="relative pt-6 pb-12 lg:py-0">
+          {/* The ribbon bleeds off the right edge and above the column, like a backdrop. */}
+          <HeroRibbon className="pointer-events-none absolute max-lg:[mask-image:linear-gradient(to_bottom,transparent,black_45%)] lg:[mask-image:linear-gradient(to_bottom,transparent_calc(50%-270px),black_calc(50%-150px))] top-1/2 left-1/2 w-[150%] max-w-none -translate-x-[38%] -translate-y-1/2 sm:w-[95%] sm:-translate-x-1/2 lg:w-[235%] lg:-translate-x-[22%]" />
           <div className="relative">
             <HeroVisual />
           </div>
@@ -85,7 +85,7 @@ const stats = [
 function Problem() {
   return (
     <Section tone="surface" className="relative pt-32 sm:pt-40 lg:pt-56">
-      <ChevronEdge from="night" />
+      <ChevronEdge from="white" />
       <SectionHeading
         title="Eine Wohnung neu zu vermieten ist bis heute Handarbeit"
         lead="Auf eine Wohnung kommen dutzende, in Großstädten hunderte Anfragen. Wer privat vermietet, sortiert Postfächer, stimmt Termine ab und steht am Wochenende in der leeren Wohnung."

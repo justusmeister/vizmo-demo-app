@@ -5,7 +5,7 @@ import { cx } from "@/lib/cx";
 // the double chevron of the logo. Used at two transitions only (hero → problem, comparison →
 // trust), so it stays a signature, not a pattern. Decorative.
 
-const fills = { white: "text-white", surface: "text-surface", night: "text-night" } as const;
+const fills = { white: "text-white", surface: "text-surface" } as const;
 
 export function ChevronEdge({ from, className }: { from: keyof typeof fills; className?: string }) {
   return (

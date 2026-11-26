@@ -73,9 +73,13 @@ export default function PrivacyPage() {
           notwendig und nach § 25 Abs. 2 Nr. 2 TDDDG ohne Einwilligung zulässig.
         </p>
         <p>
-          Optionale Statistik setzen wir derzeit nicht ein. Sollte sich das ändern, geschieht das nur mit Ihrer Einwilligung
-          (§ 25 Abs. 1 TDDDG, Art. 6 Abs. 1 lit. a DSGVO). Sie können Ihre Auswahl jederzeit über „Cookie-Einstellungen“ im
-          Fuß der Seite ändern oder widerrufen.
+          Nur wenn Sie im Cookie-Hinweis der Statistik zustimmen, nutzen wir Vercel Web Analytics von Vercel Inc. (Anschrift
+          siehe Abschnitt 2). Es zählt Seitenaufrufe, damit wir sehen, wie viele Menschen die Website wann besuchen. Erfasst
+          werden die aufgerufene Seite, die verweisende Seite, Browser, Betriebssystem, Gerätetyp und das Land. Es werden keine
+          Cookies gesetzt. Besucher werden über einen Hashwert aus der Anfrage unterschieden, der nach 24 Stunden verworfen
+          wird; Ihre IP-Adresse wird dafür nicht gespeichert. Rechtsgrundlage ist Ihre Einwilligung (§ 25 Abs. 1 TDDDG, Art. 6
+          Abs. 1 lit. a DSGVO). Sie können sie jederzeit über „Cookie-Einstellungen“ im Fuß der Seite widerrufen; danach lädt die
+          Statistik nicht mehr.
         </p>
       </LegalSection>
 

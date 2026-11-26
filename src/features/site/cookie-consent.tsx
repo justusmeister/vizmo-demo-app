@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Dialog } from "@/components/ui/dialog";
 
-// Cookie banner with equally prominent accept and reject (TDDDG § 25, DSGVO). The site
-// currently only uses technically necessary storage; "Statistik" exists so consent can be
-// collected before any analytics is added.
+// Cookie banner with equally prominent accept and reject (TDDDG § 25, DSGVO). Besides the
+// technically necessary storage of the choice itself, "Statistik" switches on Vercel Web
+// Analytics (see SiteAnalytics); without that consent no analytics script loads.
 
 const KEY = "vizmo-consent";
 const EVENT = "vizmo-consent-change";
@@ -41,6 +41,17 @@ function save(consent: Omit<Consent, "date">) {
     // Storage blocked: the banner will show again next time.
   }
   window.dispatchEvent(new Event(EVENT));
+}
+
+/** True once the visitor has agreed to statistics; false before any choice or after a reject. */
+export function useStatisticsConsent() {
+  const stored = useSyncExternalStore(subscribe, read, () => null);
+  if (!stored || stored === "unavailable") return false;
+  try {
+    return (JSON.parse(stored) as Consent).statistics === true;
+  } catch {
+    return false;
+  }
 }
 
 export function openCookieSettings() {
@@ -152,7 +163,7 @@ export function CookieConsent() {
               <span>
                 <span className="block text-h2 font-medium">Statistik</span>
                 <span className="mt-1 block text-slate">
-                  Anonyme Nutzungsstatistik, um die Seite zu verbessern. Derzeit ist kein Statistik-Dienst im Einsatz.
+                  Zählt Seitenaufrufe mit Vercel Web Analytics, ohne Cookies und ohne Sie wiederzuerkennen. So sehen wir, wie viele Menschen die Seite wann besuchen.
                 </span>
               </span>
             </label>
