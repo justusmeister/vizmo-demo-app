@@ -11,7 +11,7 @@ export function NotFoundPage() {
     <Container className="py-20 md:py-28">
       <div className="mx-auto flex max-w-2xl flex-col items-start gap-6">
         <p className="rounded-full bg-mist px-3 py-1 text-body font-medium text-night">Fehler 404</p>
-        <h1 className="font-display text-hero font-medium text-balance">Diese Seite gibt es nicht.</h1>
+        <h1 className="font-display text-hero font-bold text-balance">Diese Seite gibt es nicht.</h1>
         <p className="text-lead text-slate">
           Vielleicht hat sich die Adresse geändert oder es steckt ein Tippfehler im Link. Von der Startseite aus finden Sie
           alles Wichtige.

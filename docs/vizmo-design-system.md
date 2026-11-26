@@ -76,24 +76,25 @@ Implemented in `src/app/tokens.css` as Tailwind theme colors (`bg-blue`, `text-n
 
 ## 3. Typography
 
-- **[Decision]** Headings: **Schibsted Grotesk Medium (500)**, owner's decision. It replaces the PDF's Poppins Bold, which reads generic because many startups use it; a lighter grotesque with its own character fits calm and precise better. The wordmark stays the logo asset.
+- **[PDF]** Headings: **Poppins Bold**. It is related to the wordmark. (Owner is looking for a less generic alternative; Schibsted Grotesk Medium was tried and reverted until the right face is found.)
 - **[PDF]** Body text and app UI: **Inter Regular / Medium**. It reads better at small sizes.
 - **[PDF]** Both fonts come from Google Fonts.
 - **[PDF]** Never reset the wordmark in another font. Always use the logo asset.
-- **[Assumption]** Inter SemiBold (600) is allowed only where Medium can't carry hierarchy, for example table headers. Schibsted Grotesk appears in headings only, never in controls or body text.
+- **[Assumption]** Inter SemiBold (600) is allowed only where Medium can't carry hierarchy, for example table headers. Poppins appears in headings only, never in controls or body text.
 - **[Assumption]** Type scale. The PDF gives no sizes.
 
 | Role | Font | Size / line-height | Weight |
 |---|---|---|---|
-| Display (rare, hero/empty state) | Schibsted Grotesk | 32 / 40 | 500 |
-| H1 page title | Schibsted Grotesk | 24 / 32 | 500 |
-| H2 section | Schibsted Grotesk | 20 / 28 | 500 |
-| H3 card title | Schibsted Grotesk | 16 / 24 | 500 |
+| Display (rare, hero/empty state) | Poppins | 31.25 / 38 | 700 |
+| H1 page title | Poppins | 25 / 32 | 700 |
+| H2 section | Poppins | 20 / 28 | 700 |
+| H3 card title | Poppins | 16 / 24 | 700 |
 | Body | Inter | 14 / 20 | 400 |
 | Body emphasis, labels, buttons | Inter | 14 / 20 | 500 |
 | Small / meta / captions | Inter | 12 / 16 | 400–500 |
 
-- Utilities: `font-display` (Schibsted Grotesk, always with `font-medium`), `font-sans` (Inter, default), and `text-display`, `text-h1`, `text-h2`, `text-h3`, `text-body`, `text-small`. Tailwind's default size scale is removed.
+- **[Decision]** Type scale (owner's request): a strict modular scale with ratio 1.25 from 16 px: 12.8 (`text-small`) · 16 (`text-copy`, `text-h3`) · 20 (`text-h2`, `text-lead`, `text-intro`) · 25 (`text-h1`) · 31.25 (`text-display`) · 39.06 · 48.83 · 61.04. The marketing sizes `text-section` (25 → 31.25 → 39.06), `text-hero` (31.25 → 39.06 → 48.83) and `text-stage` (31.25 → 39.06 → 48.83 → 61.04) step up one scale step per breakpoint (640, 1024, 1280 px) via media queries in `tokens.css`, never to in-between values. The only size off the scale is `text-body` (14 px) for dense UI: buttons, table cells, captions.
+- Utilities: `font-display` (Poppins, always with `font-bold`), `font-sans` (Inter, default), and `text-display`, `text-h1`, `text-h2`, `text-h3`, `text-body`, `text-small`. Tailwind's default size scale is removed.
 - **[Assumption]** Use sentence case everywhere and no all-caps labels. Use tabular numerals (`font-variant-numeric: tabular-nums`) for times, dates, amounts and counts in tables.
 
 ## 4. Logo & mark
@@ -221,9 +222,8 @@ Applicant decisions **[Assumption]**: only AGG- and data-protection-compatible q
 `src/app/(site)/`, built from the same tokens and primitives as the app.
 
 - **[Decision]** unslop polish pass (heydamir/unslop, November 2026): key figures in Nachtblau, not Blau (blue stays for actions); section labels like „Pilotprojekt“ are plain Schiefer text, not pills; headings end without a period (the claim keeps its period as in the PDF); decorative icons take the text color (Nachtblau, Schiefer, Lavendel on dark), never Tiefblau; step cards carry only their number, no extra icon; trust icons stand without a tile; section headings name what this product does instead of generic lines.
-- **[Decision]** Homepage hero only: `text-stage` (fluid 34 to 76 px, line height 1.04) and `text-intro` (fluid 19 to 24 px).
-- **[Assumption]** Extra type tokens for marketing only: `text-copy` (16 px body), `text-hero` (fluid 36 to 64 px, Schibsted Grotesk Medium, tight leading), `text-section` (fluid 28 to 40 px) and `text-lead` (18 px). Don't use them inside the app.
-- **[Decision]** Homepage hero (owner's request: less clinical, more its own): the claim large and left (`text-stage`, Schibsted Grotesk Medium), intro in Schiefer, two buttons and one plain trust line. On the right, on a Nebel slab that covers the right 47 % and runs off the edge (below lg a soft Nebel tint instead), `HeroLog` shows one real rental as a log from Monday 09:12 (listing online) to Tuesday 18:03 (photos matched). The landlord's single action („Sie laden vier Interessenten ein", „Ihr einziger Schritt") sits on a square-cut white strip with a larger Vizmo Blau dot; all other dots are Nachtblau. The log builds up once on load, row by row (`animate-rise`, 0.55 s stagger) while its track fills in Vizmo Blau (`animate-fill`); this is the page's only motion that runs without being on screen or triggered, and none of it runs under reduced motion. The site header has no bottom border: it is transparent at the very top (the homepage hero, subpage intros and the /pilot section run up behind it with `-mt-16`) and turns frosted white once the page scrolls or the menu is open. The Nachtblau supergraphic (`ChevronGraphic`) stays in the footer and the dark section.
+- **[Assumption]** Extra type tokens for marketing only: `text-copy`, `text-hero`, `text-section`, `text-stage`, `text-lead` and `text-intro` (sizes in the type scale above). Don't use them inside the app.
+- **[Decision]** Homepage hero (owner's request: less clinical, more its own): the headline says what vizmo does („Wohnungen zeigen, ohne selbst dabei zu sein"), not the brand claim, which belongs to the footer. Below it one short sentence and two buttons, nothing more: no eyebrow, no trust line, no extra small print. On the right, on a Nebel slab that covers the right 42 % and runs off the edge (below lg a soft Nebel tint instead), `HeroVisual` shows the demo's real application list; the booked slot, the verified identity and the door opening appear once on load one after another (`animate-rise`, none under reduced motion). The site header has no bottom border: it is transparent at the very top (the homepage hero, subpage intros and the /pilot section run up behind it with `-mt-16`) and turns frosted white once the page scrolls or the menu is open. The Nachtblau supergraphic (`ChevronGraphic`) stays in the footer and the dark section.
 - **[Decision]** Fewer cards, deliberate breaks (owner's request): marketing sections avoid grids of identical rounded cards. Figures in „Handarbeit" sit on a Nachtblau top rule and step down like the chevron (second and third column offset). The five steps are open columns on a 2 px Nachtblau rule with large numbers. „Für Vermieter" and „Für Interessenten" are two open columns split by a hairline, the second set lower. The product section mirrors its rows, and one Nebel block and the screenshot run off the page edge. Cards remain where they hold an interaction (pilot form, pricing).
 - **[Decision]** Product section („So sieht vizmo im Alltag aus"): two animated product moments instead of static screenshots (`process-demos.tsx`): applications arrive and re-sort by fit, then the top three are invited; an applicant picks a free slot on a phone, books it and sees the confirmation. They loop slowly only while on screen (`use-loop.ts`), hold their finished state under reduced motion, and carry a visually hidden sentence for screen readers. One real screenshot (Inserate) stays, labelled as a real excerpt.
 - **[Assumption]** Section rhythm: white, surface and mist sections alternate, with one Nachtblau section (trust: „Sicher für Ihre Wohnung, fair für Interessenten“) for contrast. Content width is `max-w-6xl`.
@@ -234,7 +234,7 @@ Applicant decisions **[Assumption]**: only AGG- and data-protection-compatible q
 - **[Decision]** The website doesn't link to the demo (`/p/…`, `/u/…`) yet. Calls to action point to the pilot waitlist (`/#pilot`) and the contact page. The demo routes still exist and are noindex.
 - **[Assumption]** Marketing body copy is 16 px (`text-copy`, set on the site layout); hints and captions use `text-body` (14 px), never 12 px. The app keeps its 14 px body.
 - **[Decision]** Header logo: black wordmark (`BrandLogo tone="ink"`), as is common on landing pages; the footer keeps Farbe auf Dunkel. Clicking it is a plain `<a href="/">`, so the start page reloads fully. The footer no longer says "Entwickelt und gehostet in Deutschland" (not true for the Vercel-hosted site); the hero and trust section keep it because it describes the product.
-- **[Decision]** Fonts are self-hosted: `next/font/google` downloads Schibsted Grotesk and Inter at build time and serves them from `/_next/static/media`, so visitors never connect to Google (LG München I, 3 O 17493/20).
+- **[Decision]** Fonts are self-hosted: `next/font/google` downloads Poppins and Inter at build time and serves them from `/_next/static/media`, so visitors never connect to Google (LG München I, 3 O 17493/20).
 - **[Decision]** Team page `/team` (header, mobile menu, footer under Unternehmen, sitemap): Justus Meister, Jan Witte and Johanna Spratte with round portraits of equal size (`public/team/*.jpg`, 480 px squares; Justus' photo is a square crop of his portrait with the head centered), name, role in Schiefer and one line on their focus. The pilot section keeps "Sie sprechen direkt mit uns, dem Gründerteam." The legal pages still name only Justus Meister.
 - **[Decision]** vizmo is in the pre-founding phase: no registered company, so no "GmbH i.G.", register entry or VAT ID anywhere. `company.name` is "vizmo". Imprint and privacy policy name only Justus Meister (provider and responsible under § 18 MStV) with an interim address (Ursulaschule Osnabrück); no phone number. The contact page shows no address. The footer reads "© 2026 vizmo. Alle Rechte vorbehalten."
 - **[Decision]** The legal pages are filled in (no placeholders): hosting Vercel (USA, DPF and SCCs), DNS Cloudflare (DNS only), e-mail IONOS, supervisory authority Niedersachsen, no data protection officer (contact: Justus Meister). Have them reviewed legally before launch.

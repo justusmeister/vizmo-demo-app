@@ -40,7 +40,7 @@ function Intro({ eyebrow, title, text }: { eyebrow: string; title: string; text:
   return (
     <div className="flex flex-col gap-3">
       <p className="text-body font-medium text-deep-blue">{eyebrow}</p>
-      <h3 className="font-display text-h1 font-medium md:text-section">{title}</h3>
+      <h3 className="font-display text-h1 font-bold md:text-section">{title}</h3>
       <p className="text-slate">{text}</p>
     </div>
   );
@@ -50,7 +50,7 @@ export function ProductShots() {
   return (
     <Section id="produkt" tone="white" className="overflow-hidden">
       <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
-        <h2 className="max-w-[16ch] font-display text-section font-medium">So sieht vizmo im Alltag aus</h2>
+        <h2 className="max-w-[16ch] font-display text-section font-bold">So sieht vizmo im Alltag aus</h2>
         <p className="max-w-xl text-lead text-slate">
           Für Vermieter am Schreibtisch, für Interessenten unterwegs am Handy. Alle Namen und Daten sind Beispiele.
         </p>

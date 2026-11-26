@@ -45,7 +45,7 @@ export default function PricingPage() {
         <div className="grid items-start gap-12 lg:grid-cols-[1.1fr_1fr]">
           <PricingCard />
           <div>
-            <h2 className="font-display text-h1 font-medium">Im Preis enthalten</h2>
+            <h2 className="font-display text-h1 font-bold">Im Preis enthalten</h2>
             <ul className="mt-6 flex flex-col gap-4">
               {included.map((item) => (
                 <li key={item} className="flex gap-3">
@@ -85,7 +85,7 @@ export default function PricingPage() {
       <Section tone="mist">
         <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
           <div className="max-w-2xl">
-            <h2 className="font-display text-section font-medium">Werden Sie Pilotvermieter</h2>
+            <h2 className="font-display text-section font-bold">Werden Sie Pilotvermieter</h2>
             <p className="mt-3 text-lead text-slate">Tragen Sie sich ein oder schreiben Sie uns, wenn Sie Fragen zu den Preisen haben.</p>
           </div>
           <div className="grid w-full gap-3 sm:flex sm:w-auto sm:flex-wrap">

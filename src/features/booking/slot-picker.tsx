@@ -95,7 +95,7 @@ export function SlotPicker({ days, duration, value, onChange }: SlotPickerProps)
                   )}
                 >
                   <span className="text-small font-medium text-slate">{weekdayShort.format(date).replace(".", "")}</span>
-                  <span className="font-display text-h3 font-medium tabular-nums">{pad(date.getDate())}.{pad(date.getMonth() + 1)}.</span>
+                  <span className="font-display text-h3 font-bold tabular-nums">{pad(date.getDate())}.{pad(date.getMonth() + 1)}.</span>
                   <span className={cx("text-small font-medium", full ? "text-slate" : "text-night")}>{full ? "ausgebucht" : `${free} frei`}</span>
                 </button>
               </li>

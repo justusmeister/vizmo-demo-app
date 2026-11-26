@@ -25,41 +25,46 @@
 
   /* 3 Typography: families [PDF], scale [Assumption] */
   --font-*: initial;
-  --font-display: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   --text-*: initial;
-  /* Marketing site only [Assumption]: hero headline and lead paragraph. */
-  --text-hero: clamp(2.25rem, 1.4rem + 3.4vw, 4rem);
-  --text-hero--line-height: 1.08;
-  --text-hero--letter-spacing: -0.02em;
-  /* Homepage hero only [Decision]: larger, open headline and the intro below it. */
-  --text-stage: clamp(2.125rem, 1.25rem + 4.6vw, 4.75rem);
-  --text-stage--line-height: 1.04;
-  --text-stage--letter-spacing: -0.025em;
-  --text-intro: clamp(1.1875rem, 1rem + 0.75vw, 1.5rem);
-  --text-intro--line-height: 1.45;
-  --text-section: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem);
+  /*
+   * Modular scale [Decision]: every step is the previous one times 1.25, from 16 px.
+   * 12.8 · 16 · 20 · 25 · 31.25 · 39.06 · 48.83 · 61.04 px. Large marketing sizes step down
+   * one scale step per breakpoint (see the media queries below the theme), never in between.
+   * Only exception: text-body (14 px) for dense UI such as buttons, table cells and captions.
+   */
+  --text-small: 0.8rem; /* 12.8 */
+  --text-small--line-height: 1.125rem;
+  --text-body: 0.875rem; /* 14, UI exception */
+  --text-body--line-height: 1.25rem;
+  --text-copy: 1rem; /* 16 */
+  --text-copy--line-height: 1.625rem;
+  --text-h3: 1rem; /* 16 */
+  --text-h3--line-height: 1.5rem;
+  --text-h2: 1.25rem; /* 20 */
+  --text-h2--line-height: 1.75rem;
+  --text-lead: 1.25rem; /* 20 */
+  --text-lead--line-height: 1.875rem;
+  --text-intro: 1.25rem; /* 20 */
+  --text-intro--line-height: 1.875rem;
+  --text-h1: 1.5625rem; /* 25 */
+  --text-h1--line-height: 2rem;
+  --text-display: 1.953rem; /* 31.25 */
+  --text-display--line-height: 2.375rem;
+  /* Marketing only. Phone value here; tablet and desktop step up in the queries below. */
+  --text-section: 1.5625rem; /* 25 → 31.25 → 39.06 */
   --text-section--line-height: 1.15;
   --text-section--letter-spacing: -0.01em;
-  --text-lead: 1.125rem;
-  --text-lead--line-height: 1.75rem;
-  --text-copy: 1rem; /* marketing body copy, 16px */
-  --text-copy--line-height: 1.625rem;
-  --text-display: 2rem;
-  --text-display--line-height: 2.5rem;
-  --text-h1: 1.5rem;
-  --text-h1--line-height: 2rem;
-  --text-h2: 1.25rem;
-  --text-h2--line-height: 1.75rem;
-  --text-h3: 1rem;
-  --text-h3--line-height: 1.5rem;
-  --text-body: 0.875rem;
-  --text-body--line-height: 1.25rem;
-  --text-small: 0.75rem;
-  --text-small--line-height: 1rem;
+  --text-hero: 1.953rem; /* 31.25 → 39.06 → 48.83 */
+  --text-hero--line-height: 1.1;
+  --text-hero--letter-spacing: -0.02em;
+  --text-stage: 1.953rem; /* 31.25 → 39.06 → 48.83 → 61.04 */
+  --text-stage--line-height: 1.06;
+  --text-stage--letter-spacing: -0.025em;
 
-  /* Motion [Decision]: the hero log builds up once on load, row by row, with its track filling. */
+  /* Motion [Decision]: the hero visual's parts appear once on load, one after another. */
   --animate-rise: rise 0.5s cubic-bezier(0.2, 0, 0, 1) both;
   @keyframes rise {
     from {
@@ -71,16 +76,6 @@
       transform: none;
     }
   }
-  --animate-fill: fill 4.2s cubic-bezier(0.4, 0, 0.6, 1) both;
-  @keyframes fill {
-    from {
-      transform: scaleY(0);
-    }
-    to {
-      transform: scaleY(1);
-    }
-  }
-
   /* 5 Spacing: 4px grid [Assumption]. Tailwind's default --spacing: 0.25rem already matches. */
 
   /* 5 Radius by hierarchy [Assumption, PDF-observed] */
@@ -124,5 +119,26 @@
   [class*="rounded-card"],
   [class*="rounded-modal"] {
     corner-shape: squircle;
+  }
+}
+
+/* Modular scale steps for the large marketing sizes [Decision]: one 1.25 step per breakpoint. */
+@media (width >= 40rem) {
+  :root {
+    --text-stage: 2.441rem; /* 39.06 */
+    --text-hero: 2.441rem;
+    --text-section: 1.953rem; /* 31.25 */
+  }
+}
+@media (width >= 64rem) {
+  :root {
+    --text-stage: 3.052rem; /* 48.83 */
+    --text-hero: 3.052rem;
+    --text-section: 2.441rem; /* 39.06 */
+  }
+}
+@media (width >= 80rem) {
+  :root {
+    --text-stage: 3.815rem; /* 61.04 */
   }
 }

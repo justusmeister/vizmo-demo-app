@@ -134,7 +134,7 @@ export function ContactForm() {
         <span className="flex size-10 items-center justify-center rounded-full bg-success text-white">
           <Check aria-hidden className="size-5" strokeWidth={2.5} />
         </span>
-        <h2 ref={headingRef} tabIndex={-1} className="font-display text-h1 font-medium outline-none">
+        <h2 ref={headingRef} tabIndex={-1} className="font-display text-h1 font-bold outline-none">
           Ihre Nachricht liegt im E-Mail-Programm bereit
         </h2>
         <p className="max-w-prose text-slate">
@@ -165,7 +165,7 @@ export function ContactForm() {
       </div>
       <Progress value={position + 1} max={steps.length} label="Fortschritt" className="mt-3" />
 
-      <h2 ref={headingRef} tabIndex={-1} className="mt-8 font-display text-h1 font-medium outline-none md:text-display">
+      <h2 ref={headingRef} tabIndex={-1} className="mt-8 font-display text-h1 font-bold outline-none md:text-display">
         {stepTitles[step]}
       </h2>
 

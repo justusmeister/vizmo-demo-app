@@ -13,29 +13,27 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ButtonLink } from "@/components/ui/button";
 import { cx } from "@/lib/cx";
-import { HeroLog } from "./hero-log";
+import { HeroVisual } from "./hero-visual";
 import { PilotSignup } from "./pilot-signup";
 import { ComparisonTable, PricingCard } from "./pricing";
 import { ProductShots } from "./product-shots";
 import { Container, Section, SectionHeading } from "./section";
-import { company } from "./site-nav";
 
 // Homepage of govizmo.de. Figures come from the pitch deck (Finale V2, Oktober 2026).
 
 function Hero() {
   return (
     <section className="relative -mt-16 overflow-hidden pt-16">
-      {/* A Nebel slab behind the log, set off-centre and cut short at the bottom, so the hero
-          is not one symmetric band. It runs up behind the transparent header. */}
-      <div aria-hidden className="absolute inset-y-0 right-0 hidden w-[47%] bg-mist lg:block" />
+      {/* A Nebel slab behind the product visual, set off-centre and running off the right edge,
+          so the hero is not one symmetric band. It runs up behind the transparent header. */}
+      <div aria-hidden className="absolute inset-y-0 right-0 hidden w-[42%] bg-mist lg:block" />
       <div aria-hidden className="absolute inset-x-0 top-0 h-full bg-linear-to-b from-mist/70 to-white to-50% lg:hidden" />
-      <Container className="relative grid grid-cols-1 gap-14 pt-12 pb-16 md:pt-20 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:pt-28 lg:pb-24">
-        <div className="relative z-10 flex min-w-0 flex-col items-start lg:pb-10">
-          <h1 className="max-w-[12ch] font-display text-stage font-medium text-balance text-night">{company.claim}</h1>
-          <p className="mt-7 max-w-[36ch] text-intro text-slate">
-            Interessenten bewerben sich, buchen selbst einen Termin und besichtigen mit geprüfter Identität per Smartlock. Sie
-            entscheiden nur, wen Sie einladen.
-          </p>
+      <Container className="relative grid grid-cols-1 items-center gap-16 pt-12 pb-24 md:pt-20 lg:grid-cols-[1.15fr_1fr] lg:gap-16 lg:pt-28 lg:pb-32">
+        <div className="relative z-10 flex min-w-0 flex-col items-start">
+          <h1 className="max-w-[18ch] font-display text-stage font-bold text-balance text-night">
+            Wohnungen zeigen, ohne selbst dabei zu sein
+          </h1>
+          <p className="mt-6 max-w-[34ch] text-intro text-slate">Interessenten buchen selbst einen Termin, das Smartlock öffnet die Tür.</p>
           <div className="mt-10 grid w-full gap-3 sm:flex sm:w-auto sm:flex-wrap">
             <ButtonLink href="#pilot" className="h-12 px-6">
               Für den Pilot vormerken
@@ -44,9 +42,10 @@ function Hero() {
               So funktioniert’s
             </ButtonLink>
           </div>
-          <p className="mt-10 max-w-[44ch] text-body text-slate">DSGVO-konform, AGG-konforme Auswahl, entwickelt in Osnabrück.</p>
         </div>
-        <HeroLog className="lg:pt-4 lg:pl-6" />
+        <div className="px-2 py-6 sm:px-8 lg:py-0 lg:pl-10">
+          <HeroVisual />
+        </div>
       </Container>
     </section>
   );
@@ -60,7 +59,7 @@ export function Pilot({ asPage = false }: { asPage?: boolean }) {
       <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-16">
         <div className="flex flex-col gap-5">
           <p className="text-body font-medium text-slate">Pilotprojekt</p>
-          <Heading id="pilot-title" className={cx("font-display font-medium text-balance", asPage ? "text-hero" : "text-section")}>
+          <Heading id="pilot-title" className={cx("font-display font-bold text-balance", asPage ? "text-hero" : "text-section")}>
             Vermieten Sie bald neu? Werden Sie Pilotvermieter
           </Heading>
           <p className="text-lead text-slate">
@@ -98,7 +97,7 @@ function Problem() {
         {stats.map((stat, index) => (
           <div key={stat.label} className={cx("flex flex-col gap-1 border-t border-night pt-5", index === 1 && "md:mt-12", index === 2 && "md:mt-24")}>
             <dt className="order-2 font-medium">{stat.label}</dt>
-            <dd className="order-1 font-display text-stage font-medium tabular-nums text-night">{stat.value}</dd>
+            <dd className="order-1 font-display text-stage font-bold tabular-nums text-night">{stat.value}</dd>
             <dd className="order-3 max-w-[28ch] text-slate">{stat.note}</dd>
           </div>
         ))}
@@ -147,7 +146,7 @@ export function HowItWorks({ withHeading = true }: { withHeading?: boolean }) {
       <ol className={cx("grid gap-x-8 gap-y-10 md:grid-cols-2 xl:grid-cols-5", withHeading && "mt-14")}>
         {steps.map((step, index) => (
           <li key={step.title} className="flex flex-col gap-3 border-t-2 border-night pt-4">
-            <span className="font-display text-section font-medium tabular-nums text-night">{index + 1}</span>
+            <span className="font-display text-section font-bold tabular-nums text-night">{index + 1}</span>
             <h3 className="text-h2 font-medium">{step.title}</h3>
             <p className="text-slate">{step.text}</p>
             <p className="mt-auto pt-2 text-body font-medium text-deep-blue">{step.detail}</p>
@@ -189,7 +188,7 @@ export function BothSides() {
       <div className="mt-14 grid gap-14 md:grid-cols-2 md:gap-0">
         {sides.map((side, index) => (
           <div key={side.title} className={cx(index === 1 && "md:mt-20 md:border-l md:border-line md:pl-12", index === 0 && "md:pr-12")}>
-            <h3 className="font-display text-h1 font-medium md:text-section">{side.title}</h3>
+            <h3 className="font-display text-h1 font-bold md:text-section">{side.title}</h3>
             <p className="mt-3 max-w-[42ch] text-slate">{side.lead}</p>
             <ul className="mt-7 flex flex-col divide-y divide-line border-y border-line">
               {side.points.map((point) => (
@@ -294,7 +293,7 @@ function FinalCta() {
     <Section tone="mist">
       <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
         <div className="max-w-2xl">
-          <h2 className="font-display text-section font-medium">{company.claim}</h2>
+          <h2 className="font-display text-section font-bold">Planen Sie Ihre nächste Vermietung mit vizmo</h2>
           <p className="mt-3 text-lead text-slate">Werden Sie Pilotvermieter oder schreiben Sie uns, wenn Sie Fragen haben.</p>
         </div>
         <div className="flex flex-wrap gap-3">

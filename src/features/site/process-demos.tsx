@@ -107,7 +107,7 @@ export function BookingDemo() {
       <div aria-hidden className="relative h-[25rem] overflow-hidden px-4 pt-5 pb-4">
         <div className={cx("flex h-full flex-col transition-opacity duration-300", booked && "opacity-0")}>
           <p className="text-small text-slate">Gneisenaustraße 41</p>
-          <p className="mt-0.5 font-display text-h2 font-medium">Termin wählen</p>
+          <p className="mt-0.5 font-display text-h2 font-bold">Termin wählen</p>
           <div className="mt-4 grid grid-cols-3 gap-2 text-center text-small">
             {[
               ["Mo", "2.11."],
@@ -153,7 +153,7 @@ export function BookingDemo() {
           <span className="flex size-10 items-center justify-center rounded-full bg-success text-white">
             <Check className="size-5" strokeWidth={2.5} />
           </span>
-          <p className="mt-4 font-display text-h2 font-medium">Termin gebucht</p>
+          <p className="mt-4 font-display text-h2 font-bold">Termin gebucht</p>
           <p className="mt-1 tabular-nums text-slate">Di, 3. November, 17:40–18:00</p>
           <div className="mt-6 border-t border-line pt-4 text-body">
             <p className="font-medium">Vor der Besichtigung</p>

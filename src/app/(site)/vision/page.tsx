@@ -43,7 +43,7 @@ export default function VisionPage() {
         />
         <ul className="mt-10 grid gap-4 md:grid-cols-3">
           {headlines.map((line) => (
-            <li key={line} className="rounded-card border border-line bg-surface p-6 font-display text-h2 font-medium">
+            <li key={line} className="rounded-card border border-line bg-surface p-6 font-display text-h2 font-bold">
               {line}
             </li>
           ))}

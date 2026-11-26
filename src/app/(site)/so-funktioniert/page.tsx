@@ -23,7 +23,7 @@ export default function HowItWorksPage() {
       <Section tone="mist">
         <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
           <div className="max-w-2xl">
-            <h2 className="font-display text-section font-medium">Bereit, Besichtigungen abzugeben?</h2>
+            <h2 className="font-display text-section font-bold">Bereit, Besichtigungen abzugeben?</h2>
             <p className="mt-3 text-lead text-slate">Werden Sie Pilotvermieter oder schreiben Sie uns, wenn Sie Fragen haben.</p>
           </div>
           <div className="grid w-full gap-3 sm:flex sm:w-auto sm:flex-wrap">

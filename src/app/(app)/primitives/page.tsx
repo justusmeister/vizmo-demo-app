@@ -90,13 +90,13 @@ export default function PrimitivesPage() {
 
         <Section title="Typografie">
           <Card className="flex flex-col gap-3">
-            <p className="font-display text-display font-medium">Display, Schibsted Grotesk 32</p>
-            <p className="font-display text-h1 font-medium">Überschrift 1, Schibsted Grotesk 24</p>
-            <p className="font-display text-h2 font-medium">Überschrift 2, Schibsted Grotesk 20</p>
-            <p className="font-display text-h3 font-medium">Überschrift 3, Schibsted Grotesk 16</p>
+            <p className="font-display text-display font-bold">Display, Poppins 31,25</p>
+            <p className="font-display text-h1 font-bold">Überschrift 1, Poppins 25</p>
+            <p className="font-display text-h2 font-bold">Überschrift 2, Poppins 20</p>
+            <p className="font-display text-h3 font-bold">Überschrift 3, Poppins 16</p>
             <p>Fließtext, Inter 14. Interessenten bestätigen ihre Identität, bevor sie einen Slot buchen.</p>
             <p className="font-medium">Hervorgehoben und Beschriftungen, Inter Medium 14</p>
-            <p className="text-small text-slate">Klein und Metadaten, Inter 12</p>
+            <p className="text-small text-slate">Klein und Metadaten, Inter 12,8</p>
           </Card>
         </Section>
 

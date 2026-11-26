@@ -226,7 +226,7 @@ export function ListingManage({ slug }: { slug: string }) {
                 ].map(([label, value]) => (
                   <div key={label} className="rounded-card bg-surface px-3 py-2">
                     <dt className="text-small text-slate">{label}</dt>
-                    <dd className="text-h3 font-display font-medium">{value}</dd>
+                    <dd className="text-h3 font-display font-bold">{value}</dd>
                   </div>
                 ))}
               </dl>

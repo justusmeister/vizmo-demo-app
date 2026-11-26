@@ -13,7 +13,7 @@ export function ListingFacts({ listing }: { listing: Listing }) {
         <Building aria-hidden className="size-6" />
       </span>
       <div className="min-w-0">
-        <p className="font-display text-h3 font-medium">
+        <p className="font-display text-h3 font-bold">
           {listing.rooms}-Zimmer-Wohnung, {listing.size} m²
         </p>
         <p className="flex items-center gap-1 text-slate">

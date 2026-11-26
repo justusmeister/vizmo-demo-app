@@ -100,7 +100,7 @@ function Stepper({
         <button type="button" className={button} onClick={() => onChange(value - 1)} disabled={value <= min} aria-label={`${label}: eine weniger`}>
           <Minus aria-hidden className="size-4" />
         </button>
-        <output aria-live="polite" className="w-6 text-center text-h3 font-display font-medium tabular-nums">
+        <output aria-live="polite" className="w-6 text-center text-h3 font-display font-bold tabular-nums">
           {value}
         </output>
         <button type="button" className={button} onClick={() => onChange(value + 1)} disabled={value >= 9} aria-label={`${label}: eine mehr`}>

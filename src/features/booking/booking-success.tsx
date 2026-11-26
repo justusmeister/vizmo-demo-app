@@ -30,7 +30,7 @@ export function BookingSuccess({ invitation, listing, slot, paymentLabel, refere
       <Card padding="lg" className="flex flex-col gap-4">
         <div>
           <p className="text-small text-slate">Ihr Termin</p>
-          <p className="font-display text-h2 font-medium">{slot.label}</p>
+          <p className="font-display text-h2 font-bold">{slot.label}</p>
         </div>
         <div className="flex items-start gap-3 rounded-card bg-surface p-3">
           <MapPin aria-hidden className="mt-0.5 size-5 shrink-0 text-deep-blue" />

@@ -21,7 +21,7 @@ export function SiteFooter() {
       <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-14 md:px-6 lg:grid-cols-[1.2fr_2fr]">
         <div className="flex flex-col gap-4">
           <BrandLogo tone="dark" width={132} />
-          <p className="max-w-xs font-display text-h2 font-medium">{company.claim}</p>
+          <p className="max-w-xs font-display text-h2 font-bold">{company.claim}</p>
           <a href={`mailto:${company.email}`} className="inline-flex items-center gap-2 self-start rounded-button text-lavender hover:text-white">
             <Mail aria-hidden className="size-4" />
             {company.email}
