@@ -26,6 +26,10 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // On the homepage the hero is Nachtblau: until the page scrolls (or the menu opens) the header
+  // sits on it transparently and switches to the light-on-dark logo and white links.
+  const onDark = trimSlash(pathname) === "/" && !scrolled && !open;
+
   // Every nav entry has its own page. Clicking the entry of the page you're on reloads it
   // (client navigation to the same URL would do nothing). Links to another page keep the
   // mobile menu open until that page has rendered, then the check below closes it; closing
@@ -66,7 +70,7 @@ export function SiteHeader() {
           {/* Plain link on purpose: clicking the logo reloads the start page, as visitors expect. */}
           {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- deliberate full reload */}
           <a href="/" aria-label="vizmo Startseite" className="rounded-button">
-            <BrandLogo tone="ink" width={108} />
+            <BrandLogo tone={onDark ? "dark" : "ink"} width={108} />
           </a>
 
           <nav aria-label="Hauptnavigation" className="hidden lg:block">
@@ -77,7 +81,7 @@ export function SiteHeader() {
                     href={item.href}
                     onClick={(event) => reloadIfCurrent(event, item.href)}
                     aria-current={isCurrent(item.href) ? "page" : undefined}
-                    className="rounded-button px-3 py-2 font-medium text-night hover:bg-mist"
+                    className={cx("rounded-button px-3 py-2 font-medium transition-colors", onDark ? "text-white hover:bg-white/10" : "text-night hover:bg-mist")}
                   >
                     {item.label}
                   </Link>
@@ -87,15 +91,22 @@ export function SiteHeader() {
           </nav>
 
           <div className="hidden items-center gap-2 lg:flex">
-            <ButtonLink href="/kontakt" variant="tertiary" onClick={(event) => reloadIfCurrent(event, "/kontakt")}>
-              Kontakt
-            </ButtonLink>
+            {onDark ? (
+              // Tertiary blue text would be too weak on Nachtblau, so a plain white link stands in.
+              <Link href="/kontakt" className="rounded-button px-4 py-2 text-body font-medium text-white hover:bg-white/10">
+                Kontakt
+              </Link>
+            ) : (
+              <ButtonLink href="/kontakt" variant="tertiary" onClick={(event) => reloadIfCurrent(event, "/kontakt")}>
+                Kontakt
+              </ButtonLink>
+            )}
             <ButtonLink href="/pilot" onClick={(event) => reloadIfCurrent(event, "/pilot")}>
               Pilot vormerken
             </ButtonLink>
           </div>
 
-          <MenuToggle open={open} onToggle={() => setOpen((value) => !value)} />
+          <MenuToggle open={open} onDark={onDark} onToggle={() => setOpen((value) => !value)} />
         </div>
       </header>
 
@@ -128,7 +139,7 @@ export function SiteHeader() {
 // Three lines that turn into a cross. The outer lines move to the middle and rotate in one
 // motion; the middle line simply fades out. Pressing only greys the lines: no background
 // flash, no tap highlight.
-function MenuToggle({ open, onToggle }: { open: boolean; onToggle: () => void }) {
+function MenuToggle({ open, onDark, onToggle }: { open: boolean; onDark: boolean; onToggle: () => void }) {
   const line = "absolute left-0 h-0.5 w-6 rounded-full bg-current motion-reduce:transition-none";
   return (
     <button
@@ -137,7 +148,7 @@ function MenuToggle({ open, onToggle }: { open: boolean; onToggle: () => void })
       aria-expanded={open}
       aria-controls="mobile-menu"
       aria-label={open ? "Menü schließen" : "Menü öffnen"}
-      className="-mr-2.5 inline-flex size-11 items-center justify-center rounded-button text-night transition-colors active:text-gray lg:hidden"
+      className={cx("-mr-2.5 inline-flex size-11 items-center justify-center rounded-button transition-colors active:text-gray lg:hidden", onDark ? "text-white" : "text-night")}
     >
       <span aria-hidden className="relative block h-4 w-6">
         <span className={cx(line, "top-0 transition-transform duration-300 ease-in-out", open && "translate-y-1.75 rotate-45")} />

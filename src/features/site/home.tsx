@@ -14,6 +14,8 @@ import type { ReactNode } from "react";
 import { ButtonLink } from "@/components/ui/button";
 import { cx } from "@/lib/cx";
 import { ChevronEdge } from "./chevron-edge";
+import { HeroChevrons } from "./hero-chevrons";
+import { HeroSignup } from "./hero-signup";
 import { HeroVisual } from "./hero-visual";
 import { PilotSignup } from "./pilot-signup";
 import { ComparisonTable, PricingCard } from "./pricing";
@@ -24,29 +26,22 @@ import { Container, Section, SectionHeading } from "./section";
 
 function Hero() {
   return (
-    <section className="relative -mt-16 overflow-hidden pt-16">
-      {/* A Nebel slab behind the product visual, set off-centre and running off the right edge,
-          so the hero is not one symmetric band. It runs up behind the transparent header and
-          stops short of the bottom, so the chevron edge into the pilot section starts on white. */}
-      <div aria-hidden className="absolute top-0 right-0 bottom-20 hidden w-[42%] bg-mist lg:block" />
-      <div aria-hidden className="absolute inset-x-0 top-0 h-full bg-linear-to-b from-mist/70 to-white to-50% lg:hidden" />
-      <Container className="relative grid grid-cols-1 items-center gap-16 pt-12 pb-24 md:pt-20 lg:grid-cols-[1.15fr_1fr] lg:gap-16 lg:pt-28 lg:pb-32">
+    <section className="relative -mt-16 overflow-hidden bg-night pt-16 text-white">
+      <Container className="relative grid grid-cols-1 items-center gap-12 pt-12 pb-20 md:pt-20 lg:grid-cols-[1.1fr_1fr] lg:gap-12 lg:pt-24 lg:pb-28">
         <div className="relative z-10 flex min-w-0 flex-col items-start">
-          <h1 className="max-w-[18ch] font-display text-stage font-bold text-balance text-night">
-            Wohnungen zeigen, ohne selbst dabei zu sein
-          </h1>
-          <p className="mt-6 max-w-[34ch] text-intro text-slate">Interessenten buchen selbst einen Termin, das Smartlock öffnet die Tür.</p>
-          <div className="mt-10 grid w-full gap-3 sm:flex sm:w-auto sm:flex-wrap">
-            <ButtonLink href="#pilot" className="h-12 px-6">
-              Für den Pilot vormerken
-            </ButtonLink>
-            <ButtonLink href="#ablauf" variant="secondary" className="h-12 px-6">
-              So funktioniert’s
-            </ButtonLink>
+          <h1 className="max-w-[18ch] font-display text-stage font-bold text-balance">Wohnungen zeigen, ohne selbst dabei zu sein</h1>
+          <p className="mt-6 max-w-[34ch] text-intro text-lavender">Interessenten buchen selbst einen Termin, das Smartlock öffnet die Tür.</p>
+          <div className="mt-10 w-full">
+            <HeroSignup />
           </div>
         </div>
-        <div className="px-2 py-6 sm:px-8 lg:py-0 lg:pl-10">
-          <HeroVisual />
+        {/* The mark at hero scale sits behind the product visual and runs off the edge. */}
+        {/* Below lg the chevrons rise well above the visual, so the mark is seen, not hidden. */}
+        <div className="relative px-2 pt-44 pb-10 sm:px-10 sm:pt-56 lg:py-6 lg:pl-12">
+          <HeroChevrons className="absolute top-0 left-1/2 w-[120%] max-w-none -translate-x-[40%] sm:w-[85%] sm:-translate-x-1/2 lg:top-1/2 lg:w-[135%] lg:-translate-x-[38%] lg:-translate-y-1/2" />
+          <div className="relative">
+            <HeroVisual />
+          </div>
         </div>
       </Container>
     </section>
@@ -57,8 +52,7 @@ function Hero() {
 export function Pilot({ asPage = false }: { asPage?: boolean }) {
   const Heading = asPage ? "h1" : "h2";
   return (
-    <Section id="pilot" tone="mist" className={cx("relative", asPage ? "-mt-16 pt-32 md:pt-40" : "pt-28 sm:pt-36 lg:pt-52")}>
-      {!asPage && <ChevronEdge from="white" />}
+    <Section id={asPage ? "pilot" : "pilot-anmeldung"} tone="mist" className={cx(asPage && "-mt-16 pt-32 md:pt-40")}>
       <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-16">
         <div className="flex flex-col gap-5">
           <p className="text-body font-medium text-slate">Pilotprojekt</p>
@@ -90,7 +84,8 @@ const stats = [
 
 function Problem() {
   return (
-    <Section tone="surface">
+    <Section tone="surface" className="relative pt-32 sm:pt-40 lg:pt-56">
+      <ChevronEdge from="night" />
       <SectionHeading
         title="Eine Wohnung neu zu vermieten ist bis heute Handarbeit"
         lead="Auf eine Wohnung kommen dutzende, in Großstädten hunderte Anfragen. Wer privat vermietet, sortiert Postfächer, stimmt Termine ab und steht am Wochenende in der leeren Wohnung."
@@ -318,7 +313,6 @@ export function Home() {
   return (
     <>
       <Hero />
-      <Pilot />
       <Problem />
       <ProductShots />
       <HowItWorks />

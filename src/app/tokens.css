@@ -64,6 +64,16 @@
   --text-stage--line-height: 1.06;
   --text-stage--letter-spacing: -0.025em;
 
+  /* Motion [Decision]: the large hero chevrons draw themselves once on load. */
+  --animate-draw: draw 1.4s cubic-bezier(0.22, 0.7, 0.2, 1) both;
+  @keyframes draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
   /* Motion [Decision]: the hero visual's parts appear once on load, one after another. */
   --animate-rise: rise 0.5s cubic-bezier(0.2, 0, 0, 1) both;
   @keyframes rise {
