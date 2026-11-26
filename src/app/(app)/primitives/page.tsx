@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
+import { EmailCapture } from "@/components/ui/email-capture";
 import { ChoiceChip, ChoiceGroup } from "@/components/ui/choice-chip";
 import { CopyField } from "@/components/ui/copy-field";
 import { Input, Select, Textarea } from "@/components/ui/input";
@@ -132,6 +133,13 @@ export default function PrimitivesPage() {
               </Button>
             </div>
           </Card>
+        </Section>
+
+        <Section title="E-Mail-Erfassung auf Nachtblau">
+          <div className="flex flex-col gap-8 rounded-card bg-night p-6 md:flex-row">
+            <EmailCapture label="E-Mail-Adresse" placeholder="Ihre E-Mail-Adresse" action="Pilot vormerken" hint="Öffnet Ihr E-Mail-Programm, Sie senden selbst." />
+            <EmailCapture label="E-Mail-Adresse" placeholder="Ihre E-Mail-Adresse" action="Pilot vormerken" defaultValue="lena@" error="Bitte eine gültige E-Mail-Adresse angeben" />
+          </div>
         </Section>
 
         <Section title="Eingabefelder">
