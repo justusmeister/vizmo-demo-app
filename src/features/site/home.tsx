@@ -13,6 +13,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ButtonLink } from "@/components/ui/button";
 import { cx } from "@/lib/cx";
+import { ChevronEdge } from "./chevron-edge";
 import { HeroVisual } from "./hero-visual";
 import { PilotSignup } from "./pilot-signup";
 import { ComparisonTable, PricingCard } from "./pricing";
@@ -25,8 +26,9 @@ function Hero() {
   return (
     <section className="relative -mt-16 overflow-hidden pt-16">
       {/* A Nebel slab behind the product visual, set off-centre and running off the right edge,
-          so the hero is not one symmetric band. It runs up behind the transparent header. */}
-      <div aria-hidden className="absolute inset-y-0 right-0 hidden w-[42%] bg-mist lg:block" />
+          so the hero is not one symmetric band. It runs up behind the transparent header and
+          stops short of the bottom, so the chevron edge into the pilot section starts on white. */}
+      <div aria-hidden className="absolute top-0 right-0 bottom-20 hidden w-[42%] bg-mist lg:block" />
       <div aria-hidden className="absolute inset-x-0 top-0 h-full bg-linear-to-b from-mist/70 to-white to-50% lg:hidden" />
       <Container className="relative grid grid-cols-1 items-center gap-16 pt-12 pb-24 md:pt-20 lg:grid-cols-[1.15fr_1fr] lg:gap-16 lg:pt-28 lg:pb-32">
         <div className="relative z-10 flex min-w-0 flex-col items-start">
@@ -55,7 +57,8 @@ function Hero() {
 export function Pilot({ asPage = false }: { asPage?: boolean }) {
   const Heading = asPage ? "h1" : "h2";
   return (
-    <Section id="pilot" tone="mist" className={cx(asPage && "-mt-16 pt-32 md:pt-40")}>
+    <Section id="pilot" tone="mist" className={cx("relative", asPage ? "-mt-16 pt-32 md:pt-40" : "pt-28 sm:pt-36 lg:pt-52")}>
+      {!asPage && <ChevronEdge from="white" />}
       <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-16">
         <div className="flex flex-col gap-5">
           <p className="text-body font-medium text-slate">Pilotprojekt</p>
@@ -247,9 +250,11 @@ const trust: { title: string; text: string; icon: ReactNode }[] = [
   },
 ];
 
-export function Trust() {
+/** Security and fairness. `edgeFrom` is the tone of the section above, for the chevron edge. */
+export function Trust({ edgeFrom = "white" }: { edgeFrom?: "white" | "surface" }) {
   return (
-    <Section id="sicherheit" tone="night" className="relative overflow-hidden">
+    <Section id="sicherheit" tone="night" className="relative overflow-hidden pt-32 sm:pt-40 lg:pt-56">
+      <ChevronEdge from={edgeFrom} />
       <SectionHeading
         dark
         title="Sicher für Ihre Wohnung, fair für Interessenten"
@@ -319,7 +324,7 @@ export function Home() {
       <HowItWorks />
       <BothSides />
       <Comparison />
-      <Trust />
+      <Trust edgeFrom="surface" />
       <Pricing />
       <FinalCta />
     </>

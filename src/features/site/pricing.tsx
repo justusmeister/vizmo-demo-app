@@ -1,4 +1,5 @@
 import { Clock } from "lucide-react";
+import { cx } from "@/lib/cx";
 
 // Pricing building blocks shared by the homepage and /preise. Figures come from the pitch
 // deck (Finale V2, Oktober 2026): 39 € at sign-up, 45 % of the first cold rent on success.
@@ -40,25 +41,29 @@ export function PricingCard() {
   );
 }
 
-/** Makler vs. selbst vs. vizmo. Cards on phones, a table from 768 px. */
+/**
+ * Makler vs. selbst vs. vizmo, without boxes: hairline rows on a Nachtblau top rule, and the
+ * vizmo column as a square-cut Nachtblau band that rises above the header row. Stacked rows on
+ * phones, a table from 768 px.
+ */
 export function ComparisonTable() {
   return (
     <>
-      {/* Phones: one card per criterion, so nothing scrolls sideways. */}
-      <ul className="mt-10 flex flex-col gap-3 md:hidden">
+      {/* Phones: one block per criterion, so nothing scrolls sideways. */}
+      <ul className="mt-10 flex flex-col gap-8 md:hidden">
         {comparison.map((row) => (
-          <li key={row.label} className="rounded-card border border-line bg-white">
-            <p className="px-4 pt-4 pb-2 font-medium text-slate">{row.label}</p>
-            <dl className="divide-y divide-line">
-              <div className="flex justify-between gap-4 px-4 py-3">
+          <li key={row.label} className="border-t-2 border-night pt-4">
+            <p className="font-medium">{row.label}</p>
+            <dl className="mt-3 flex flex-col">
+              <div className="flex justify-between gap-4 border-b border-line py-2.5">
                 <dt className="text-slate">Makler</dt>
                 <dd className="text-right">{row.makler}</dd>
               </div>
-              <div className="flex justify-between gap-4 px-4 py-3">
+              <div className="flex justify-between gap-4 border-b border-line py-2.5">
                 <dt className="text-slate">Selbst vermieten</dt>
                 <dd className="text-right">{row.selbst}</dd>
               </div>
-              <div className="flex justify-between gap-4 rounded-b-card bg-mist px-4 py-3">
+              <div className="mt-2 flex justify-between gap-4 bg-night px-3 py-3 text-white">
                 <dt className="font-display font-bold">vizmo</dt>
                 <dd className="text-right font-medium">{row.vizmo}</dd>
               </div>
@@ -66,30 +71,39 @@ export function ComparisonTable() {
           </li>
         ))}
       </ul>
-      <div className="mt-10 hidden overflow-hidden rounded-card border border-line bg-white md:block">
-        <table className="w-full border-collapse text-left">
-          <thead>
-            <tr className="border-b border-line">
-              <th scope="col" className="p-4 text-body font-medium text-slate">
-                <span className="sr-only">Merkmal</span>
-              </th>
-              <th scope="col" className="p-4 font-medium">Makler</th>
-              <th scope="col" className="p-4 font-medium">Selbst vermieten</th>
-              <th scope="col" className="bg-mist p-4 font-display font-bold">vizmo</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-line">
-            {comparison.map((row) => (
+      <table className="mt-14 hidden w-full border-collapse text-left md:table">
+        <thead>
+          <tr>
+            <th scope="col" className="w-[22%] border-b-2 border-night px-4 pb-4 align-bottom">
+              <span className="sr-only">Merkmal</span>
+            </th>
+            <th scope="col" className="border-b-2 border-night px-4 pb-4 align-bottom font-medium">
+              Makler
+            </th>
+            <th scope="col" className="border-b-2 border-night px-4 pb-4 align-bottom font-medium">
+              Selbst vermieten
+            </th>
+            <th scope="col" className="w-[30%] border-b-2 border-night bg-night px-5 pt-7 pb-4 align-bottom font-display text-h2 font-bold text-white">
+              vizmo
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {comparison.map((row, index) => {
+            const last = index === comparison.length - 1;
+            return (
               <tr key={row.label}>
-                <th scope="row" className="p-4 font-medium text-slate">{row.label}</th>
-                <td className="p-4">{row.makler}</td>
-                <td className="p-4">{row.selbst}</td>
-                <td className="bg-mist p-4 font-medium">{row.vizmo}</td>
+                <th scope="row" className={cx("px-4 py-4 align-top font-medium text-slate", !last && "border-b border-line")}>
+                  {row.label}
+                </th>
+                <td className={cx("px-4 py-4 align-top", !last && "border-b border-line")}>{row.makler}</td>
+                <td className={cx("px-4 py-4 align-top", !last && "border-b border-line")}>{row.selbst}</td>
+                <td className={cx("bg-night px-5 py-4 align-top font-medium text-white", !last ? "border-b border-white/15" : "pb-7")}>{row.vizmo}</td>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            );
+          })}
+        </tbody>
+      </table>
       <p className="mt-4 text-body text-slate">Quellen: eigene Darstellung; ImmoScout24 WohnBarometer 2026, IW Köln Vermieterreport 2026, § 3 WoVermittG</p>
     </>
   );
