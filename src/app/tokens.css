@@ -60,7 +60,7 @@
   --text-hero: 1.953rem; /* 31.25 → 39.06 → 48.83 */
   --text-hero--line-height: 1.1;
   --text-hero--letter-spacing: -0.02em;
-  --text-stage: 1.953rem; /* 31.25 → 39.06 → 48.83 → 61.04 */
+  --text-stage: 2.441rem; /* 39.06 → 48.83 → 61.04; 31.25 below 360 px */
   --text-stage--line-height: 1.06;
   --text-stage--letter-spacing: -0.025em;
 
@@ -132,10 +132,16 @@
   }
 }
 
-/* Modular scale steps for the large marketing sizes [Decision]: one 1.25 step per breakpoint. */
+/* Modular scale steps for the large marketing sizes [Decision]: one 1.25 step per breakpoint.
+   Stage starts one step higher on phones (owner: the hero headline must carry the mobile view),
+   and drops one step below 360 px, where „Besichtigungen," (313 px at 39 px) would not fit. */
+@media (width < 22.5rem) {
+  :root {
+    --text-stage: 1.953rem; /* 31.25 */
+  }
+}
 @media (width >= 40rem) {
   :root {
-    --text-stage: 2.441rem; /* 39.06 */
     --text-hero: 2.441rem;
     --text-section: 1.953rem; /* 31.25 */
   }
