@@ -10,7 +10,8 @@ import { deliver, trapped } from "./send-form";
 // sign-up up front): e-mail only, sent straight to kontakt@govizmo.de (send-form.ts). No note
 // under the field until something happens.
 
-export function HeroSignup() {
+/** `id` is the jump target for „Für den Pilot vormerken" links (default `pilot`). */
+export function HeroSignup({ id = "pilot" }: { id?: string }) {
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string>();
   const [success, setSuccess] = useState<string>();
@@ -44,7 +45,7 @@ export function HeroSignup() {
   }
 
   return (
-    <form id="pilot" onSubmit={submit} noValidate className="scroll-mt-24">
+    <form id={id} onSubmit={submit} noValidate className="scroll-mt-24">
       <Honeypot />
       <EmailCapture
         label="Ihre E-Mail-Adresse für den Pilot"

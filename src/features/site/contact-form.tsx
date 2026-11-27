@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowLeft, Check, Send } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChoiceChip } from "@/components/ui/choice-chip";
@@ -283,6 +284,14 @@ export function ContactForm() {
           <Button type="submit" loading={sending} className="h-12 w-full px-6 sm:w-auto" icon={step === 4 ? <Send aria-hidden className="size-4" /> : undefined}>
             {step === 4 ? "Nachricht senden" : "Weiter"}
           </Button>
+          {step === 4 && (
+            <p className="text-body text-slate">
+              Wir nutzen Ihre Angaben nur für Ihre Anfrage.{" "}
+              <Link href="/datenschutz" className="font-medium text-blue hover:text-deep-blue hover:underline">
+                Datenschutz
+              </Link>
+            </p>
+          )}
         </div>
       )}
     </form>

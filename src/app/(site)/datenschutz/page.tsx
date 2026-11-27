@@ -1,13 +1,14 @@
-import { WEB3FORMS_KEY } from "@/features/site/send-form";
 import type { Metadata } from "next";
 import { LegalPage, LegalSection } from "@/features/site/legal";
+import { WEB3FORMS_KEY } from "@/features/site/send-form";
 import { company } from "@/features/site/site-nav";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/datenschutz/" }, title: "Datenschutz" };
 
 // Privacy policy for the website govizmo.de (not the vizmo platform, which needs its own,
-// more detailed one). Hosting: Vercel; DNS: Cloudflare (DNS only, no proxy); e-mail: IONOS.
+// more detailed one). Hosting: Vercel; DNS: Cloudflare (DNS only, no proxy); e-mail: IONOS;
+// forms: Web3Forms (facts from its DPA v1.0 and privacy policy, 13 Jul 2026) once a key is set.
 export default function PrivacyPage() {
   return (
     <LegalPage
@@ -75,12 +76,12 @@ export default function PrivacyPage() {
         </p>
         <p>
           Nur wenn Sie im Cookie-Hinweis der Statistik zustimmen, nutzen wir Vercel Web Analytics von Vercel Inc. (Anschrift
-          siehe Abschnitt 2). Es zählt Seitenaufrufe, damit wir sehen, wie viele Menschen die Website wann besuchen. Erfasst
+          siehe Abschnitt 3). Es zählt Seitenaufrufe, damit wir sehen, wie viele Menschen die Website wann besuchen. Erfasst
           werden die aufgerufene Seite, die verweisende Seite, Browser, Betriebssystem, Gerätetyp und das Land. Es werden keine
           Cookies gesetzt. Besucher werden über einen Hashwert aus der Anfrage unterschieden, der nach 24 Stunden verworfen
           wird; Ihre IP-Adresse wird dafür nicht gespeichert. Rechtsgrundlage ist Ihre Einwilligung (§ 25 Abs. 1 TDDDG, Art. 6
-          Abs. 1 lit. a DSGVO). Sie können sie jederzeit über „Cookie-Einstellungen“ im Fuß der Seite widerrufen; danach lädt die
-          Statistik nicht mehr.
+          Abs. 1 lit. a DSGVO). Sie können sie jederzeit über das Cookie-Symbol unten links oder „Cookie-Einstellungen“ im Fuß der
+          Seite widerrufen; danach lädt die Statistik nicht mehr.
         </p>
       </LegalSection>
 
@@ -103,10 +104,28 @@ export default function PrivacyPage() {
           Vertrag zur Auftragsverarbeitung besteht. Die Server stehen in der EU.
         </p>
         {WEB3FORMS_KEY ? (
-          <p>
-            Die Formulare auf dieser Website übermitteln Ihre Angaben über den Dienst Web3Forms (Web3Creative), der sie als
-            E-Mail an {company.email} weiterleitet. Mit Web3Forms besteht ein Vertrag zur Auftragsverarbeitung.
-          </p>
+          <>
+            <p>
+              Das Kontaktformular und die Pilot-Anmeldung übermitteln Ihre Angaben (je nach Formular E-Mail-Adresse, Name,
+              Nachricht und Ihre Antworten) über den Dienst Web3Forms an uns. Anbieter ist Web3Creative mit Sitz in Indien
+              (support@web3forms.com). Web3Forms leitet die Angaben als E-Mail an {company.email} weiter und verarbeitet dabei
+              auch technische Daten wie Ihre IP-Adresse, Zeitpunkt und aufrufende Seite. Mit Web3Creative besteht ein Vertrag
+              zur Auftragsverarbeitung nach Art. 28 DSGVO.
+            </p>
+            <p>
+              Web3Forms setzt dafür Unterauftragsverarbeiter ein, insbesondere Amazon Web Services (Hosting, Speicherung,
+              E-Mail-Versand), Cloudflare (Netzwerk und Sicherheit) und Hetzner Online (Server in der EU). Zum Schutz vor Spam
+              werden Ihre IP-Adresse und E-Mail-Adresse an die Spamfilter CleanTalk und Akismet (Automattic) übermittelt, die
+              auch in den USA verarbeiten. Web3Forms speichert eingereichte Formulardaten höchstens drei Jahre und löscht sie
+              dann automatisch; wir löschen Anfragen bei uns, sobald sie erledigt sind.
+            </p>
+            <p>
+              Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit Ihre Anfrage auf einen Vertrag zielt (etwa die Teilnahme am
+              Pilotprojekt), sonst unser berechtigtes Interesse an der Beantwortung von Anfragen (Art. 6 Abs. 1 lit. f DSGVO).
+              Wenn Sie den Weg über Web3Forms nicht möchten, schreiben Sie uns einfach direkt an{" "}
+              <a href={`mailto:${company.email}`}>{company.email}</a>.
+            </p>
+          </>
         ) : (
           <p>
             Das Kontaktformular und die Pilot-Anmeldung bereiten eine Nachricht in Ihrem E-Mail-Programm vor. Daten werden
@@ -123,6 +142,14 @@ export default function PrivacyPage() {
           Angemessenheitsbeschluss erlassen hat (Art. 45 DSGVO). Zusätzlich sind die Standardvertragsklauseln der
           EU-Kommission vereinbart (Art. 46 Abs. 2 lit. c DSGVO).
         </p>
+        {WEB3FORMS_KEY && (
+          <p>
+            Bei der Nutzung der Formulare werden Daten an Web3Creative in Indien sowie an dessen Unterauftragsverarbeiter
+            übermittelt (siehe Abschnitt 7). Für Indien gibt es keinen Angemessenheitsbeschluss der EU-Kommission. Die
+            Übermittlung stützt sich auf die Standardvertragsklauseln der EU-Kommission, die Bestandteil des Vertrags zur
+            Auftragsverarbeitung sind (Art. 46 Abs. 2 lit. c DSGVO). Eine Kopie können Sie bei uns anfordern.
+          </p>
+        )}
       </LegalSection>
 
       <LegalSection title="9. Ihre Rechte">

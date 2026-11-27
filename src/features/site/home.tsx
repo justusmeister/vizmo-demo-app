@@ -6,7 +6,7 @@ import {
   MessagesSquare,
   Scale,
   ScanFace,
-  Server,
+  MapPin,
   ShieldCheck,
 } from "lucide-react";
 import Link from "next/link";
@@ -17,7 +17,6 @@ import { ChevronEdge } from "./chevron-edge";
 import { HeroRibbon } from "./hero-ribbon";
 import { HeroSignup } from "./hero-signup";
 import { HeroVisual } from "./hero-visual";
-import { PilotSignup } from "./pilot-signup";
 import { ComparisonTable, PricingCard } from "./pricing";
 import { ProductShots } from "./product-shots";
 import { Container, Section, SectionHeading } from "./section";
@@ -26,17 +25,18 @@ import { Container, Section, SectionHeading } from "./section";
 
 /**
  * Announcement pill above the hero headline, as Attio or Personio do it: a quiet link with a
- * small Nachtblau tag, no glow, no sparkle. Points to the pilot page.
+ * small Nebel tag in Tiefblau and a Vizmo Blau arrow, so it stays in the blue family of the
+ * button below. No glow, no sparkle. Points to the pilot page.
  */
 function PilotPill() {
   return (
     <Link
       href="/pilot"
-      className="group inline-flex max-w-full items-center gap-2.5 rounded-full border border-line bg-white/80 py-1 pr-3 pl-1 text-body text-night transition-colors hover:border-gray hover:bg-white"
+      className="group inline-flex max-w-full items-center gap-2.5 rounded-full border border-line bg-white/70 py-1 pr-3 pl-1 text-body text-night transition-colors hover:border-gray hover:bg-white"
     >
-      <span className="rounded-full bg-night px-2.5 py-0.5 text-small font-medium text-white">Pilot</span>
+      <span className="rounded-full bg-mist px-2.5 py-0.5 text-small font-medium text-deep-blue">Pilot</span>
       <span className="truncate">Wir starten mit wenigen Vermietern</span>
-      <ArrowRight aria-hidden className="size-4 shrink-0 text-slate transition-transform group-hover:translate-x-0.5 group-hover:text-night motion-reduce:transition-none" />
+      <ArrowRight aria-hidden className="size-4 shrink-0 text-blue transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none" />
     </Link>
   );
 }
@@ -59,38 +59,43 @@ function Hero() {
         <div className="relative pt-6 pb-12 lg:py-0">
           {/* The ribbon bleeds off the right edge and above the column, like a backdrop. */}
           <HeroRibbon className="pointer-events-none absolute max-lg:[mask-image:linear-gradient(to_bottom,transparent,black_45%)] lg:[mask-image:linear-gradient(to_bottom,transparent_calc(50%-270px),black_calc(50%-150px))] top-[38%] left-1/2 w-[150%] sm:top-1/2 max-w-none -translate-x-[38%] -translate-y-1/2 sm:w-[95%] sm:-translate-x-1/2 lg:w-[235%] lg:-translate-x-[22%]" />
-          <div className="relative">
+          <div className="relative z-10">
             <HeroVisual />
           </div>
         </div>
       </Container>
+      {/* The ribbon fades out towards the chevron edge below instead of being cut off by it. */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-linear-to-b from-white/0 to-white lg:h-40" />
     </section>
   );
 }
 
-/** Pilot waitlist. On /pilot it is the page itself, so its heading becomes the h1. */
-export function Pilot({ asPage = false }: { asPage?: boolean }) {
-  const Heading = asPage ? "h1" : "h2";
+/** Pilot waitlist page (/pilot): the same fused e-mail field as in the hero, no box around it. */
+export function Pilot() {
   return (
-    <Section id={asPage ? "pilot" : "pilot-anmeldung"} tone="mist" className={cx(asPage && "-mt-16 pt-32 md:pt-40")}>
-      <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-16">
-        <div className="flex flex-col gap-5">
-          <p className="text-body font-medium text-slate">Pilotprojekt</p>
-          <Heading id="pilot-title" className={cx("font-display font-bold text-balance", asPage ? "text-hero" : "text-section")}>
-            Vermieten Sie bald neu? Werden Sie Pilotvermieter
-          </Heading>
-          <p className="text-lead text-slate">
-            Wir starten vizmo mit einer kleinen Gruppe privater Vermieter. Tragen Sie sich ein, dann melden wir uns persönlich,
-            sobald es losgeht.
-          </p>
-          <p className="flex items-center gap-2 text-body text-slate">
-            <MessagesSquare aria-hidden className="size-4 shrink-0 text-slate" />
-            Sie sprechen direkt mit uns, dem Gründerteam.
-          </p>
+    <Section id="pilot-anmeldung" tone="mist" className="-mt-16 pt-32 md:pt-40">
+      <div className="flex max-w-2xl flex-col items-start">
+        <p className="text-body font-medium text-slate">Pilotprojekt</p>
+        <h1 id="pilot-title" className="mt-5 font-display text-hero font-bold text-balance">
+          Vermieten Sie bald neu? Werden Sie Pilotvermieter
+        </h1>
+        <p className="mt-5 text-lead text-slate">
+          Wir starten vizmo mit einer kleinen Gruppe privater Vermieter. Tragen Sie sich ein, dann melden wir uns persönlich,
+          sobald es losgeht.
+        </p>
+        <div className="mt-10 w-full">
+          <HeroSignup id="pilot" />
         </div>
-        <div className="rounded-modal border border-line bg-white p-5 md:p-8">
-          <PilotSignup />
-        </div>
+        <p className="mt-8 flex items-center gap-2 text-body text-slate">
+          <MessagesSquare aria-hidden className="size-4 shrink-0 text-slate" />
+          Sie sprechen direkt mit uns, dem Gründerteam.
+        </p>
+        <p className="mt-2 text-body text-slate">
+          Wir nutzen Ihre E-Mail-Adresse nur für das Pilotprojekt.{" "}
+          <Link href="/datenschutz" className="font-medium text-deep-blue hover:underline">
+            Datenschutz
+          </Link>
+        </p>
       </div>
     </Section>
   );
@@ -234,17 +239,17 @@ function Comparison() {
 
 const trust: { title: string; text: string; icon: ReactNode }[] = [
   {
-    title: "DSGVO-konform",
+    title: "Datensparsam nach DSGVO",
     text: "Wir erheben nur, was für die Vermietung nötig ist, und löschen Daten, sobald sie nicht mehr gebraucht werden. Ausweisdaten bleiben beim Prüfdienst.",
     icon: <ShieldCheck aria-hidden className="size-6" />,
   },
   {
-    title: "Entwickelt und gehostet in Deutschland",
-    text: "Unser Team entwickelt vizmo selbst. Die Plattform läuft auf Servern in deutschen Rechenzentren.",
-    icon: <Server aria-hidden className="size-6" />,
+    title: "Entwickelt in Osnabrück",
+    text: "Unser Team entwickelt vizmo selbst. Dienstleister, die Daten für uns verarbeiten, verpflichten wir vertraglich auf die DSGVO.",
+    icon: <MapPin aria-hidden className="size-6" />,
   },
   {
-    title: "AGG-konforme Auswahl",
+    title: "Faire Auswahl nach AGG",
     text: "Kriterien sortieren, sie schließen niemanden aus. Herkunft, Religion, Geschlecht, Alter oder Behinderung werden weder abgefragt noch bewertet.",
     icon: <Scale aria-hidden className="size-6" />,
   },

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function PilotPage() {
   return (
     <>
-      <Pilot asPage />
+      <Pilot />
       <HowItWorks />
     </>
   );

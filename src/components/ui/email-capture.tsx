@@ -5,8 +5,8 @@ import { Button } from "./button";
 
 // One fused field for a single e-mail address and its action (design doc 6.3, "E-mail
 // capture"): the input and the primary button share one rounded control, so it reads as one
-// element, not a box. The button sits 6 px inside the field with the smaller input radius, so
-// the corners stay concentric. `light` for white or Nebel surfaces, `dark` for Nachtblau.
+// element, not a box. The field is 48 px high; the button sits 4 px inside it with the button
+// radius (card radius minus 4 px), so the corners stay concentric. `light` for white or Nebel surfaces, `dark` for Nachtblau.
 // The label is visually hidden because the placeholder and surrounding copy name the field.
 // `success` replaces the note after sending; `loading` disables the button while it sends.
 
@@ -27,13 +27,13 @@ export function EmailCapture({ label, action, hint, error, success, loading = fa
   const noteId = `${fieldId}-note`;
   const dark = tone === "dark";
   return (
-    <div className={cx("flex w-full max-w-md flex-col gap-2.5", className)}>
+    <div className={cx("flex w-full max-w-lg flex-col gap-2.5", className)}>
       <label htmlFor={fieldId} className="sr-only">
         {label}
       </label>
       <div
         className={cx(
-          "flex items-center gap-1.5 rounded-card p-1.5 transition-[box-shadow,background-color]",
+          "flex items-center gap-1 rounded-card p-1 transition-[box-shadow,background-color]",
           dark
             ? cx("bg-white/10 ring-1 focus-within:bg-white/15 focus-within:ring-2 focus-within:ring-white [&_button:focus-visible]:outline-white", error ? "ring-white" : "ring-white/25 hover:ring-white/40")
             : cx("bg-white ring-1 focus-within:ring-2 focus-within:ring-blue", error ? "ring-error" : "ring-gray/50 hover:ring-gray"),
@@ -53,7 +53,7 @@ export function EmailCapture({ label, action, hint, error, success, loading = fa
           )}
           {...props}
         />
-        <Button type="submit" inset loading={loading} className="h-10 px-4">
+        <Button type="submit" loading={loading} className="h-10 px-4">
           {action}
         </Button>
       </div>

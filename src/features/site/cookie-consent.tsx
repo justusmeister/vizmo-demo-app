@@ -88,37 +88,54 @@ export function CookieConsent() {
     <>
       <OpenListener onOpen={openSettings} />
       {showBanner && (
-        <div role="region" aria-label="Cookie-Hinweis" className="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-white">
-          <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-4 md:flex-row md:items-center md:gap-8 md:px-6 md:py-5">
-            <div className="flex min-w-0 flex-1 gap-3">
-              <Cookie aria-hidden className="mt-0.5 size-5 shrink-0 text-deep-blue" />
-              <div>
-                <p className="font-medium">Ihre Privatsphäre</p>
-                <p className="mt-1 text-slate">
-                  Wir nutzen nur technisch notwendige Speicher, damit die Seite funktioniert. Optionale Statistik setzen wir
-                  nur mit Ihrer Einwilligung ein. Mehr in der{" "}
-                  <Link href="/datenschutz" className="font-medium text-blue underline hover:text-deep-blue">
-                    Datenschutzerklärung
-                  </Link>
-                  .
-                </p>
-              </div>
+        // Floating, centred card: one deliberate step, not a strip glued to the page edge.
+        <div
+          role="region"
+          aria-label="Cookie-Hinweis"
+          className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-xl rounded-modal border border-line bg-white p-5 shadow-overlay sm:bottom-6 sm:p-6"
+        >
+          <div className="flex gap-3">
+            <Cookie aria-hidden className="mt-0.5 size-5 shrink-0 text-deep-blue" />
+            <div className="min-w-0">
+              <p className="font-medium">Ihre Privatsphäre</p>
+              <p className="mt-1 text-slate">
+                Wir nutzen nur technisch notwendige Speicher, damit die Seite funktioniert. Optionale Statistik setzen wir nur
+                mit Ihrer Einwilligung ein. Mehr in der{" "}
+                <Link href="/datenschutz" className="font-medium text-blue underline hover:text-deep-blue">
+                  Datenschutzerklärung
+                </Link>
+                .
+              </p>
             </div>
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-              <div className="grid grid-cols-2 gap-2 sm:order-2">
-                <Button variant="secondary" onClick={() => save({ statistics: false })}>
-                  Ablehnen
-                </Button>
-                <Button variant="secondary" onClick={() => save({ statistics: true })}>
-                  Akzeptieren
-                </Button>
-              </div>
-              <Button variant="tertiary" onClick={openSettings}>
-                Einstellungen
+          </div>
+          <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <Button variant="tertiary" onClick={openSettings} className="sm:order-first">
+              Einstellungen
+            </Button>
+            <div className="grid grid-cols-2 gap-2 max-sm:order-first">
+              <Button variant="secondary" onClick={() => save({ statistics: false })}>
+                Ablehnen
+              </Button>
+              <Button variant="secondary" onClick={() => save({ statistics: true })}>
+                Akzeptieren
               </Button>
             </div>
           </div>
         </div>
+      )}
+
+      {/* Always-there way back to the settings once a choice is made (TDDDG: withdrawing must
+          be as easy as consenting). */}
+      {stored !== null && stored !== "pending" && !settingsOpen && (
+        <button
+          type="button"
+          onClick={openSettings}
+          aria-label="Cookie-Einstellungen"
+          title="Cookie-Einstellungen"
+          className="fixed bottom-4 left-4 z-40 flex size-11 items-center justify-center rounded-full border border-line bg-white text-deep-blue shadow-overlay transition-colors hover:border-gray hover:text-blue"
+        >
+          <Cookie aria-hidden className="size-5" />
+        </button>
       )}
 
       <Dialog
@@ -126,7 +143,7 @@ export function CookieConsent() {
         onClose={() => setSettingsOpen(false)}
         size="lg"
         title="Cookie-Einstellungen"
-        description="Sie können Ihre Auswahl jederzeit im Fuß der Seite ändern."
+        description="Sie können Ihre Auswahl jederzeit über das Cookie-Symbol unten links ändern."
         footer={
           <>
             <Button
