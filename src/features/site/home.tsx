@@ -3,7 +3,6 @@ import {
   BadgeEuro,
   Check,
   KeyRound,
-  MessagesSquare,
   Scale,
   ScanFace,
   MapPin,
@@ -75,8 +74,7 @@ export function Pilot() {
   return (
     <Section id="pilot-anmeldung" tone="mist" className="-mt-16 pt-32 md:pt-40">
       <div className="flex max-w-2xl flex-col items-start">
-        <p className="text-body font-medium text-slate">Pilotprojekt</p>
-        <h1 id="pilot-title" className="mt-5 font-display text-hero font-bold text-balance">
+        <h1 id="pilot-title" className="font-display text-hero font-bold text-balance">
           Vermieten Sie bald neu? Werden Sie Pilotvermieter
         </h1>
         <p className="mt-5 text-lead text-slate">
@@ -86,11 +84,7 @@ export function Pilot() {
         <div className="mt-10 w-full">
           <HeroSignup id="pilot" />
         </div>
-        <p className="mt-8 flex items-center gap-2 text-body text-slate">
-          <MessagesSquare aria-hidden className="size-4 shrink-0 text-slate" />
-          Sie sprechen direkt mit uns, dem Gründerteam.
-        </p>
-        <p className="mt-2 text-body text-slate">
+        <p className="mt-8 text-body text-slate">
           Wir nutzen Ihre E-Mail-Adresse nur für das Pilotprojekt.{" "}
           <Link href="/datenschutz" className="font-medium text-deep-blue hover:underline">
             Datenschutz
