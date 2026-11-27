@@ -322,7 +322,7 @@ function FinalCta() {
           <p className="mt-3 text-lead text-slate">Werden Sie Pilotvermieter oder schreiben Sie uns, wenn Sie Fragen haben.</p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <ButtonLink href="#pilot" className="h-12 px-6">
+          <ButtonLink href="/pilot" className="h-12 px-6">
             Für den Pilot vormerken
           </ButtonLink>
           <ButtonLink href="/kontakt" variant="secondary" className="h-12 px-6">
