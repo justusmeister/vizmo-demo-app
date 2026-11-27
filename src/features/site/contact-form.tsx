@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, Check, Mail } from "lucide-react";
+import { ArrowLeft, Check, Send } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChoiceChip } from "@/components/ui/choice-chip";
@@ -8,12 +8,13 @@ import { Input, Textarea } from "@/components/ui/input";
 import { Notice } from "@/components/ui/notice";
 import { Progress } from "@/components/ui/progress";
 import { cx } from "@/lib/cx";
-import { clean, isEmail, limits, openMail } from "./mailto";
+import { Honeypot } from "./honeypot";
+import { clean, isEmail, limits } from "./mailto";
+import { deliver, trapped, type Delivery } from "./send-form";
 import { company } from "./site-nav";
 
 // Contact as a guided flow: topic, a few questions that fit the topic, the message, contact
-// details, then a review. Like before it prepares an e-mail to kontakt@govizmo.de in the
-// visitor's mail app (no backend); nothing is sent until they press send there.
+// details, then a review. Sending goes straight to kontakt@govizmo.de (send-form.ts).
 
 type Topic = "vermieter" | "suche" | "presse" | "partner" | "anderes";
 
@@ -64,7 +65,8 @@ export function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [opened, setOpened] = useState(false);
+  const [opened, setOpened] = useState<Exclude<Delivery, "error"> | false>(false);
+  const [sending, setSending] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const moved = useRef(false);
 
@@ -109,10 +111,19 @@ export function ContactForm() {
     setErrors(next);
     if (Object.keys(next).length) return;
     if (step < 4) return go(steps[position + 1]);
-    send();
+    void send(event.currentTarget as HTMLFormElement);
   }
 
-  function send() {
+  /** After a successful send, start over so the same message can't go out twice. */
+  function reset() {
+    setTopic(null);
+    setAnswers({});
+    setMessage("");
+    setOpened(false);
+    go(0);
+  }
+
+  async function send(form: HTMLFormElement) {
     if (!topic) return;
     const label = topics.find((t) => t.id === topic)!.label;
     const details = asked
@@ -121,11 +132,14 @@ export function ContactForm() {
       .map(([k, v]) => `${k}: ${v}`);
     const values = { name: clean(name, limits.name), email: clean(email, limits.email), message: clean(message, limits.message, true) };
     const body = [values.message, details.length ? `\n${details.join("\n")}` : "", `\n${values.name}\n${values.email}`].join("\n");
-    if (!openMail(`${label}: Anfrage von ${values.name}`, body)) {
-      setErrors({ send: "Die Nachricht ist zu lang für das E-Mail-Programm. Bitte kürzen Sie sie etwas." });
+    setSending(true);
+    const result = await deliver({ subject: `${label}: Anfrage von ${values.name}`, email: values.email, name: values.name, body, trap: trapped(form) });
+    setSending(false);
+    if (result === "error") {
+      setErrors({ send: `Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es noch einmal oder schreiben Sie direkt an ${company.email}.` });
       return;
     }
-    setOpened(true);
+    setOpened(result);
   }
 
   if (opened) {
@@ -135,16 +149,22 @@ export function ContactForm() {
           <Check aria-hidden className="size-5" strokeWidth={2.5} />
         </span>
         <h2 ref={headingRef} tabIndex={-1} className="font-display text-h1 font-bold outline-none">
-          Ihre Nachricht liegt im E-Mail-Programm bereit
+          {opened === "sent" ? "Danke, Ihre Nachricht ist angekommen" : "Ihre Nachricht liegt im E-Mail-Programm bereit"}
         </h2>
-        <p className="max-w-prose text-slate">
-          Prüfen Sie sie dort und drücken Sie auf Senden. Falls sich nichts geöffnet hat, schreiben Sie direkt an{" "}
-          <a href={`mailto:${company.email}`} className="font-medium text-blue hover:text-deep-blue hover:underline">
-            {company.email}
-          </a>
-          .
-        </p>
-        <Button variant="secondary" className="mt-2" onClick={() => setOpened(false)}>
+        {opened === "sent" ? (
+          <p className="max-w-prose text-slate">
+            Wir antworten Ihnen persönlich an <span className="font-medium text-night">{email}</span>.
+          </p>
+        ) : (
+          <p className="max-w-prose text-slate">
+            Prüfen Sie sie dort und drücken Sie auf Senden. Falls sich nichts geöffnet hat, schreiben Sie direkt an{" "}
+            <a href={`mailto:${company.email}`} className="font-medium text-blue hover:text-deep-blue hover:underline">
+              {company.email}
+            </a>
+            .
+          </p>
+        )}
+        <Button variant="secondary" className="mt-2" onClick={() => (opened === "sent" ? reset() : setOpened(false))}>
           Zurück zur Übersicht
         </Button>
       </div>
@@ -153,6 +173,7 @@ export function ContactForm() {
 
   return (
     <form onSubmit={forward} noValidate className="flex flex-col border-t-2 border-night pt-5">
+      <Honeypot />
       <div className="flex items-center justify-between gap-4 text-body text-slate">
         <span aria-live="polite">
           Schritt {position + 1} von {steps.length}
@@ -259,10 +280,9 @@ export function ContactForm() {
 
       {step > 0 && (
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
-          <Button type="submit" className="h-12 w-full px-6 sm:w-auto" icon={step === 4 ? <Mail aria-hidden className="size-4" /> : undefined}>
-            {step === 4 ? "E-Mail vorbereiten" : "Weiter"}
+          <Button type="submit" loading={sending} className="h-12 w-full px-6 sm:w-auto" icon={step === 4 ? <Send aria-hidden className="size-4" /> : undefined}>
+            {step === 4 ? "Nachricht senden" : "Weiter"}
           </Button>
-          {step === 4 && <p className="text-body text-slate">Öffnet Ihr E-Mail-Programm mit der fertigen Nachricht.</p>}
         </div>
       )}
     </form>

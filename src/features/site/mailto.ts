@@ -1,7 +1,7 @@
 import { company } from "./site-nav";
 
-// The site has no backend: forms compose an e-mail to kontakt@govizmo.de in the visitor's
-// mail app. Nothing leaves the browser until they press send there. Inputs are cleaned and
+// Input hygiene for the site forms, plus the mail-app fallback that send-form.ts uses while
+// no Web3Forms key is set. Inputs are cleaned and
 // length-capped, and every part of the URL is percent-encoded, so a field can't inject
 // extra headers (cc, bcc), change the recipient or break out of the mailto: scheme.
 

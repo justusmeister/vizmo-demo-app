@@ -24,12 +24,32 @@ import { Container, Section, SectionHeading } from "./section";
 
 // Homepage of govizmo.de. Figures come from the pitch deck (Finale V2, Oktober 2026).
 
+/**
+ * Announcement pill above the hero headline, as Attio or Personio do it: a quiet link with a
+ * small Nachtblau tag, no glow, no sparkle. Points to the pilot page.
+ */
+function PilotPill() {
+  return (
+    <Link
+      href="/pilot"
+      className="group inline-flex max-w-full items-center gap-2.5 rounded-full border border-line bg-white/80 py-1 pr-3 pl-1 text-body text-night transition-colors hover:border-gray hover:bg-white"
+    >
+      <span className="rounded-full bg-night px-2.5 py-0.5 text-small font-medium text-white">Pilot</span>
+      <span className="truncate">Wir starten mit wenigen Vermietern</span>
+      <ArrowRight aria-hidden className="size-4 shrink-0 text-slate transition-transform group-hover:translate-x-0.5 group-hover:text-night motion-reduce:transition-none" />
+    </Link>
+  );
+}
+
 function Hero() {
   return (
     <section className="relative -mt-16 overflow-hidden bg-linear-to-b from-mist/80 to-white to-60% pt-16">
       <Container className="relative grid grid-cols-1 items-center gap-14 pt-14 pb-20 md:pt-20 lg:grid-cols-[1.35fr_1fr] lg:gap-8 lg:pt-24 lg:pb-28">
         <div className="relative z-10 flex min-w-0 flex-col items-start">
-          <h1 className="max-w-[16ch] font-display text-stage font-bold text-balance text-night">Die Plattform für Besichtigungen ohne Terminabsprache</h1>
+          <PilotPill />
+          <h1 className="mt-6 max-w-[16ch] font-display text-stage font-bold text-balance text-night">
+            Die Plattform für Besichtigungen, die sich selbst organisieren
+          </h1>
           <p className="mt-6 max-w-[34ch] text-intro text-slate">Interessenten buchen selbst, das Smartlock öffnet die Tür.</p>
           <div className="mt-10 w-full">
             <HeroSignup />
@@ -38,7 +58,7 @@ function Hero() {
 
         <div className="relative pt-6 pb-12 lg:py-0">
           {/* The ribbon bleeds off the right edge and above the column, like a backdrop. */}
-          <HeroRibbon className="pointer-events-none absolute max-lg:[mask-image:linear-gradient(to_bottom,transparent,black_45%)] lg:[mask-image:linear-gradient(to_bottom,transparent_calc(50%-270px),black_calc(50%-150px))] top-1/2 left-1/2 w-[150%] max-w-none -translate-x-[38%] -translate-y-1/2 sm:w-[95%] sm:-translate-x-1/2 lg:w-[235%] lg:-translate-x-[22%]" />
+          <HeroRibbon className="pointer-events-none absolute max-lg:[mask-image:linear-gradient(to_bottom,transparent,black_45%)] lg:[mask-image:linear-gradient(to_bottom,transparent_calc(50%-270px),black_calc(50%-150px))] top-[38%] left-1/2 w-[150%] sm:top-1/2 max-w-none -translate-x-[38%] -translate-y-1/2 sm:w-[95%] sm:-translate-x-1/2 lg:w-[235%] lg:-translate-x-[22%]" />
           <div className="relative">
             <HeroVisual />
           </div>

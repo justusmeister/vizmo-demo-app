@@ -1,3 +1,4 @@
+import { WEB3FORMS_KEY } from "@/features/site/send-form";
 import type { Metadata } from "next";
 import { LegalPage, LegalSection } from "@/features/site/legal";
 import { company } from "@/features/site/site-nav";
@@ -90,10 +91,10 @@ export default function PrivacyPage() {
         </p>
       </LegalSection>
 
-      <LegalSection title="7. Kontakt und Pilot-Anmeldung per E-Mail">
+      <LegalSection title="7. Kontakt und Pilot-Anmeldung">
         <p>
-          Wenn Sie uns eine E-Mail schreiben, auch über das Kontaktformular oder die Anmeldung zum Pilotprojekt, die jeweils
-          eine Nachricht in Ihrem E-Mail-Programm vorbereiten, verarbeiten wir Ihre Angaben, um Ihre Anfrage zu beantworten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b
+          Wenn Sie uns eine E-Mail schreiben, das Kontaktformular nutzen oder sich für das Pilotprojekt vormerken, verarbeiten
+          wir Ihre Angaben, um Ihre Anfrage zu beantworten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b
           DSGVO, wenn es um einen Vertrag geht, sonst Art. 6 Abs. 1 lit. f DSGVO. Wir löschen die Daten, wenn die Anfrage
           erledigt ist und keine gesetzlichen Aufbewahrungspflichten bestehen.
         </p>
@@ -101,6 +102,17 @@ export default function PrivacyPage() {
           E-Mails an {company.email} werden über die IONOS SE, Elgendorfer Str. 57, 56410 Montabaur, verarbeitet, mit der ein
           Vertrag zur Auftragsverarbeitung besteht. Die Server stehen in der EU.
         </p>
+        {WEB3FORMS_KEY ? (
+          <p>
+            Die Formulare auf dieser Website übermitteln Ihre Angaben über den Dienst Web3Forms (Web3Creative), der sie als
+            E-Mail an {company.email} weiterleitet. Mit Web3Forms besteht ein Vertrag zur Auftragsverarbeitung.
+          </p>
+        ) : (
+          <p>
+            Das Kontaktformular und die Pilot-Anmeldung bereiten eine Nachricht in Ihrem E-Mail-Programm vor. Daten werden
+            erst übermittelt, wenn Sie diese E-Mail selbst absenden.
+          </p>
+        )}
       </LegalSection>
 
       <LegalSection title="8. Empfänger und Drittländer">
