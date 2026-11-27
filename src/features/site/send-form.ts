@@ -1,11 +1,11 @@
 import { openMail } from "./mailto";
 
 // Forms on govizmo.de go straight to kontakt@govizmo.de through Web3Forms, a form backend
-// that turns a POST into an e-mail (processor under Art. 28 DSGVO, see Datenschutz §4). The
-// access key is public by design: it only lets someone send to our inbox, nothing else.
-// Until a key is set, forms fall back to the visitor's mail app, so the site never breaks.
+// that turns a POST into an e-mail (processor under Art. 28 DSGVO, see Datenschutz §7). The
+// access key is public by design: it only lets someone send to our inbox, nothing else. The
+// env var can override it; the mail-app fallback in deliver() only runs if no key exists.
 
-export const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "";
+export const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "6de3f965-4ed4-4cf5-8034-e6a9928a6e36";
 
 const ENDPOINT = "https://api.web3forms.com/submit";
 
